@@ -16,7 +16,7 @@ function MediButton({
   className,
 }: MediButtonProps) {
   const baseStyles =
-    "px-8 py-6 text-base font-medium rounded-full transition-all duration-300 ease-in-out transform";
+    "px-8 py-6  text-lg font-medium rounded-full transition-all duration-300 ease-in-out transform";
 
   const primaryStyles = `
     bg-primary text-background border-1 border-transparent

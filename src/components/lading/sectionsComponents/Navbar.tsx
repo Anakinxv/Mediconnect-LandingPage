@@ -10,11 +10,11 @@ function Navbar() {
           alt="MediConnect Logo"
           className="h-16 w-16 object-contain pointer-events-none"
         />
-        <h1 className="text-xl font-medium">Mediconnect</h1>
+        <h1 className="text-xl font-semibold">Mediconnect</h1>
       </span>
 
       <span>
-        <ul className="flex gap-8 items-center">
+        <ul className="flex gap-2 items-center text-lg font-medium text-white">
           {[
             { href: "#inicio", label: "Inicio" },
             { href: "#about", label: "Sobre Nosotros" },
@@ -22,15 +22,29 @@ function Navbar() {
             { href: "#faq", label: "FAQ" },
             { href: "#contact", label: "Contacto" },
           ].map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="overflow-hidden">
               <a
                 href={item.href}
-                className="relative block transition-all duration-300
-                  hover:scale-105 hover:opacity-90
-                  after:content-[''] after:block after:h-[2px] after:bg-white after:scale-x-0
-                  hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:rounded-full"
+                className="relative block px-3 py-2 rounded-full
+                  hover:bg-white/10
+                  [perspective:10000px] group"
+                style={{ transformStyle: "preserve-3d" }}
               >
-                {item.label}
+                <span
+                  className="relative inline-block transition-transform duration-700
+                    [transform-style:preserve-3d] [transform-origin:50%_0]
+                    group-hover:[transform:rotateX(90deg)_translateY(-22px)]"
+                >
+                  {item.label}
+                  <span
+                    className="pointer-events-none absolute top-full left-0 w-full h-full text-center
+                      [transform:rotateX(-90deg)] [transform-origin:50%_0]
+                      text-white"
+                    aria-hidden="true"
+                  >
+                    {item.label}
+                  </span>
+                </span>
               </a>
             </li>
           ))}
