@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 
 function HeroImageSection() {
   useGSAP(() => {
+    // Animación de la imagen hero
     gsap.fromTo(
       "#hero-image",
       {
@@ -17,6 +18,39 @@ function HeroImageSection() {
         scale: 1,
         opacity: 1,
         ease: "power3.out",
+      }
+    );
+
+    // Animación del navbar (desde arriba)
+    gsap.fromTo(
+      "#navbar",
+      {
+        y: -100,
+        opacity: 0,
+      },
+      {
+        duration: 1,
+        y: 0,
+        opacity: 1,
+        ease: "power3.out",
+        delay: 0.3,
+      }
+    );
+
+    // Animación stagger de los hijos de info-content (de abajo hacia arriba)
+    gsap.fromTo(
+      "#info-content > *",
+      {
+        y: 60,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.15,
+        delay: 0.7,
       }
     );
   });
@@ -32,9 +66,12 @@ function HeroImageSection() {
         />
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between  p-6">
-          <Navbar />
+          <Navbar id="navbar" />
 
-          <div className="flex flex-col items-start justify-end h-full px-6 gap-6 ">
+          <div
+            className="flex flex-col items-start justify-end h-full px-6 gap-6 "
+            id="info-content"
+          >
             <h4 className="text-lg font-regular tracking-wide text-background">
               Bienvenido a Mediconnect
             </h4>
@@ -45,7 +82,7 @@ function HeroImageSection() {
               Una plataforma integral que transforma la comunicación entre
               <br /> médicos, pacientes y centros de salud.
             </p>
-            <div className="flex gap-4 mt-4">
+            <div className="flex gap-4 ">
               <MediButton variant="primary" className="bg-white text-primary ">
                 Conectar
               </MediButton>

@@ -1,9 +1,15 @@
 import MediConnectLogo from "../../../assets/MediConnectLanding.png";
 import MediButton from "@/components/common/MediButton";
 import LanguageDropDown from "@/components/common/LanguageDropDown";
-function Navbar() {
+type NavbarProps = {
+  id?: string;
+};
+function Navbar({ id }: NavbarProps) {
   return (
-    <nav className=" w-full flex justify-between items-center px-6  bg-transparent  ">
+    <nav
+      id={id}
+      className=" w-full flex justify-between items-center px-6  bg-transparent  "
+    >
       <span className="flex gap-3 items-center">
         <img
           src={MediConnectLogo}

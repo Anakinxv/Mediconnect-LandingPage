@@ -54,14 +54,18 @@ function LanguageDropDown() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Selecciona idioma</DropdownMenuLabel>
+        <DropdownMenuLabel className="font-medium">
+          Selecciona idioma
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
           {languages.map((lang) => (
             <DropdownMenuRadioItem
               key={lang.code}
               value={lang.code}
-              className="focus:outline-none focus:ring-0"
+              className={`focus:outline-none focus:ring-0 ${
+                language === lang.code ? "text-primary" : ""
+              }`}
             >
               <span className="flex items-center gap-2">
                 <img
