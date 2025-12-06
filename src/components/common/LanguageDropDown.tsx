@@ -8,8 +8,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useState } from "react";
 
+import { useAppStore } from "@/stores/useAppStore";
 // Importa las banderas
 import flagSpain from "@/assets/flag-spain.png";
 import flagUSA from "@/assets/flag-usa.png";
@@ -32,7 +32,8 @@ const languages = [
 ];
 
 function LanguageDropDown() {
-  const [selected, setSelected] = useState("es");
+  const language = useAppStore((state) => state.language);
+  const setLanguage = useAppStore((state) => state.setLanguage);
 
   return (
     <DropdownMenu>
@@ -45,8 +46,8 @@ function LanguageDropDown() {
     motion-safe:transition-transform"
         >
           <img
-            src={languages.find((l) => l.code === selected)?.flag}
-            alt={languages.find((l) => l.code === selected)?.label}
+            src={languages.find((l) => l.code === language)?.flag}
+            alt={languages.find((l) => l.code === language)?.label}
             className="w-5 h-5 rounded-full focus:outline-none"
           />
           <ChevronDownIcon size={20} />
@@ -55,7 +56,7 @@ function LanguageDropDown() {
       <DropdownMenuContent>
         <DropdownMenuLabel>Selecciona idioma</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={selected} onValueChange={setSelected}>
+        <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
           {languages.map((lang) => (
             <DropdownMenuRadioItem
               key={lang.code}

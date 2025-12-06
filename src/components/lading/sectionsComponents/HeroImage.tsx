@@ -28,7 +28,7 @@ function HeroImageSection() {
           src={HeroImage}
           id="hero-image"
           alt="Hero"
-          className="rounded-[35px] object-cover w-full h-full"
+          className="rounded-[35px] object-cover w-full h-full pointer-events-none"
         />
 
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between  p-6">

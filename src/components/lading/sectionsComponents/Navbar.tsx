@@ -8,38 +8,32 @@ function Navbar() {
         <img
           src={MediConnectLogo}
           alt="MediConnect Logo"
-          className="h-16 w-16 object-contain"
+          className="h-16 w-16 object-contain pointer-events-none"
         />
         <h1 className="text-xl font-medium">Mediconnect</h1>
       </span>
 
       <span>
         <ul className="flex gap-8 items-center">
-          <li>
-            <a href="#inicio" className="hover:text-blue-600">
-              Inicio
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="hover:text-blue-600">
-              Sobre Nosotros
-            </a>
-          </li>
-          <li>
-            <a href="#how" className="hover:text-blue-600">
-              Cómo Funciona
-            </a>
-          </li>
-          <li>
-            <a href="#faq" className="hover:text-blue-600">
-              FAQ
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-blue-600">
-              Contacto
-            </a>
-          </li>
+          {[
+            { href: "#inicio", label: "Inicio" },
+            { href: "#about", label: "Sobre Nosotros" },
+            { href: "#how", label: "Cómo Funciona" },
+            { href: "#faq", label: "FAQ" },
+            { href: "#contact", label: "Contacto" },
+          ].map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className="relative block transition-all duration-300
+                  hover:scale-105 hover:opacity-90
+                  after:content-[''] after:block after:h-[2px] after:bg-white after:scale-x-0
+                  hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left after:rounded-full"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </span>
 
