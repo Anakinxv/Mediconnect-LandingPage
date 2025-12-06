@@ -1,8 +1,11 @@
-import { Button } from "./components/ui/button"
+import HeroSection from "./components/lading/HeroSection";
+
 function App() {
   return (
-    <div>App</div>
-  )
+    <div>
+      <HeroSection />
+    </div>
+  );
 }
 
-export default App
+export default App;
