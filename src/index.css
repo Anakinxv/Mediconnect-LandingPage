@@ -122,8 +122,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-html,
-body {
-  overflow-x: hidden;
-}

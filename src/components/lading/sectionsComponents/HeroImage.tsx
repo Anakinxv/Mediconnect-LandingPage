@@ -18,7 +18,7 @@ function HeroImageSection() {
     gsap.fromTo(
       "#navbar",
       { y: -100, opacity: 0 },
-      { duration: 1, y: 0, opacity: 1, ease: "power3.out", delay: 0.3 }
+      { duration: 1, y: 0, opacity: 1, ease: "power3.out", delay: 0.2 }
     );
     gsap.fromTo(
       "#info-content > *",
@@ -26,17 +26,17 @@ function HeroImageSection() {
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 1,
         ease: "power3.out",
         stagger: { each: 0.15 },
-        delay: 0.7,
+        delay: 0.2,
       }
     );
   });
 
   return (
     <div
-      className={`h-screen w-full box-border flex items-center justify-center bg-white ${
+      className={`h-dvh w-full box-border flex items-center justify-center bg-white ${
         isMobile ? "" : "p-[15px]"
       }`}
     >
