@@ -59,28 +59,28 @@ function HeroImageSection() {
           {isMobile ? <NavbarMobile id="navbar" /> : <Navbar id="navbar" />}
 
           <div
-            className={`flex flex-col items-start justify-end h-full px-6 gap-6 ${
+            className={`flex flex-col items-start justify-end h-full px-6 gap-4 ${
               isMobile ? "max-w-xs" : ""
             }`}
             id="info-content"
           >
             <h4
               className={`tracking-wide ${
-                isMobile ? "text-base" : "text-lg"
+                isMobile ? "text-base" : "text-xl"
               } font-regular text-background`}
             >
               Bienvenido a Mediconnect
             </h4>
             <h1
               className={`${
-                isMobile ? "text-2xl" : "text-5xl"
-              } font-semibold text-background`}
+                isMobile ? "text-2xl" : "text-6xl"
+              } font-medium text-background`}
             >
               Conectando el Futuro <br /> de la Atención Médica
             </h1>
             <p
               className={`font-medium text-background ${
-                isMobile ? "text-base max-w-xs" : "text-lg max-w-xl"
+                isMobile ? "text-base max-w-xs" : "text-xl max-w-xl"
               }`}
             >
               Una plataforma integral que transforma la comunicación entre
