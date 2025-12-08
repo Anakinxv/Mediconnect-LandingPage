@@ -55,7 +55,11 @@ function HeroImageSection() {
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10 z-0 pointer-events-none" />
         )}
 
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-6 z-10">
+        <div
+          className={`absolute top-0 left-0 w-full h-full flex flex-col justify-between p-6 ${
+            isMobile ? "z-10" : "z-10"
+          }`}
+        >
           {isMobile ? <NavbarMobile id="navbar" /> : <Navbar id="navbar" />}
 
           <div

@@ -8,9 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-
 import { useAppStore } from "@/stores/useAppStore";
-// Importa las banderas
 import flagSpain from "@/assets/flag-spain.png";
 import flagUSA from "@/assets/flag-usa.png";
 import flagFrance from "@/assets/flag-france.png";
@@ -31,26 +29,53 @@ const languages = [
   { code: "zh", label: "中文", flag: flagChina },
 ];
 
-function LanguageDropDown() {
+type LanguageDropDownProps = {
+  showLabel?: boolean;
+  buttonBg?: string;
+  buttonText?: string;
+  borderColor?: string;
+  className?: string;
+};
+
+function LanguageDropDown({
+  showLabel = false,
+  buttonBg = "bg-white",
+  buttonText = "text-primary",
+  borderColor = "border-primary",
+  className = "px-3 py-2", // tamaño compacto por defecto
+}: LanguageDropDownProps) {
   const language = useAppStore((state) => state.language);
   const setLanguage = useAppStore((state) => state.setLanguage);
+  const selectedLang = languages.find((l) => l.code === language);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="flex items-center gap-2 px-3 py-2 rounded-full border border-white transition focus:outline-none  hover:-translate-y-0.5 hover:scale-105 hover:opacity-95
-    active:scale-97 active:translate-y-0 active:opacity-90
-  
-    disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:scale-100
-    motion-safe:transition-transform"
+          className={`flex items-center rounded-full border transition focus:outline-none
+            ${buttonBg} ${buttonText} ${borderColor} ${className}
+            hover:-translate-y-0.5 hover:scale-105 hover:opacity-95
+            active:scale-97 active:translate-y-0 active:opacity-90
+            disabled:opacity-50 disabled:cursor-not-allowed
+            motion-safe:transition-transform`}
         >
-          <img
-            src={languages.find((l) => l.code === language)?.flag}
-            alt={languages.find((l) => l.code === language)?.label}
-            className="w-5 h-5 rounded-full focus:outline-none"
-          />
-          <ChevronDownIcon size={20} />
+          <span
+            className={`flex items-center gap-2 w-full ${
+              showLabel ? "justify-center" : ""
+            }`}
+          >
+            <img
+              src={selectedLang?.flag}
+              alt={selectedLang?.label}
+              className="w-5 h-5 rounded-full focus:outline-none"
+            />
+            {showLabel && (
+              <span className="font-medium text-2xl">
+                {selectedLang?.label}
+              </span>
+            )}
+            <ChevronDownIcon size={20} />
+          </span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

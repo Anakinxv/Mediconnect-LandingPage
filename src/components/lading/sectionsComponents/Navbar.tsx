@@ -58,7 +58,12 @@ function Navbar({ id }: NavbarProps) {
       </span>
 
       <span className="flex gap-4">
-        <LanguageDropDown />
+        <LanguageDropDown
+          buttonBg="transparent"
+          borderColor="border-white"
+          buttonText="text-white"
+        />
+
         <MediButton
           variant="secondary"
           className="text-white bg-transparent border-white"

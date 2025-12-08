@@ -182,7 +182,7 @@ function AboutSection() {
                   <img
                     src={AboutMain}
                     alt="About Main"
-                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-110 transition-transform duration-500  "
+                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500  "
                   />
                 </div>
                 <div
@@ -192,7 +192,7 @@ function AboutSection() {
                   <img
                     src={AboutAside}
                     alt="About Aside"
-                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-110 transition-transform duration-500  "
+                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500  "
                   />
                 </div>
               </>
