@@ -52,7 +52,9 @@ function LanguageDropDown({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className={`flex items-center rounded-full border transition focus:outline-none
+          className={`flex ${
+            showLabel ? "justify-center" : ""
+          } items-center gap-2 rounded-full border transition focus:outline-none
             ${buttonBg} ${buttonText} ${borderColor} ${className}
             hover:-translate-y-0.5 hover:scale-105 hover:opacity-95
             active:scale-97 active:translate-y-0 active:opacity-90
@@ -67,15 +69,15 @@ function LanguageDropDown({
             <img
               src={selectedLang?.flag}
               alt={selectedLang?.label}
-              className="w-5 h-5 rounded-full focus:outline-none"
+              className="w-[1.5em] h-[1.5em] rounded-full focus:outline-none object-cover min-w-[1.5em] min-h-[1.5em] max-w-[2em] max-h-[2em]"
             />
             {showLabel && (
               <span className="font-medium text-2xl">
                 {selectedLang?.label}
               </span>
             )}
-            <ChevronDownIcon size={20} />
           </span>
+          <ChevronDownIcon size={20} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -96,7 +98,7 @@ function LanguageDropDown({
                 <img
                   src={lang.flag}
                   alt={lang.label}
-                  className="w-5 h-5 rounded-full"
+                  className="w-[1.5em] h-[1.5em] rounded-full object-cover min-w-[1.5em] min-h-[1.5em] max-w-[2em] max-h-[2em]"
                 />
                 {lang.label}
               </span>

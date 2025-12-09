@@ -3,8 +3,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import MediButton from "@/components/common/MediButton";
 import Navbar from "./Navbar";
-import NavbarMobile from "./Navbar-Mobile";
+
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 function HeroImageSection() {
   const isMobile = useIsMobile();
@@ -32,10 +36,36 @@ function HeroImageSection() {
         delay: 0.2,
       }
     );
-  });
+
+    // Animación de scroll - SOLO EN DESKTOP
+    if (!isMobile) {
+      gsap.to("#hero-container", {
+        padding: "0px",
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: "#hero-container",
+          start: "top top",
+          end: "bottom 80%",
+          scrub: 1,
+        },
+      });
+
+      gsap.to("#hero-image", {
+        borderRadius: "0px",
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: "#hero-container",
+          start: "top top",
+          end: "bottom 80%",
+          scrub: 1,
+        },
+      });
+    }
+  }, [isMobile]);
 
   return (
     <div
+      id="hero-container"
       className={`h-dvh w-full box-border flex items-center justify-center bg-white ${
         isMobile ? "" : "p-[15px]"
       }`}
@@ -55,12 +85,8 @@ function HeroImageSection() {
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10 z-0 pointer-events-none" />
         )}
 
-        <div
-          className={`absolute top-0 left-0 w-full h-full flex flex-col justify-between p-6 ${
-            isMobile ? "z-10" : "z-10"
-          }`}
-        >
-          {isMobile ? <NavbarMobile id="navbar" /> : <Navbar id="navbar" />}
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-6 z-10">
+          <Navbar id="navbar" />
 
           <div
             className={`flex flex-col items-start justify-end h-full px-6 gap-4 ${
