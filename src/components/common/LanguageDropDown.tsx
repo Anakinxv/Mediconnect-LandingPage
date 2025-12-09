@@ -17,6 +17,7 @@ import flagItaly from "@/assets/flag-italy.png";
 import flagJapan from "@/assets/flag-japan.png";
 import flagPortugal from "@/assets/flag-portugal.png";
 import flagChina from "@/assets/flag-china.png";
+import MediButton from "./MediButton";
 
 const languages = [
   { code: "es", label: "Español", flag: flagSpain },
@@ -42,7 +43,7 @@ function LanguageDropDown({
   buttonBg = "bg-white",
   buttonText = "text-primary",
   borderColor = "border-primary",
-  className = "px-3 py-2", // tamaño compacto por defecto
+  className = "px-6 py-3 text-base md:px-8 md:py-6 md:text-lg font-medium rounded-full transition-all duration-300 ease-in-out transform", // igual que MediButton
 }: LanguageDropDownProps) {
   const language = useAppStore((state) => state.language);
   const setLanguage = useAppStore((state) => state.setLanguage);
@@ -69,15 +70,15 @@ function LanguageDropDown({
             <img
               src={selectedLang?.flag}
               alt={selectedLang?.label}
-              className="w-[1.5em] h-[1.5em] rounded-full focus:outline-none object-cover min-w-[1.5em] min-h-[1.5em] max-w-[2em] max-h-[2em]"
+              className="w-[1.5em] h-[1.5em] rounded-full focus:outline-none object-cover min-w-[1.5em] min-h-[1.5em] max-w-[2em] max-h-[2em]" // igual tamaño que botón
             />
             {showLabel && (
-              <span className="font-medium text-2xl">
+              <span className="font-medium text-lg md:text-xl">
                 {selectedLang?.label}
               </span>
             )}
+            <ChevronDownIcon size={20} />
           </span>
-          <ChevronDownIcon size={20} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -98,7 +99,7 @@ function LanguageDropDown({
                 <img
                   src={lang.flag}
                   alt={lang.label}
-                  className="w-[1.5em] h-[1.5em] rounded-full object-cover min-w-[1.5em] min-h-[1.5em] max-w-[2em] max-h-[2em]"
+                  className="w-5 h-5 rounded-full"
                 />
                 {lang.label}
               </span>
