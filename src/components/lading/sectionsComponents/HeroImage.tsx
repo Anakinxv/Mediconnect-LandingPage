@@ -8,11 +8,12 @@ import MobileNavbar from "./MobileNavbar";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
-
+import { useTranslation } from "react-i18next";
 gsap.registerPlugin(ScrollTrigger);
 
 function HeroImageSection() {
   const isMobile = useIsMobile();
+  const { t } = useTranslation("landing");
   const [showFixedNavbar, setShowFixedNavbar] = useState(false);
 
   // Mostrar navbar fijo en mobile solo al pasar el Hero
@@ -149,7 +150,7 @@ function HeroImageSection() {
           isMobile ? "" : "p-[15px]"
         }`}
       >
-        <div className="relative w-full h-full flex items-center justify-center bg-[#f5f6fa]">
+        <div className="relative w-full h-full flex items-center justify-center ">
           {" "}
           {/* <-- color de fondo suave */}
           <img
@@ -171,7 +172,7 @@ function HeroImageSection() {
 
             <div
               className={`flex flex-col items-start justify-end h-full px-6 gap-4 ${
-                isMobile ? "max-w-xs" : ""
+                isMobile ? "max-w-md" : ""
               }`}
               id="info-content"
             >
@@ -180,22 +181,20 @@ function HeroImageSection() {
                   isMobile ? "text-base" : "text-xl"
                 } font-regular text-background`}
               >
-                Bienvenido a Mediconnect
+                {t("hero.welcome")}
               </h4>
               <h1
                 className={`${
-                  isMobile ? "text-2xl" : "text-6xl"
+                  isMobile ? "text-3xl" : "text-6xl"
                 } font-medium text-background`}
-              >
-                Conectando el Futuro <br /> de la Atención Médica
-              </h1>
+                dangerouslySetInnerHTML={{ __html: t("hero.title") }}
+              />
               <p
                 className={`font-medium text-background ${
                   isMobile ? "text-base max-w-xs" : "text-xl max-w-xl"
                 }`}
               >
-                Una plataforma integral que transforma la comunicación entre
-                <br /> médicos, pacientes y centros de salud.
+                {t("hero.description")}
               </p>
               <div className="flex gap-4">
                 <MediButton
@@ -206,7 +205,7 @@ function HeroImageSection() {
                       : ""
                   }`}
                 >
-                  Conectar
+                  {t("hero.connect")}
                 </MediButton>
                 <MediButton
                   variant="secondary"
@@ -216,7 +215,7 @@ function HeroImageSection() {
                       : ""
                   }`}
                 >
-                  Empezar ahora
+                  {t("hero.startNow")}
                 </MediButton>
               </div>
             </div>

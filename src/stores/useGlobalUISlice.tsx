@@ -1,6 +1,6 @@
 import { type StateCreator } from "zustand";
 import { persist } from "zustand/middleware";
-
+import i18n from "../i18n/config";
 export type GlobalUISlice = {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
@@ -34,7 +34,10 @@ export const createGlobalUISlice: StateCreator<
     toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
 
     language: "es",
-    setLanguage: (lang: string) => set({ language: lang }),
+    setLanguage: (lang: string) => {
+      i18n.changeLanguage(lang);
+      set({ language: lang });
+    },
 
     isloading: false,
     setIsLoading: (loading: boolean) => set({ isloading: loading }),
