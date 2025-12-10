@@ -5,11 +5,13 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function AboutSection() {
   const isMobile = useIsMobile();
+  const { t } = useTranslation("landing");
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -136,7 +138,7 @@ function AboutSection() {
             ref={titleRef}
             className="tracking-wide text-xl font-normal text-primary"
           >
-            Sobre Nosotros
+            {t("about.title")}
           </h4>
           <div
             className={`${
@@ -149,16 +151,13 @@ function AboutSection() {
                 isMobile ? "text-4xl" : "text-7xl"
               } font-bold text-primary mb-4`}
             >
-              Una Plataforma para la Salud Conectada
+              {t("about.subtitle")}
             </h1>
             <p
               ref={textRef}
               className="font-normal text-xl text-primary mb-4 w-full"
             >
-              MediConect es una plataforma digital que conecta pacientes,
-              médicos y centros de salud para ofrecer atención rápida y
-              organizada. Simplifica citas, comunicación y acceso a historiales,
-              creando una experiencia médica más clara, humana y eficiente.
+              {t("about.description")}
             </p>
           </div>
           <div

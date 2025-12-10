@@ -5,5 +5,19 @@
     "description": "An all-in-one platform transforming communication between doctors, patients, and healthcare centers.",
     "connect": "Connect",
     "startNow": "Start Now"
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "how": "How It Works",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "A Platform for Connected Healthcare",
+    "description": "MediConnect is a digital platform that connects patients, doctors, and healthcare centers to provide fast and organized care. It simplifies appointments, communication, and access to records, creating a clearer, more human, and efficient medical experience."
   }
 }

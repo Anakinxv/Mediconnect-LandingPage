@@ -5,5 +5,19 @@
     "description": "Una plataforma integral que transforma la comunicación entre médicos, pacientes y centros de salud.",
     "connect": "Conectar",
     "startNow": "Empezar ahora"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "about": "Sobre Nosotros",
+    "how": "Cómo Funciona",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Una Plataforma para la Salud Conectada",
+    "description": "MediConect es una plataforma digital que conecta pacientes, médicos y centros de salud para ofrecer atención rápida y organizada. Simplifica citas, comunicación y acceso a historiales, creando una experiencia médica más clara, humana y eficiente."
   }
 }

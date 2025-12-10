@@ -7,6 +7,7 @@ import MediButton from "@/components/common/MediButton";
 import LanguageDropDown from "@/components/common/LanguageDropDown";
 import { GripIcon } from "@/components/ui/drop-icon";
 import { XIcon } from "@/components/ui/x-icon";
+import { useTranslation } from "react-i18next";
 
 type MobileNavbarProps = {
   id?: string;
@@ -14,6 +15,7 @@ type MobileNavbarProps = {
 };
 
 function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
+  const { t } = useTranslation("landing");
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<HTMLUListElement>(null);
@@ -40,11 +42,11 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   }, [isOpen]);
 
   const menuItems = [
-    { href: "#inicio", label: "Inicio" },
-    { href: "#about", label: "Sobre Nosotros" },
-    { href: "#how", label: "Cómo Funciona" },
-    { href: "#faq", label: "FAQ" },
-    { href: "#contact", label: "Contacto" },
+    { href: "#inicio", label: t("navbar.home") },
+    { href: "#about", label: t("navbar.about") },
+    { href: "#how", label: t("navbar.how") },
+    { href: "#faq", label: t("navbar.faq") },
+    { href: "#contact", label: t("navbar.contact") },
   ];
 
   useGSAP(() => {
@@ -226,13 +228,13 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
               variant="secondary"
               className="w-full h-14 px-6 text-xl font-medium rounded-full border text-primary bg-white border-primary active:bg-primary/10 active:scale-95 transition-all duration-150"
             >
-              Iniciar Sesión
+              {t("navbar.login")}
             </MediButton>
             <MediButton
               variant="primary"
               className="w-full h-14 px-6 text-xl font-medium rounded-full bg-primary text-white active:opacity-90 active:scale-95 transition-all duration-150"
             >
-              Registrarse
+              {t("navbar.register")}
             </MediButton>
           </div>
         </div>

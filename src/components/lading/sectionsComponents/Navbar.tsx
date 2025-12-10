@@ -2,6 +2,7 @@ import MediConnectLogo from "../../../assets/MediConnectLanding.png";
 import MediButton from "@/components/common/MediButton";
 import LanguageDropDown from "@/components/common/LanguageDropDown";
 import MediConnectGreenLogo from "../../../assets/MediConnectLanding-green.png";
+import { useTranslation } from "react-i18next";
 
 type NavbarProps = {
   id?: string;
@@ -9,6 +10,16 @@ type NavbarProps = {
 };
 
 function Navbar({ id, isFixed = false }: NavbarProps) {
+  const { t } = useTranslation("landing");
+
+  const menuItems = [
+    { href: "#inicio", label: t("navbar.home") },
+    { href: "#about", label: t("navbar.about") },
+    { href: "#how", label: t("navbar.how") },
+    { href: "#faq", label: t("navbar.faq") },
+    { href: "#contact", label: t("navbar.contact") },
+  ];
+
   return (
     <nav
       id={id}
@@ -39,13 +50,7 @@ function Navbar({ id, isFixed = false }: NavbarProps) {
             isFixed ? "text-primary" : "text-white"
           }`}
         >
-          {[
-            { href: "#inicio", label: "Inicio" },
-            { href: "#about", label: "Sobre Nosotros" },
-            { href: "#how", label: "Cómo Funciona" },
-            { href: "#faq", label: "FAQ" },
-            { href: "#contact", label: "Contacto" },
-          ].map((item) => (
+          {menuItems.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
@@ -74,7 +79,7 @@ function Navbar({ id, isFixed = false }: NavbarProps) {
               : "text-white bg-transparent border-white"
           }
         >
-          Iniciar Sesión
+          {t("navbar.login")}
         </MediButton>
         <MediButton
           variant="primary"
@@ -82,7 +87,7 @@ function Navbar({ id, isFixed = false }: NavbarProps) {
             isFixed ? "bg-primary text-white" : "bg-white text-primary"
           }
         >
-          Registrarse
+          {t("navbar.register")}
         </MediButton>
       </span>
     </nav>
