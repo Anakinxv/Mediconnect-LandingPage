@@ -136,20 +136,20 @@ function AboutSection() {
         <div className="flex flex-col gap-6 w-full px-6 h-full">
           <h4
             ref={titleRef}
-            className="tracking-wide text-xl font-normal text-primary"
+            className="tracking-wide text-xl font-regular text-primary"
           >
             {t("about.title")}
           </h4>
           <div
             className={`${
               isMobile ? "flex flex-col" : "grid grid-cols-[65%_35%]"
-            } align-top items-start gap-6`}
+            } align-top items-start gap-4`}
           >
             <h1
               ref={subtitleRef}
               className={`${
                 isMobile ? "text-4xl" : "text-7xl"
-              } font-bold text-primary mb-4`}
+              } font-medium text-primary mb-4`}
             >
               {t("about.subtitle")}
             </h1>
@@ -163,7 +163,7 @@ function AboutSection() {
           <div
             className={`w-full h-full ${
               isMobile ? "flex flex-col" : "grid grid-cols-[65%_35%]"
-            } align-top items-start gap-6`}
+            } align-top items-start gap-4`}
           >
             {isMobile ? (
               <img

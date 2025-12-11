@@ -19,5 +19,10 @@
     "title": "About Us",
     "subtitle": "A Platform for Connected Healthcare",
     "description": "MediConnect is a digital platform that connects patients, doctors, and healthcare centers to provide fast and organized care. It simplifies appointments, communication, and access to records, creating a clearer, more human, and efficient medical experience."
+  },
+  "users": {
+    "title": "Made for you, just what you need",
+    "subtitle": "Designed for Every Role <br /> in Healthcare",
+    "description": "Features tailored to the needs of patients, doctors, and healthcare centers."
   }
 }
