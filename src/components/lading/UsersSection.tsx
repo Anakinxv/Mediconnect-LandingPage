@@ -253,24 +253,24 @@ function UsersSection() {
               </div>
             ) : (
               // DESKTOP: grid de 2 columnas para cada bloque
-              <div className="flex flex-col gap-8 w-full">
+              <div className="flex flex-col gap-4 w-full">
                 <div
                   ref={patientRef}
-                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6"
+                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4 "
                 >
                   <InfoContainers userType="patient" />
                   <PhotoContainers userType="patient" />
                 </div>
                 <div
                   ref={doctorRef}
-                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6"
+                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4"
                 >
                   <PhotoContainers userType="doctor" />
                   <InfoContainers userType="doctor" />
                 </div>
                 <div
                   ref={centerRef}
-                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-6"
+                  className="w-full min-h-[500px] md:h-[600px] lg:h-[750px] flex flex-col lg:grid lg:grid-cols-2 gap-4 "
                 >
                   <InfoContainers userType="center" />
                   <PhotoContainers userType="center" />

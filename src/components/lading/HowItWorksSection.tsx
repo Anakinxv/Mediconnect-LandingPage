@@ -6,7 +6,8 @@ import step1 from "../../assets/step-01.png";
 import step2 from "../../assets/step-02.png";
 import step3 from "../../assets/step-03.png";
 import step4 from "../../assets/step-04.png";
-
+import HowItWorksPanels from "./sectionsComponents/HowItWorksPanels";
+import { useIsMobile } from "@/hooks/useIsMobile";
 gsap.registerPlugin(ScrollTrigger);
 
 interface HowItWorksSectionProps {
@@ -15,6 +16,7 @@ interface HowItWorksSectionProps {
 
 function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
   const { t } = useTranslation("landing");
+  const isMobile = useIsMobile(); // Usar el hook en lugar de window.innerWidth
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
@@ -96,7 +98,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         trigger: container,
         pin: true,
         scrub: 1,
-        snap: 1 / (steps.length - 1),
+        snap: 1 / (4 - 1),
         end: () => `+=${totalWidth}`,
         anticipatePin: 1,
         // Callback para notificar cuando el carrusel está activo
@@ -139,13 +141,13 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
       window.removeEventListener("resize", handleResize);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [steps.length, onCarouselActiveChange]);
+  }, [isMobile, onCarouselActiveChange]); // Agregar isMobile a las dependencias
 
   return (
-    <section ref={sectionRef} className="w-full bg-white">
+    <section ref={sectionRef} className="w-full bg-white p-[15px]">
       {/* TITULOS - CENTRADOS */}
-      <div className="p-[15px]">
-        <div className="flex flex-col items-center text-center gap-4 py-20">
+      <div className="bg-white py-12 px-6  items-center w-full ">
+        <div className="flex flex-col items-center text-center gap-2">
           <h4
             ref={titleRef}
             className="tracking-wide text-lg font-regular text-primary"
@@ -154,13 +156,15 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
           </h4>
           <h1
             ref={subtitleRef}
-            className="text-3xl md:text-5xl font-medium text-primary mb-4"
+            className={`${
+              isMobile ? "text-3xl" : "text-7xl"
+            } font-medium text-primary mb-4`}
           >
             {t("how.subtitle")}
           </h1>
           <p
             ref={textRef}
-            className="font-normal text-lg text-primary mb-4 w-full max-w-2xl"
+            className="font-normal text-lg text-primary w-full max-w-2xl"
           >
             {t("how.description")}
           </p>
@@ -175,21 +179,14 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         <div
           ref={panelsWrapperRef}
           className="flex gap-4 pl-4 pr-8"
-          style={{ width: `${steps.length * 90}vw` }}
+          style={{ width: `${4 * 90}vw` }}
         >
           {steps.map((step, index) => (
             <div
               key={index}
               className="horizontal-panel w-[90vw] h-[100vh] bg-white flex items-center justify-center py-4"
             >
-              <div className="w-full h-full rounded-4xl overflow-hidden  bg-white">
-                <img
-                  src={step.image}
-                  alt={`Step ${step.number}`}
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              </div>
+              <HowItWorksPanels stepIndex={index} />
             </div>
           ))}
         </div>

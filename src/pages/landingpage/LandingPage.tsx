@@ -3,6 +3,7 @@ import HeroSection from "../../components/lading/HeroSection";
 import AboutSection from "@/components/lading/AboutSection";
 import UsersSection from "@/components/lading/UsersSection";
 import HowItWorksSection from "@/components/lading/HowItWorksSection";
+import HowItWorksPanels from "@/components/lading/sectionsComponents/HowItWorksPanels";
 
 function LandingPage() {
   const [isCarouselActive, setIsCarouselActive] = useState(false);
@@ -13,6 +14,7 @@ function LandingPage() {
       <AboutSection />
       <UsersSection />
       <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />
+      <UsersSection />
     </div>
   );
 }
