@@ -22,7 +22,58 @@
   },
   "users": {
     "title": "Made for you, just what you need",
-    "subtitle": "Designed for Every Role <br /> in Healthcare",
-    "description": "Features tailored to the needs of patients, doctors, and healthcare centers."
+    "subtitle": "Designed for Every Role in Healthcare",
+    "description": "Features tailored to the needs of patients, doctors, and healthcare centers.",
+    "patient": {
+      "title": "Patients",
+      "description": "Fast, simple, and accessible care.",
+      "benefits": [
+        "Book your medical appointments in seconds.",
+        "Check your medical history from any device.",
+        "Receive automatic appointment reminders.",
+        "Have teleconsultations with trusted doctors.",
+        "Access doctors, specialties, and centers in one place.",
+        "Available 24/7."
+      ],
+      "buttons": {
+        "primary": "Start Booking",
+        "secondary": "Register"
+      }
+    },
+    "doctor": {
+      "title": "Doctors",
+      "description": "Organize your medical practice and start attending with ease.",
+      "benefits": [
+        "Manage your schedule and availability in real time.",
+        "Receive appointment requests hassle-free.",
+        "Access your patients' medical records.",
+        "Keep your notes, diagnoses, and follow-ups.",
+        "Join or collaborate with multiple health centers.",
+        "Start attending quickly after verifying your data."
+      ],
+      "buttons": {
+        "primary": "Start Attending",
+        "secondary": "Join"
+      }
+    },
+    "center": {
+      "title": "Health Centers",
+      "description": "Control and visualization from your dashboard.",
+      "benefits": [
+        "View the medical directory associated with your center.",
+        "Connect with your doctors and strengthen relationships within the app.",
+        "Check general reports of your professionals.",
+        "Manage your operation from a unified panel."
+      ],
+      "buttons": {
+        "primary": "Start Managing",
+        "secondary": "Configure"
+      }
+    }
+  },
+  "switch": {
+    "patient": "Patient",
+    "doctor": "Doctor",
+    "center": "Center"
   }
 }

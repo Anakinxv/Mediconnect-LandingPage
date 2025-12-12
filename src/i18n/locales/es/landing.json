@@ -23,6 +23,57 @@
   "users": {
     "title": "Hecho para ti, según lo que necesitas",
     "subtitle": "Pensado Para Cada Rol  <br /> en la Atención Médica",
-    "description": "Funciones adaptadas a lo que necesitan pacientes, médicos y centros de salud."
+    "description": "Funciones adaptadas a lo que necesitan pacientes, médicos y centros de salud.",
+    "patient": {
+      "title": "Pacientes",
+      "description": "Atención rápida, simple y accesible.",
+      "benefits": [
+        "Agenda tus citas médicas en segundos.",
+        "Consulta tu historial desde cualquier dispositivo.",
+        "Recibe recordatorios automáticos de citas.",
+        "Realiza teleconsultas con doctores de confianza.",
+        "Accede a médicos, especialidades y centros en un solo lugar.",
+        "Todo disponible 24/7."
+      ],
+      "buttons": {
+        "primary": "Comenzar a Agendar",
+        "secondary": "Registrarme"
+      }
+    },
+    "doctor": {
+      "title": "Doctores",
+      "description": "Organiza tu práctica médica y comienza a atender con facilidad.",
+      "benefits": [
+        "Gestiona tu agenda y disponibilidad en tiempo real.",
+        "Recibe solicitudes de citas sin complicaciones.",
+        "Accede al historial clínico de tus pacientes.",
+        "Lleva tus notas, diagnósticos y seguimientos.",
+        "Únete o colabora con varios centros de salud.",
+        "Comienza a atender rápidamente tras verificar tus datos."
+      ],
+      "buttons": {
+        "primary": "Comenzar a Atender",
+        "secondary": "Unirme"
+      }
+    },
+    "center": {
+      "title": "Centros de Salud",
+      "description": "Control y visualización desde tu dashboard.",
+      "benefits": [
+        "Visualiza el directorio médico asociado a tu centro.",
+        "Conecta con tus doctores y fortalece la relación dentro de la app.",
+        "Consulta reportes generales de tus profesionales.",
+        "Gestiona tu operación desde un panel unificado."
+      ],
+      "buttons": {
+        "primary": "Comenzar a Gestionar",
+        "secondary": "Configurar"
+      }
+    }
+  },
+  "switch": {
+    "patient": "Paciente",
+    "doctor": "Doctor",
+    "center": "Centro"
   }
 }

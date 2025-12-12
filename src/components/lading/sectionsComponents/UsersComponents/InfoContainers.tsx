@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ interface InfoContainersProps {
 }
 
 function InfoContainers({ userType = "patient" }: InfoContainersProps) {
+  const { t } = useTranslation("landing");
   const isMobile = useIsMobile();
   const [currentType, setCurrentType] = useState(userType);
 
@@ -21,55 +23,20 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
   }, [userType]);
 
   const getContent = () => {
-    switch (currentType) {
-      case "patient":
-        return {
-          subtitle: "Hecho para ti, según lo que necesitas",
-          title: "Pacientes",
-          description: "Atención rápida, simple y accesible.",
-          benefits: [
-            "Agenda tus citas médicas en segundos",
-            "Consulta tu historial desde cualquier dispositivo",
-            "Recibe recordatorios automáticos de citas",
-            "Realiza teleconsultas con médicos de confianza",
-            "Todo disponible 24/7",
-          ],
-          indicator: "1",
-        };
-
-      case "doctor":
-        return {
-          subtitle: "Optimiza tu práctica médica",
-          title: "Médicos",
-          description: "Gestión eficiente de pacientes y consultas.",
-          benefits: [
-            "Gestiona tu agenda de forma inteligente",
-            "Accede al historial completo de tus pacientes",
-            "Realiza teleconsultas desde cualquier lugar",
-            "Automatiza recordatorios y seguimientos",
-            "Herramientas de diagnóstico integradas",
-          ],
-          indicator: "2",
-        };
-
-      case "center":
-        return {
-          subtitle: "Solución integral para tu centro",
-          title: "Centros Médicos",
-          description: "Administración completa y centralizada.",
-          benefits: [
-            "Gestiona múltiples médicos y especialidades",
-            "Sistema de facturación integrado",
-            "Reportes y estadísticas en tiempo real",
-            "Control de inventario médico",
-            "Cumplimiento normativo automatizado",
-          ],
-          indicator: "3",
-        };
-
-      default:
-        return getContent();
-    }
+    const type = currentType;
+    return {
+      subtitle: t("users.title"),
+      title: t(`users.${type}.title`),
+      description: t(`users.${type}.description`),
+      benefits: t(`users.${type}.benefits`, {
+        returnObjects: true,
+      }) as string[],
+      indicator: type === "patient" ? "1" : type === "doctor" ? "2" : "3",
+      buttons: {
+        primary: t(`users.${type}.buttons.primary`),
+        secondary: t(`users.${type}.buttons.secondary`),
+      },
+    };
   };
 
   const content = getContent();
@@ -88,104 +55,138 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 85%",
-        toggleActions: "play none none none", // No reverse
-        once: true, // Solo una vez
+        start: "top 80%", // Inicia más temprano para transición suave
+        end: "bottom 20%", // Termina más tarde
+        scrub: 1.2, // Vincula la animación al scroll con suavizado
+        toggleActions: "play pause resume reverse",
+        once: false, // Permite reversión
+        anticipatePin: 1,
       },
     });
 
-    tl.from(containerRef.current, {
-      opacity: 0,
-      y: 40,
-      duration: 0.4, // Más rápido
-      ease: "power3.out",
-    })
-      .from(
-        [subtitleRef.current, titleRef.current],
+    // Animación más suave con easing personalizado
+    tl.fromTo(
+      containerRef.current,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.95,
+        filter: "blur(8px)",
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1.5,
+        ease: "power3.out",
+      }
+    )
+      .fromTo(
+        [subtitleRef.current, titleRef.current, descriptionRef.current],
         {
           opacity: 0,
-          y: 12,
-          duration: 0.25, // Más rápido
-          stagger: 0.08,
-          ease: "power2.out",
+          y: 40,
+          x: -30,
         },
-        "-=0.2"
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out",
+        },
+        "-=1.2"
       )
-      .from(
-        descriptionRef.current,
+      .fromTo(
+        listRef.current ? Array.from(listRef.current.children) : [],
         {
           opacity: 0,
-          y: 10,
-          duration: 0.2,
-          ease: "power2.out",
+          x: -50,
+          rotationY: -15,
         },
-        "-=0.15"
-      )
-      .from(
-        listRef.current ? listRef.current.children : [],
         {
-          opacity: 0,
-          x: -10,
-          duration: 0.2,
-          stagger: 0.06,
-          ease: "power2.out",
+          opacity: 1,
+          x: 0,
+          rotationY: 0,
+          duration: 1,
+          stagger: 0.12,
+          ease: "power3.out",
         },
-        "-=0.15"
+        "-=0.8"
       )
-      .from(
+      .fromTo(
         buttonsRef.current,
         {
           opacity: 0,
-          scale: 0.9,
-          duration: 0.18,
-          ease: "back.out(1.8)",
+          scale: 0.8,
+          y: 30,
         },
-        "-=0.1"
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "elastic.out(1, 0.5)",
+        },
+        "-=0.6"
       )
-      .from(
+      .fromTo(
         indicatorsRef.current?.children ?? [],
         {
           opacity: 0,
-          y: 8,
-          duration: 0.15,
-          stagger: 0.05,
-          ease: "power2.out",
+          y: 20,
+          scale: 0.5,
         },
-        "-=0.1"
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "back.out(2)",
+        },
+        "-=0.4"
       );
   });
 
   return (
-    <div
-      ref={containerRef}
-      className={`flex flex-col justify-center items-center gap-6 w-full p-25 bg-accent rounded-[35px] `}
-    >
-      <div className="flex flex-col w-full max-w-md gap-2">
+    <div className="flex flex-col justify-center items-center gap-4 w-full h-full p-8 bg-accent rounded-4xl ">
+      <div className="flex flex-col w-full gap-2 max-w-full sm:max-w-md">
         <h4
           ref={subtitleRef}
-          className={`tracking-wide ${
-            isMobile ? "text-base" : "text-lg"
-          } font-regular text-primary`}
+          className={`
+            tracking-wide font-regular text-primary
+            text-base sm:text-lg md:text-xl
+          `}
         >
           {content.subtitle}
         </h4>
 
-        <h2 ref={titleRef} className="text-3xl font-medium text-primary">
+        <h2
+          ref={titleRef}
+          className="text-2xl sm:text-3xl md:text-4xl font-medium text-primary"
+        >
           {content.title}
         </h2>
 
-        <p ref={descriptionRef} className="text-lg text-primary font-regular">
+        <p
+          ref={descriptionRef}
+          className="text-base sm:text-lg md:text-xl text-primary font-regular"
+        >
           {content.description}
         </p>
       </div>
 
       {/* Lista */}
-      <div className="w-full max-w-md">
-        <h4 className="text-lg font-medium text-primary mb-4">Incluye:</h4>
-
+      <div className="w-full max-w-full sm:max-w-md">
+        <h4 className="text-base sm:text-lg font-medium text-primary mb-2 sm:mb-4">
+          Incluye:
+        </h4>
         <ul
           ref={listRef}
-          className="list-disc list-inside text-primary space-y-2"
+          className="list-disc list-inside text-primary space-y-2 text-sm sm:text-base"
         >
           {content.benefits.map((benefit, index) => (
             <li key={index}>{benefit}</li>
@@ -194,22 +195,37 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
       </div>
 
       {/* Botones */}
-      <div ref={buttonsRef} className="flex gap-4 w-full max-w-md">
-        <MediButton variant="primary">Comenzar a Gestionar</MediButton>
-        <MediButton variant="secondary">Configurar</MediButton>
+      <div
+        ref={buttonsRef}
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-full sm:max-w-md"
+      >
+        <MediButton variant="primary" className="w-full sm:w-auto">
+          {content.buttons.primary}
+        </MediButton>
+        <MediButton variant="secondary" className="w-full sm:w-auto">
+          {content.buttons.secondary}
+        </MediButton>
       </div>
 
       {/* Indicadores */}
       <div
         ref={indicatorsRef}
-        className="flex w-full max-w-md justify-start gap-2 mt-4"
+        className="flex w-full max-w-full sm:max-w-md justify-start gap-2 mt-2 sm:mt-4"
       >
         <div className="w-8 h-8 flex items-center justify-center text-md text-primary border border-primary rounded-full font-medium">
           {content.indicator}
         </div>
-        <div className="w-8 h-8 flex items-center justify-center text-md text-primary opacity-70 border border-primary rounded-full font-medium">
+        <p
+          className={`w-8 h-8 flex items-center justify-center text-md font-medium rounded-full m-0
+            ${
+              currentType === "center"
+                ? "text-primary border border-primary"
+                : "text-primary opacity-40 border border-primary/30 pointer-events-none select-none"
+            }
+          `}
+        >
           3
-        </div>
+        </p>
       </div>
     </div>
   );

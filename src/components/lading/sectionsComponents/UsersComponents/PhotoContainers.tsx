@@ -70,14 +70,14 @@ function PhotoContainers({ userType }: PhotoContainersProps) {
   return (
     <div
       ref={containerRef}
-      className="bg-accent rounded-[35px] overflow-hidden flex items-center justify-center"
+      className="bg-accent rounded-4xl overflow-hidden flex items-center justify-center"
     >
       {/* 🔥 Contenedor con proporción fija */}
       <div className="w-full overflow-hidden inline-block  aspect-[4/5]">
         <img
           src={imageData.src}
           alt={imageData.alt}
-          className="w-full h-full object-cover object-top rounded-[35px]  hover:scale-115 transition-transform duration-500 "
+          className="w-full h-full object-cover object-top rounded-4xl hover:scale-115 transition-transform duration-500 "
           loading="lazy"
         />
       </div>

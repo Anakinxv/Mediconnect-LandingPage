@@ -15,35 +15,58 @@ function HeroImageSection() {
   const isMobile = useIsMobile();
   const { t } = useTranslation("landing");
   const [showFixedNavbar, setShowFixedNavbar] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Mostrar navbar fijo en mobile solo al pasar el Hero
+  // Control del fixed navbar con scroll direction
   useEffect(() => {
-    if (!isMobile) return;
-
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
       const hero = document.getElementById("hero-container");
       if (!hero) return;
+
       const heroBottom = hero.getBoundingClientRect().bottom;
-      setShowFixedNavbar(heroBottom <= 0);
+      const scrollingUp = currentScrollY < lastScrollY;
+
+      // Mostrar fixed navbar si:
+      // 1. Estás haciendo scroll hacia arriba Y
+      // 2. Has pasado el hero (heroBottom <= 0)
+      if (scrollingUp && heroBottom <= 0) {
+        setShowFixedNavbar(true);
+      }
+      // Ocultar si estás en el Hero section (heroBottom > 0)
+      else if (heroBottom > 0) {
+        setShowFixedNavbar(false);
+      }
+      // Ocultar si haces scroll hacia abajo
+      else if (!scrollingUp && currentScrollY > lastScrollY) {
+        setShowFixedNavbar(false);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMobile]);
+  }, [lastScrollY, isMobile]);
 
   useGSAP(() => {
     gsap.fromTo(
       "#hero-image",
-      { scale: 1.3, opacity: 1 }, // <-- opacity: 1 para evitar parpadeo
+      { scale: 1.3, opacity: 1 },
       { duration: 1.2, scale: 1, opacity: 1, ease: "power3.out" }
     );
-    gsap.fromTo(
-      "#navbar",
-      { y: -100, opacity: 0 },
-      { duration: 1, y: 0, opacity: 1, ease: "power3.out", delay: 0.2 }
-    );
+
+    // Solo animación para desktop
+    if (!isMobile) {
+      gsap.fromTo(
+        "#navbar",
+        { y: -100, opacity: 0 },
+        { duration: 1, y: 0, opacity: 1, ease: "power3.out", delay: 0.2 }
+      );
+    }
+
     gsap.fromTo(
       "#info-content > *",
       { y: 60, opacity: 0 },
@@ -81,68 +104,19 @@ function HeroImageSection() {
         },
       });
 
-      // Control del navbar fijo - SOLO EN DESKTOP
-      ScrollTrigger.create({
-        trigger: "#hero-container",
-        start: "50% top",
-        end: "bottom top",
-        onUpdate: (self) => {
-          const scrollDirection = self.direction;
-          const progress = self.progress;
-
-          if (progress > 0 && scrollDirection === -1) {
-            gsap.to("#fixed-navbar", {
-              y: 0,
-              opacity: 1,
-              duration: 0.3,
-              ease: "power3.out",
-            });
-          } else {
-            gsap.to("#fixed-navbar", {
-              y: -100,
-              opacity: 0,
-              duration: 0.3,
-              ease: "power3.out",
-            });
-          }
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: "#hero-container",
-        start: "50% top",
-        end: "bottom top",
-        onToggle: (self) => {
-          if (self.isActive) {
-            gsap.to("#navbar", {
-              opacity: 0,
-              y: -50,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          } else {
-            gsap.to("#navbar", {
-              opacity: 1,
-              y: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }
-        },
-      });
-
       gsap.set("#fixed-navbar", { y: -100, opacity: 0 });
     }
   }, [isMobile]);
 
   return (
     <>
-      {/* Solo mostrar el fixed-navbar en mobile si showFixedNavbar es true */}
-      {isMobile ? (
-        showFixedNavbar && <MobileNavbar id="fixed-navbar" isFixed={true} />
-      ) : (
-        <Navbar id="fixed-navbar" isFixed={true} />
-      )}
+      {/* Fixed navbar que aparece con scroll hacia arriba */}
+      {showFixedNavbar &&
+        (isMobile ? (
+          <MobileNavbar id="fixed-navbar" isFixed={true} />
+        ) : (
+          <Navbar id="fixed-navbar" isFixed={true} />
+        ))}
 
       <div
         id="hero-container"
@@ -151,8 +125,6 @@ function HeroImageSection() {
         }`}
       >
         <div className="relative w-full h-full flex items-center justify-center ">
-          {" "}
-          {/* <-- color de fondo suave */}
           <img
             src={HeroImage}
             id="hero-image"
@@ -165,7 +137,7 @@ function HeroImageSection() {
           />
           <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-6 z-10">
             {isMobile ? (
-              <MobileNavbar id="navbar" isFixed={false} />
+              <MobileNavbar id="navbarmobile" isFixed={false} />
             ) : (
               <Navbar id="navbar" isFixed={false} />
             )}

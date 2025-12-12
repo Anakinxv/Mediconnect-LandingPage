@@ -32,7 +32,6 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   // Manejar el overflow del body al abrir/cerrar el menú
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
@@ -42,11 +41,11 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   }, [isOpen]);
 
   const menuItems = [
-    { href: "#inicio", label: t("navbar.home") },
-    { href: "#about", label: t("navbar.about") },
-    { href: "#how", label: t("navbar.how") },
-    { href: "#faq", label: t("navbar.faq") },
-    { href: "#contact", label: t("navbar.contact") },
+    { label: t("navbar.home") },
+    { label: t("navbar.about") },
+    { label: t("navbar.how") },
+    { label: t("navbar.faq") },
+    { label: t("navbar.contact") },
   ];
 
   useGSAP(() => {
@@ -57,49 +56,49 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
         .fromTo(
           overlayRef.current,
           { y: "-100%", opacity: 0 },
-          { y: "0%", opacity: 1, duration: 0.6, ease: "power3.out" }
+          { y: "0%", opacity: 1, duration: 0.25, ease: "power2.out" }
         )
         .fromTo(
           menuItemsRef.current?.children || [],
-          { x: -100, opacity: 0 },
+          { x: -50, opacity: 0 },
           {
             x: 0,
             opacity: 1,
-            duration: 0.5,
-            stagger: 0.1,
+            duration: 0.3,
+            stagger: 0.05,
             ease: "power2.out",
           },
-          "-=0.2"
+          "-=0.15"
         )
         .fromTo(
           buttonsRef.current?.children || [],
-          { y: 50, opacity: 0 },
+          { y: 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.4,
-            stagger: 0.1,
+            duration: 0.25,
+            stagger: 0.05,
             ease: "power2.out",
           },
-          "-=0.3"
+          "-=0.2"
         );
     } else {
       const tl = gsap.timeline();
 
       tl.to(buttonsRef.current?.children || [], {
-        y: 50,
+        y: 30,
         opacity: 0,
-        duration: 0.2,
-        stagger: 0.05,
+        duration: 0.15,
+        stagger: 0.02,
         ease: "power2.in",
       })
         .to(
           menuItemsRef.current?.children || [],
           {
-            x: -100,
+            x: -50,
             opacity: 0,
-            duration: 0.3,
-            stagger: 0.05,
+            duration: 0.2,
+            stagger: 0.02,
             ease: "power2.in",
           },
           "-=0.1"
@@ -109,13 +108,13 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
           {
             y: "-100%",
             opacity: 0,
-            duration: 0.5,
-            ease: "power3.in",
+            duration: 0.2,
+            ease: "power2.in",
             onComplete: () => {
               gsap.set(overlayRef.current, { display: "none" });
             },
           },
-          "-=0.1"
+          "-=0.15"
         );
     }
   }, [isOpen]);
@@ -199,15 +198,14 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
         {/* Menu Items - Toda la fila con efecto táctil y rounded */}
         <div className="flex-1 -mx-6">
           <ul ref={menuItemsRef} className="space-y-2">
-            {menuItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                <button
                   onClick={handleMenuItemClick}
-                  className="block w-full px-8 py-4 text-3xl font-medium text-primary transition-all duration-300 rounded-xl active:bg-primary/10 active:scale-[0.98]"
+                  className="block w-full px-8 py-4 text-3xl font-medium text-primary transition-all duration-300 rounded-xl active:bg-primary/10 active:scale-95 text-left"
                 >
                   {item.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
@@ -215,15 +213,17 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
 
         {/* Bottom Section - Language Dropdown and Buttons */}
         <div className="space-y-6 mt-8">
+          {/* Language Dropdown FUERA del ref de animación */}
+          <LanguageDropDown
+            buttonBg="bg-white"
+            buttonText="text-primary"
+            borderColor="border-primary"
+            showLabel={true}
+            className="w-full h-14 px-6 text-xl font-medium rounded-full border transition-all duration-150"
+          />
+
+          {/* Botones CON animación */}
           <div ref={buttonsRef} className="space-y-4">
-            {" "}
-            <LanguageDropDown
-              buttonBg="bg-white"
-              buttonText="text-primary"
-              borderColor="border-primary"
-              showLabel={true}
-              className="w-full h-14 px-6 text-xl font-medium rounded-full border transition-all duration-150"
-            />
             <MediButton
               variant="secondary"
               className="w-full h-14 px-6 text-xl font-medium rounded-full border text-primary bg-white border-primary active:bg-primary/10 active:scale-95 transition-all duration-150"

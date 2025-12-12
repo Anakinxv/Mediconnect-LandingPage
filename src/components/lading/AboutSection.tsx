@@ -133,65 +133,65 @@ function AboutSection() {
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"
       >
-        <div className="flex flex-col gap-6 w-full px-6 h-full">
+        <div className="flex flex-col gap-6 w-full h-full">
           <h4
             ref={titleRef}
-            className="tracking-wide text-xl font-regular text-primary"
+            className="tracking-wide text-lg font-regular text-primary"
           >
             {t("about.title")}
           </h4>
           <div
-            className={`${
+            className={`w-full ${
               isMobile ? "flex flex-col" : "grid grid-cols-[65%_35%]"
-            } align-top items-start gap-4`}
+            } items-start gap-4`}
           >
             <h1
               ref={subtitleRef}
               className={`${
-                isMobile ? "text-4xl" : "text-7xl"
-              } font-medium text-primary mb-4`}
+                isMobile ? "text-3xl" : "text-7xl"
+              } font-medium text-primary mb-4 w-full`}
             >
               {t("about.subtitle")}
             </h1>
             <p
               ref={textRef}
-              className="font-normal text-xl text-primary mb-4 w-full"
+              className="font-normal text-lg text-primary mb-4 w-full"
             >
               {t("about.description")}
             </p>
           </div>
           <div
-            className={`w-full h-full ${
+            className={`w-full ${
               isMobile ? "flex flex-col" : "grid grid-cols-[65%_35%]"
-            } align-top items-start gap-4`}
+            } items-start gap-4`}
           >
             {isMobile ? (
               <img
                 ref={mainImageRef}
                 src={AboutMain}
                 alt="About Main"
-                className="rounded-2xl w-full h-[350px] object-cover shadow-lg pointer-events-none "
+                className="rounded-4xl w-full h-[350px] object-cover shadow-lg pointer-events-none"
               />
             ) : (
               <>
                 <div
                   ref={mainImageRef}
-                  className="overflow-hidden inline-block rounded-2xl w-full h-full "
+                  className="overflow-hidden inline-block rounded-4xl w-full h-full"
                 >
                   <img
                     src={AboutMain}
                     alt="About Main"
-                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500  "
+                    className="rounded-4xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500"
                   />
                 </div>
                 <div
                   ref={asideImageRef}
-                  className="overflow-hidden inline-block rounded-2xl w-full h-full "
+                  className="overflow-hidden inline-block rounded-4xl w-full h-full"
                 >
                   <img
                     src={AboutAside}
                     alt="About Aside"
-                    className="rounded-2xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500  "
+                    className="rounded-4xl w-full h-full object-cover shadow-lg hover:scale-115 transition-transform duration-500"
                   />
                 </div>
               </>
