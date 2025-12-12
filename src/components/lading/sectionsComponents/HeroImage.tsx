@@ -11,7 +11,11 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 gsap.registerPlugin(ScrollTrigger);
 
-function HeroImageSection() {
+interface HeroImageSectionProps {
+  isCarouselActive?: boolean;
+}
+
+function HeroImageSection({ isCarouselActive = false }: HeroImageSectionProps) {
   const isMobile = useIsMobile();
   const { t } = useTranslation("landing");
   const [showFixedNavbar, setShowFixedNavbar] = useState(false);
@@ -20,6 +24,13 @@ function HeroImageSection() {
   // Control del fixed navbar con scroll direction
   useEffect(() => {
     const handleScroll = () => {
+      // Si el carrusel está activo, NO mostrar el navbar
+      if (isCarouselActive) {
+        setShowFixedNavbar(false);
+        setLastScrollY(window.scrollY);
+        return;
+      }
+
       const currentScrollY = window.scrollY;
       const hero = document.getElementById("hero-container");
       if (!hero) return;
@@ -49,7 +60,7 @@ function HeroImageSection() {
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isMobile]);
+  }, [lastScrollY, isMobile, isCarouselActive]);
 
   useGSAP(() => {
     gsap.fromTo(

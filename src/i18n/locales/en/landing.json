@@ -75,5 +75,10 @@
     "patient": "Patient",
     "doctor": "Doctor",
     "center": "Center"
+  },
+  "how": {
+    "title": "How does it work?",
+    "subtitle": "A simple, clear, and connected process",
+    "description": "Designed to guide you step by step, providing comfort and confidence from the first action to the final confirmation."
   }
 }

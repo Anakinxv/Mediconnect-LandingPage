@@ -1,6 +1,11 @@
 import HeroImageSection from "./sectionsComponents/HeroImage";
-function HeroSection() {
-  return <HeroImageSection />;
+
+interface HeroSectionProps {
+  isCarouselActive: boolean;
+}
+
+function HeroSection({ isCarouselActive }: HeroSectionProps) {
+  return <HeroImageSection isCarouselActive={isCarouselActive} />;
 }
 
 export default HeroSection;

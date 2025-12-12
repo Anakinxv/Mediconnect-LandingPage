@@ -22,7 +22,7 @@
   },
   "users": {
     "title": "Hecho para ti, según lo que necesitas",
-    "subtitle": "Pensado Para Cada Rol  <br /> en la Atención Médica",
+    "subtitle": "Pensado Para Cada Rol en la Atención Médica",
     "description": "Funciones adaptadas a lo que necesitan pacientes, médicos y centros de salud.",
     "patient": {
       "title": "Pacientes",
@@ -75,5 +75,10 @@
     "patient": "Paciente",
     "doctor": "Doctor",
     "center": "Centro"
+  },
+  "how": {
+    "title": "¿Cómo funciona?",
+    "subtitle": "Un proceso simple, claro y conectado",
+    "description": "Diseñado para guiarte paso a paso, brindando comodidad y confianza desde la primera acción hasta la confirmación final."
   }
 }

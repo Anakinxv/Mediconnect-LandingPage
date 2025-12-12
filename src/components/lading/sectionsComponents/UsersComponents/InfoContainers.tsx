@@ -208,7 +208,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
       </div>
 
       {/* Indicadores */}
-      <div
+      {/* <div
         ref={indicatorsRef}
         className="flex w-full max-w-full sm:max-w-md justify-start gap-2 mt-2 sm:mt-4"
       >
@@ -226,7 +226,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
         >
           3
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
