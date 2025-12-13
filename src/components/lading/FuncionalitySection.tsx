@@ -96,7 +96,7 @@ function FuncionalitySection() {
           </p>
         </div>
       </div>
-      <div>
+      <div className="w-full bg-violet-200 p-5">
         <FuncionalityCards />
       </div>
     </section>

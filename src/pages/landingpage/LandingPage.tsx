@@ -11,8 +11,9 @@ function LandingPage() {
   return (
     <div className="bg-white w-full overflow-x-hidden">
       <HeroSection isCarouselActive={isCarouselActive} />
-      <AboutSection /> <UsersSection />
+      <AboutSection />
       <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />{" "}
+      <UsersSection />
       <FuncionalitySection />
     </div>
   );
