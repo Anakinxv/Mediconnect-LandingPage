@@ -89,7 +89,9 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         },
       }
     );
-    const totalWidth = wrapper.offsetWidth - window.innerWidth;
+
+    // Calcular el ancho total correctamente
+    const totalWidth = wrapper.offsetWidth - container.offsetWidth;
 
     const tween = gsap.to(wrapper, {
       x: -totalWidth,
@@ -98,9 +100,14 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         trigger: container,
         pin: true,
         scrub: 1,
-        snap: 1 / (4 - 1),
+        snap: {
+          snapTo: 1 / (steps.length - 1),
+          duration: 0.3,
+          ease: "power1.inOut",
+        },
         end: () => `+=${totalWidth}`,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
         // Callback para notificar cuando el carrusel está activo
         onEnter: () => onCarouselActiveChange?.(true),
         onLeave: () => onCarouselActiveChange?.(false),
@@ -157,7 +164,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
           <h1
             ref={subtitleRef}
             className={`${
-              isMobile ? "text-3xl" : "text-7xl"
+              isMobile ? "text-3xl" : "text-6xl"
             } font-medium text-primary mb-4`}
           >
             {t("how.subtitle")}
@@ -178,13 +185,13 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
       >
         <div
           ref={panelsWrapperRef}
-          className="flex gap-4 pl-4 pr-12"
-          style={{ width: `${4 * 90}vw` }}
+          className="flex gap-4 pl-4 pr-4"
+          style={{ width: `${4 * 95}vw` }}
         >
           {steps.map((step, index) => (
             <div
               key={index}
-              className="horizontal-panel w-[90vw] h-[100vh] bg-white flex items-center justify-center py-4"
+              className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
             >
               <HowItWorksPanels stepIndex={index} />
             </div>

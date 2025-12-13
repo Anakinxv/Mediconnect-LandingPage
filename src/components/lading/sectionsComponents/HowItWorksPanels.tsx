@@ -65,14 +65,18 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
           }`}
         >
           <div
-            className={`flex flex-col justify-center items-center relative rounded-full border border-white/40 bg-white/30 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
+            className={`flex flex-col justify-center items-center relative rounded-full border border-white/60 bg-black/20 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
               isMobile ? "px-4 py-2" : "px-5 py-2"
             }`}
+            style={{
+              backdropFilter: "blur(16px) saturate(180%) contrast(120%)",
+              WebkitBackdropFilter: "blur(16px) saturate(180%) contrast(120%)",
+            }}
           >
             <h3
               className={`text-white ${
                 isMobile ? "text-base" : "text-lg"
-              } font-normal tracking-wider text-center`}
+              } font-normal tracking-wider text-center drop-shadow-lg`}
             >
               {step.step}
             </h3>
@@ -90,7 +94,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             <h2
               className={`text-white ${
                 isMobile ? "text-xl" : "text-2xl md:text-5xl"
-              } font-medium mb-2 max-w-lg`}
+              } font-medium mb-2 max-w-lg drop-shadow-lg`}
             >
               {step.title}
             </h2>
@@ -98,14 +102,19 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             <div
               className={`${
                 isMobile ? "max-w-full" : "max-w-sm"
-              } flex flex-col justify-center items-start relative rounded-3xl border border-white/40 bg-white/30 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
+              } flex flex-col justify-center items-start relative rounded-3xl border border-white/60 bg-black/20 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
                 isMobile ? "px-4 py-3" : "px-7 py-4"
               }`}
+              style={{
+                backdropFilter: "blur(16px) saturate(180%) contrast(120%)",
+                WebkitBackdropFilter:
+                  "blur(16px) saturate(180%) contrast(120%)",
+              }}
             >
               <h3
                 className={`text-white ${
                   isMobile ? "text-sm" : "text-base md:text-lg"
-                } font-normal tracking-wide text-left drop-shadow`}
+                } font-normal tracking-wide text-left drop-shadow-lg`}
               >
                 {step.description}
               </h3>

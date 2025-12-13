@@ -178,7 +178,7 @@ function UsersSection() {
             <h1
               ref={subtitleRef}
               className={`${
-                isMobile ? "text-3xl" : "text-7xl"
+                isMobile ? "text-3xl" : "text-6xl"
               } font-medium text-primary mb-4`}
               dangerouslySetInnerHTML={{ __html: t("users.subtitle") }}
             ></h1>
