@@ -178,7 +178,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
       >
         <div
           ref={panelsWrapperRef}
-          className="flex gap-4 pl-4 pr-8"
+          className="flex gap-4 pl-4 pr-12"
           style={{ width: `${4 * 90}vw` }}
         >
           {steps.map((step, index) => (

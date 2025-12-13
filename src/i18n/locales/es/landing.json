@@ -79,6 +79,32 @@
   "how": {
     "title": "¿Cómo funciona?",
     "subtitle": "Un proceso simple, claro y conectado",
-    "description": "Diseñado para guiarte paso a paso, brindando comodidad y confianza desde la primera acción hasta la confirmación final."
+    "description": "Diseñado para guiarte paso a paso, brindando comodidad y confianza desde la primera acción hasta la confirmación final.",
+    "steps": [
+      {
+        "number": "01",
+        "step": "Paso 1",
+        "title": "Regístrate fácilmente",
+        "description": "Crea tu cuenta en segundos y completa tu información básica para comenzar a usar la plataforma sin complicaciones."
+      },
+      {
+        "number": "02",
+        "step": "Paso 2",
+        "title": "Encuentra tu servicio médico",
+        "description": "Busca especialidades, doctores o centros cercanos. Utiliza filtros simples para localizar exactamente el servicio que necesitas."
+      },
+      {
+        "number": "03",
+        "step": "Paso 3",
+        "title": "Agenda tu cita",
+        "description": "Elige fecha, hora y modalidad de atención. Confirma tu cita y recibe notificaciones automáticas en tu dispositivo."
+      },
+      {
+        "number": "04",
+        "step": "Paso 4",
+        "title": "Preséntate a tu consulta",
+        "description": "Preséntate a tu consulta de forma presencial o conéctate a tu teleconsulta desde la app con un solo clic, según la modalidad seleccionada."
+      }
+    ]
   }
 }

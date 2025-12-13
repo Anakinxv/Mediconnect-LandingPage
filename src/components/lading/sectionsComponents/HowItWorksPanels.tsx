@@ -20,34 +20,30 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
       {
         image: step1,
         number: "01",
-        step: "Paso 1",
-        title: "Regístrate fácilmente",
-        description:
-          "Crea tu cuenta en segundos y completa tu información básica para comenzar a usar la plataforma sin complicaciones.",
+        step: t("how.steps.0.step"),
+        title: t("how.steps.0.title"),
+        description: t("how.steps.0.description"),
       },
       {
         image: step2,
         number: "02",
-        step: "Paso 2",
-        title: "Encuentra tu servicio médico",
-        description:
-          "Busca especialidades, doctores o centros cercanos. Utiliza filtros simples para localizar exactamente el servicio que necesitas.",
+        step: t("how.steps.1.step"),
+        title: t("how.steps.1.title"),
+        description: t("how.steps.1.description"),
       },
       {
         image: step3,
         number: "03",
-        step: "Paso 3",
-        title: "Agenda tu cita",
-        description:
-          "Elige fecha, hora y modalidad de atención. Confirma tu cita y recibe notificaciones automáticas en tu dispositivo.",
+        step: t("how.steps.2.step"),
+        title: t("how.steps.2.title"),
+        description: t("how.steps.2.description"),
       },
       {
         image: step4,
         number: "04",
-        step: "Paso 4",
-        title: "Preséntate a tu consulta",
-        description:
-          "Preséntate a tu consulta de forma presencial o conéctate a tu teleconsulta desde la app con un solo clic, según la modalidad seleccionada.",
+        step: t("how.steps.3.step"),
+        title: t("how.steps.3.title"),
+        description: t("how.steps.3.description"),
       },
     ];
 

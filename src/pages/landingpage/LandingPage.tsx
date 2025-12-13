@@ -14,7 +14,6 @@ function LandingPage() {
       <AboutSection />
       <UsersSection />
       <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />
-      <UsersSection />
     </div>
   );
 }

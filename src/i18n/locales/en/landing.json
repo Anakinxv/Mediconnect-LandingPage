@@ -79,6 +79,32 @@
   "how": {
     "title": "How does it work?",
     "subtitle": "A simple, clear, and connected process",
-    "description": "Designed to guide you step by step, providing comfort and confidence from the first action to the final confirmation."
+    "description": "Designed to guide you step by step, providing comfort and confidence from the first action to the final confirmation.",
+    "steps": [
+      {
+        "number": "01",
+        "step": "Step 1",
+        "title": "Register easily",
+        "description": "Create your account in seconds and complete your basic information to start using the platform without complications."
+      },
+      {
+        "number": "02",
+        "step": "Step 2",
+        "title": "Find your medical service",
+        "description": "Search for specialties, doctors, or nearby centers. Use simple filters to locate exactly the service you need."
+      },
+      {
+        "number": "03",
+        "step": "Step 3",
+        "title": "Book your appointment",
+        "description": "Choose the date, time, and type of care. Confirm your appointment and receive automatic notifications on your device."
+      },
+      {
+        "number": "04",
+        "step": "Step 4",
+        "title": "Attend your consultation",
+        "description": "Attend your consultation in person or connect to your teleconsultation from the app with a single click, according to the selected modality."
+      }
+    ]
   }
 }
