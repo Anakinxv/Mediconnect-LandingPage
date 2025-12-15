@@ -106,5 +106,28 @@
         "description": "Attend your consultation in person or connect to your teleconsultation from the app with a single click, according to the selected modality."
       }
     ]
+  },
+  "functionality": {
+    "title": "Features",
+    "subtitle": "Smart, clear, and connected solutions",
+    "description": "Designed to offer modern tools that elevate medical care and make the entire process more efficient and secure.",
+    "cards": [
+      {
+        "title": "Direct Chat with Doctors",
+        "description": "Secure and private messaging with your doctors. Resolve doubts quickly without needing an appointment."
+      },
+      {
+        "title": "Digital Medical History",
+        "description": "All your medical history in one place. Access your results, prescriptions, and analyses whenever you need them."
+      },
+      {
+        "title": "Find Doctors by Location",
+        "description": "Find specialized doctors near you with our intelligent location-based search."
+      },
+      {
+        "title": "Real-Time Teleconsultations",
+        "description": "Consult with doctors from anywhere and anytime, without waiting or traveling."
+      }
+    ]
   }
 }

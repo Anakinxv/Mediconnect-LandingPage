@@ -1,108 +1,111 @@
-import Funcionality01 from "../../../assets/Funcionality-01.png";
-import Funcionality02 from "../../../assets/Funcionality-02.png";
-import Funcionality03 from "../../../assets/Funcionality-03.png";
-import Funcionality04 from "../../../assets/Funcionality-04.png";
-
-const cards = [
-  {
-    img: Funcionality01,
-    title: "Chat Directo con Doctores",
-    desc: "Mensajería segura y privada con tus médicos. Resuelve dudas rápidamente sin necesidad de una cita.",
-  },
-  {
-    img: Funcionality02,
-    title: "Historial Clínico Digital",
-    desc: "Todo tu historial médico en un solo lugar. Accede a tus resultados, recetas y análisis cuando los necesites.",
-  },
-  {
-    img: Funcionality03,
-    title: "Buscar Doctores por Zona",
-    desc: "Encuentra médicos especializados cerca de ti con nuestra búsqueda inteligente por ubicación.",
-  },
-  {
-    img: Funcionality04,
-    title: "Teleconsultas en Tiempo Real",
-    desc: "Consulta con médicos desde cualquier lugar y en cualquier momento, sin esperas ni traslados.",
-  },
-];
+import Funcionality01 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
+import Funcionality02 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
+import Funcionality03 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
+import Funcionality04 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
+import { useTranslation } from "react-i18next";
 
 function FuncionalityCards() {
-  return (
-    <div className="w-full flex justify-center gap-4 py-8">
-      <div className="grid grid-rows-2 gap-4 w-full max-w-6xl">
-        {/* Primera fila: 65% - 35% */}
-        <div className="grid grid-cols-[60%_40%] gap-4 bg-amber-300">
-          <div className="bg-white rounded-xl h-[500px] overflow-hidden shadow-lg flex flex-col gap-4 items-center justify-center px-8 py-8 transition-transform">
-            <div className="overflow-hidden inline-block rounded-3xl w-full h-full">
-              <img
-                src={cards[0].img}
-                alt={cards[0].title}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <div className="flex flex-col justify-start">
-              <h3 className="text-xl font-semibold text-primary mb-2 text-start">
-                {cards[0].title}
-              </h3>
-              <p className="text-base text-gray-700 text-start">
-                {cards[0].desc}
-              </p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl h-[500px] overflow-hidden shadow-lg flex flex-col gap-4 items-center justify-center px-8 py-8 transition-transform">
-            <div className="overflow-hidden inline-block rounded-3xl w-full h-full">
-              <img
-                src={cards[1].img}
-                alt={cards[1].title}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <div className="flex flex-col justify-start">
-              <h3 className="text-xl font-semibold text-primary mb-2 text-start">
-                {cards[1].title}
-              </h3>
-              <p className="text-base text-gray-700 text-start">
-                {cards[1].desc}
-              </p>
-            </div>
-          </div>
-        </div>
+  const { t } = useTranslation("landing");
 
-        {/* Segunda fila: 40% - 60% */}
-        <div className="grid grid-cols-[40%_60%] gap-4">
-          <div className="bg-white rounded-xl h-[500px]  overflow-hidden shadow-lg flex flex-col gap-4 items-center justify-center px-8 py-8 transition-transform">
-            <div className="overflow-hidden inline-block rounded-3xl w-full h-full">
-              <img
-                src={cards[2].img}
-                alt={cards[2].title}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <div className="flex flex-col justify-start">
-              <h3 className="text-xl font-semibold text-primary mb-2 text-start">
-                {cards[2].title}
-              </h3>
-              <p className="text-base text-gray-700 text-start">
-                {cards[2].desc}
-              </p>
-            </div>
+  const cardImages = [
+    Funcionality01,
+    Funcionality02,
+    Funcionality03,
+    Funcionality04,
+  ];
+
+  const cards = cardImages.map((img, index) => ({
+    img,
+    title: t(`functionality.cards.${index}.title`),
+    desc: t(`functionality.cards.${index}.description`),
+  }));
+
+  const Card = ({
+    card,
+    className = "",
+  }: {
+    card: (typeof cards)[0];
+    className?: string;
+  }) => (
+    <div
+      className={`bg-white rounded-3xl bg-gradient-to-b 
+        from-white from-[0%]
+        via-[#F5FAF3] via-[71%]
+        to-[#D7E3C9]/25 to-[100%] overflow-hidden 
+        flex flex-col gap-2 sm:gap-3 md:gap-4 items-center justify-center 
+        p-3 sm:p-4 md:p-6 lg:p-8 ${className} border border-accent/40  `}
+    >
+      <div className="overflow-hidden inline-block rounded-2xl sm:rounded-3xl w-full flex-1">
+        <img
+          src={card.img}
+          alt={card.title}
+          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+        />
+      </div>
+      <div className="flex flex-col justify-start w-full">
+        <h3 className="font-semibold text-primary mb-1 sm:mb-2 md:mb-3 text-start text-lg sm:text-xl md:text-2xl lg:text-3xl">
+          {card.title}
+        </h3>
+        <p className="text-primary text-start text-xs sm:text-sm md:text-base lg:text-lg">
+          {card.desc}
+        </p>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="w-full flex justify-center px-2 sm:px-4">
+      {/* Móvil: una columna */}
+      <div className="block sm:hidden w-full max-w-sm">
+        <div className="flex flex-col gap-4">
+          {cards.map((card, index) => (
+            <Card key={index} card={card} className="h-[350px]" />
+          ))}
+        </div>
+      </div>
+
+      {/* Tablet: grid 2x2 */}
+      <div className="hidden sm:block md:hidden w-full max-w-2xl">
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[700px]">
+          <Card card={cards[0]} />
+          <Card card={cards[1]} />
+          <Card card={cards[2]} />
+          <Card
+            card={cards[3]}
+            className="bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
+          />
+        </div>
+      </div>
+
+      {/* Desktop pequeño: grid 2x2 más grande */}
+      <div className="hidden md:block lg:hidden w-full max-w-4xl">
+        <div className="grid grid-cols-2 grid-rows-2 gap-6 h-[800px]">
+          <Card card={cards[0]} />
+          <Card card={cards[1]} />
+          <Card card={cards[2]} />
+          <Card
+            card={cards[3]}
+            className="bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
+          />
+        </div>
+      </div>
+
+      {/* Desktop grande: grid asimétrico original */}
+      <div className="hidden lg:block w-full max-w-7xl">
+        <div className="grid grid-rows-2 gap-4">
+          {/* Primera fila: 55% - 45% */}
+          <div className="grid grid-cols-[55%_45%] gap-4">
+            <Card card={cards[0]} className="h-[500px]" />
+            <Card card={cards[1]} className="h-[500px]" />
           </div>
-          <div className="bg-white rounded-xl h-[500px]  overflow-hidden shadow-lg flex flex-col gap-4 items-center justify-center px-8 py-8 transition-transform">
-            <div className="overflow-hidden inline-block rounded-3xl w-full h-full">
-              <img
-                src={cards[3].img}
-                alt={cards[3].title}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </div>
-            <div className="flex flex-col justify-start">
-              <h3 className="text-xl font-semibold text-primary mb-2 text-start">
-                {cards[3].title}
-              </h3>
-              <p className="text-base text-gray-700 text-start">
-                {cards[3].desc}
-              </p>
-            </div>
+
+          {/* Segunda fila: 45% - 55% */}
+          <div className="grid grid-cols-[45%_55%] gap-4">
+            <Card card={cards[2]} className="h-[500px]" />
+            <Card
+              card={cards[3]}
+              className="h-[500px] bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
+            />
           </div>
         </div>
       </div>

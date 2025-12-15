@@ -77,7 +77,7 @@ function FuncionalitySection() {
             ref={titleRef}
             className="tracking-wide text-lg font-regular text-primary"
           >
-            Funcionalidades
+            {t("functionality.title")}
           </h4>
           <h1
             ref={subtitleRef}
@@ -85,18 +85,17 @@ function FuncionalitySection() {
               isMobile ? "text-3xl" : "text-6xl"
             } font-medium text-primary mb-4`}
           >
-            Soluciones inteligentes, claras y conectadas
+            {t("functionality.subtitle")}
           </h1>
           <p
             ref={textRef}
             className="font-normal text-lg text-primary w-full max-w-2xl"
           >
-            Diseñadas para ofrecer herramientas modernas que elevan la atención
-            médica y hacen todo el proceso más eficiente y seguro.
+            {t("functionality.description")}
           </p>
         </div>
       </div>
-      <div className="w-full bg-violet-200 p-5">
+      <div className="w-full">
         <FuncionalityCards />
       </div>
     </section>

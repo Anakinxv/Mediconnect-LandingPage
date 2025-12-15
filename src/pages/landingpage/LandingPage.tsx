@@ -12,8 +12,8 @@ function LandingPage() {
     <div className="bg-white w-full overflow-x-hidden">
       <HeroSection isCarouselActive={isCarouselActive} />
       <AboutSection />
-      <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />{" "}
       <UsersSection />
+      <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />{" "}
       <FuncionalitySection />
     </div>
   );

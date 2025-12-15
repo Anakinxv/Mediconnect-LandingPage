@@ -106,5 +106,29 @@
         "description": "Preséntate a tu consulta de forma presencial o conéctate a tu teleconsulta desde la app con un solo clic, según la modalidad seleccionada."
       }
     ]
+  },
+
+  "functionality": {
+    "title": "Funcionalidades",
+    "subtitle": "Soluciones inteligentes, claras y conectadas",
+    "description": "Diseñadas para ofrecer herramientas modernas que elevan la atención médica y hacen todo el proceso más eficiente y seguro.",
+    "cards": [
+      {
+        "title": "Chat Directo con Doctores",
+        "description": "Mensajería segura y privada con tus médicos. Resuelve dudas rápidamente sin necesidad de una cita."
+      },
+      {
+        "title": "Historial Clínico Digital",
+        "description": "Todo tu historial médico en un solo lugar. Accede a tus resultados, recetas y análisis cuando los necesites."
+      },
+      {
+        "title": "Buscar Doctores por Zona",
+        "description": "Encuentra médicos especializados cerca de ti con nuestra búsqueda inteligente por ubicación."
+      },
+      {
+        "title": "Teleconsultas en Tiempo Real",
+        "description": "Consulta con médicos desde cualquier lugar y en cualquier momento, sin esperas ni traslados."
+      }
+    ]
   }
 }
