@@ -1,28 +1,25 @@
 import { type StateCreator } from "zustand";
 
-
 export interface LandingSlice {
-  
-    conctactForm: {
-   name: string;
+  isCarouselActive: boolean;
+  setisCarouselActive: (active: boolean) => void;
+
+  conctactForm: {
+    name: string;
     email: string;
     message: string;
-      };
-
-
-
-  
-
-
+  };
 }
 
-
 export const createLandingSlice: StateCreator<LandingSlice> = (set) => ({
-  
-    conctactForm: {
-   name: "",
+  isCarouselActive: false,
+  setisCarouselActive: (active: boolean) =>
+    set(() => ({
+      isCarouselActive: active,
+    })),
+  conctactForm: {
+    name: "",
     email: "",
     message: "",
-      },
-  
+  },
 });

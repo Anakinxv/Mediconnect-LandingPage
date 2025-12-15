@@ -129,5 +129,50 @@
         "description": "Consult with doctors from anywhere and anytime, without waiting or traveling."
       }
     ]
+  },
+  "benefitsSection": {
+    "title": "Benefits",
+    "items": [
+      {
+        "id": "acceso",
+        "name": "Immediate Access",
+        "description": "Connect with doctors and specialists whenever you need, without long waits or complicated processes. MediConnect brings healthcare closer to your daily life."
+      },
+      {
+        "id": "ahorro",
+        "name": "Smart Savings",
+        "description": "Reduce costs and time by avoiding unnecessary travel, calls, and in-person procedures. The entire medical process is managed in one place."
+      },
+      {
+        "id": "historial",
+        "name": "Centralized History",
+        "description": "All your clinical information is stored in an organized and secure way, allowing quick access anytime and from any device."
+      },
+      {
+        "id": "atencion",
+        "name": "Continuous Care",
+        "description": "Maintain medical follow-up before, during, and after each consultation, ensuring constant and personalized care."
+      },
+      {
+        "id": "comunicacion",
+        "name": "Secure Communication",
+        "description": "Exchange messages, documents, and medical instructions through protected channels that respect patient privacy and confidentiality."
+      },
+      {
+        "id": "decisiones",
+        "name": "Accurate Decisions",
+        "description": "Access to complete and updated data allows professionals to offer more accurate diagnoses and treatments."
+      },
+      {
+        "id": "gestion",
+        "name": "Optimized Management",
+        "description": "Doctors and health centers can efficiently manage appointments, records, and schedules, improving productivity."
+      },
+      {
+        "id": "experiencia",
+        "name": "Reliable Experience",
+        "description": "An intuitive, modern, and stable platform that builds trust for both patients and healthcare professionals."
+      }
+    ]
   }
 }

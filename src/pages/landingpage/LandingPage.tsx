@@ -5,18 +5,19 @@ import UsersSection from "@/components/lading/UsersSection";
 import HowItWorksSection from "@/components/lading/HowItWorksSection";
 import FuncionalitySection from "@/components/lading/FuncionalitySection";
 import BeneficitsSection from "@/components/lading/BenefictsSection";
-
+import { useAppStore } from "@/stores/useAppStore";
 function LandingPage() {
-  const [isCarouselActive, setIsCarouselActive] = useState(false);
+  const setisCarouselActive = useAppStore((state) => state.setisCarouselActive);
+  const isCarouselActive = useAppStore((state) => state.isCarouselActive);
 
   return (
     <div className="bg-white w-full overflow-x-hidden">
       <HeroSection isCarouselActive={isCarouselActive} />
       <AboutSection />
       <UsersSection />
-      <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />{" "}
+      <HowItWorksSection onCarouselActiveChange={setisCarouselActive} />{" "}
       <FuncionalitySection />
-      <BeneficitsSection />
+      <BeneficitsSection onCarouselActiveChange={setisCarouselActive} />
       <AboutSection />
     </div>
   );

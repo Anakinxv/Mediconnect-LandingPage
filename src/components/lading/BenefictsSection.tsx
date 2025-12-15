@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useTranslation } from "react-i18next"; // <-- Agrega esto
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface Benefit {
@@ -23,82 +25,58 @@ interface Benefit {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const benefits: Benefit[] = [
-  {
-    id: "acceso",
-    name: "Acceso inmediato",
-    description:
-      "Conecta con médicos y especialistas cuando lo necesites, sin largas esperas ni procesos complicados. MediConnect acerca la atención médica a tu día a día.",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop",
-    icon: Zap,
-  },
-  {
-    id: "ahorro",
-    name: "Ahorro inteligente",
-    description:
-      "Reduce costos y tiempo al evitar traslados innecesarios, llamadas y gestiones presenciales. Todo el proceso médico se realiza desde un solo lugar.",
-    image:
-      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&h=800&fit=crop",
-    icon: PiggyBank,
-  },
-  {
-    id: "historial",
-    name: "Historial centralizado",
-    description:
-      "Toda tu información clínica se guarda de forma organizada y segura, permitiendo un acceso rápido en cualquier momento y desde cualquier dispositivo.",
-    image:
-      "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=1200&h=800&fit=crop",
-    icon: ClipboardList,
-  },
-  {
-    id: "atencion",
-    name: "Atención continua",
-    description:
-      "Mantén seguimiento médico antes, durante y después de cada consulta, garantizando un cuidado constante y personalizado.",
-    image:
-      "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1200&h=800&fit=crop",
-    icon: RefreshCw,
-  },
-  {
-    id: "comunicacion",
-    name: "Comunicación segura",
-    description:
-      "Intercambia mensajes, documentos e indicaciones médicas mediante canales protegidos que respetan la privacidad y confidencialidad del paciente.",
-    image:
-      "https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=1200&h=800&fit=crop",
-    icon: Lock,
-  },
-  {
-    id: "decisiones",
-    name: "Decisiones precisas",
-    description:
-      "El acceso a datos completos y actualizados permite a los profesionales ofrecer diagnósticos y tratamientos más acertados.",
-    image:
-      "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=1200&h=800&fit=crop",
-    icon: Target,
-  },
-  {
-    id: "gestion",
-    name: "Gestión optimizada",
-    description:
-      "Médicos y centros de salud pueden administrar citas, expedientes y agendas de forma eficiente, mejorando su productividad.",
-    image:
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=800&fit=crop",
-    icon: BarChart3,
-  },
-  {
-    id: "experiencia",
-    name: "Experiencia confiable",
-    description:
-      "Una plataforma intuitiva, moderna y estable que genera confianza tanto en pacientes como en profesionales de la salud.",
-    image:
-      "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&h=800&fit=crop",
-    icon: Sparkles,
-  },
-];
+// Mapea los íconos a los ids
+const benefitIcons: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
+  acceso: Zap,
+  ahorro: PiggyBank,
+  historial: ClipboardList,
+  atencion: RefreshCw,
+  comunicacion: Lock,
+  decisiones: Target,
+  gestion: BarChart3,
+  experiencia: Sparkles,
+};
 
-export const IndustryCarousel = () => {
+const benefitImages: Record<string, string> = {
+  acceso:
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop",
+  ahorro:
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&h=800&fit=crop",
+  historial:
+    "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=1200&h=800&fit=crop",
+  atencion:
+    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1200&h=800&fit=crop",
+  comunicacion:
+    "https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=1200&h=800&fit=crop",
+  decisiones:
+    "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=1200&h=800&fit=crop",
+  gestion:
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=800&fit=crop",
+  experiencia:
+    "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&h=800&fit=crop",
+};
+
+interface BenefitsSectionProps {
+  onCarouselActiveChange?: (isActive: boolean) => void;
+}
+
+export const IndustryCarousel = ({
+  onCarouselActiveChange,
+}: BenefitsSectionProps) => {
+  const { t } = useTranslation("landing");
+
+  const benefits: Benefit[] = (
+    t("benefitsSection.items", {
+      returnObjects: true,
+    }) as any[]
+  ).map((item: any) => ({
+    ...item,
+    icon: benefitIcons[item.id],
+    image: benefitImages[item.id],
+  }));
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -197,6 +175,7 @@ export const IndustryCarousel = () => {
     const totalSections = benefits.length;
     const sectionHeight = window.innerHeight;
 
+    // Ajustar la altura para permitir scroll hacia la siguiente sección
     containerRef.current.style.height = `${sectionHeight * totalSections}px`;
 
     const photos = gsap.utils.toArray<HTMLElement>(
@@ -208,17 +187,35 @@ export const IndustryCarousel = () => {
 
     const triggers: ScrollTrigger[] = [];
 
+    // Pin trigger con límites más claros
     const pinTrigger = ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
-      end: `+=${sectionHeight * (totalSections - 1)}`,
+      end: `+=${sectionHeight * (totalSections - 1)}`, // Reducir el end para evitar loop
       pin: sectionRef.current,
-      pinSpacing: false,
+      pinSpacing: true, // Cambiar a true para mantener el espacio
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      onEnter: () => {
+        console.log("Benefits carousel activated");
+        onCarouselActiveChange?.(true);
+      },
+      onLeave: () => {
+        console.log("Benefits carousel deactivated");
+        onCarouselActiveChange?.(false);
+      },
+      onEnterBack: () => {
+        console.log("Benefits carousel activated (back)");
+        onCarouselActiveChange?.(true);
+      },
+      onLeaveBack: () => {
+        console.log("Benefits carousel deactivated (back)");
+        onCarouselActiveChange?.(false);
+      },
     });
     triggers.push(pinTrigger);
 
+    // Triggers para cambiar de imagen con límites más específicos
     benefits.forEach((_, index) => {
       if (index === 0) return;
 
@@ -242,10 +239,27 @@ export const IndustryCarousel = () => {
       triggers.push(trigger);
     });
 
+    // Trigger adicional para detectar cuando sales de la sección completamente
+    const exitTrigger = ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top top",
+      end: `bottom+=${sectionHeight * 0.2} top`, // Margen para salir
+      onLeave: () => {
+        console.log("Completely left benefits section");
+        onCarouselActiveChange?.(false);
+      },
+      onLeaveBack: () => {
+        console.log("Completely left benefits section (back)");
+        onCarouselActiveChange?.(false);
+      },
+    });
+    triggers.push(exitTrigger);
+
     return () => {
       triggers.forEach((trigger) => trigger.kill());
+      onCarouselActiveChange?.(false);
     };
-  }, [isMobile]);
+  }, [isMobile, onCarouselActiveChange, benefits.length]); // Agregar benefits.length como dependencia
 
   const updateActiveIndex = (newIndex: number) => {
     if (newIndex < 0 || newIndex >= benefits.length) return;
@@ -298,8 +312,9 @@ export const IndustryCarousel = () => {
         >
           <div className="relative w-full h-full max-w-lg ">
             {/* Título arriba al centro */}
-            <div className="absolute top-8 left-0 right-0 z-50">
-              <h2 className="text-white text-xl font-semibold text-center">
+            <div className="absolute top-8 left-0 right-0 z-50 flex flex-col items-center text-3xl font-semibold text-white gap-2">
+              {t("benefitsSection.title")}
+              <h2 className="text-white text-xl font-medium text-center">
                 {current.name}
               </h2>
             </div>
@@ -327,6 +342,8 @@ export const IndustryCarousel = () => {
 
             {/* Container de imágenes centrado */}
             <div ref={photosContainerRef} className="absolute inset-4">
+              {/* Overlay oscuro solo en mobile */}
+              <div className="absolute inset-0 bg-black/10 rounded-2xl pointer-events-none md:hidden z-20" />
               {benefits.map((benefit, index) => (
                 <img
                   key={benefit.id}
@@ -359,19 +376,22 @@ export const IndustryCarousel = () => {
   }
 
   return (
-    <div ref={containerRef} className="relative bg-primary">
+    <div ref={containerRef} className="relative bg-primary ">
       <div
         ref={sectionRef}
         className="h-screen md:p-8 flex items-center justify-center bg-primary"
       >
         <div className="w-full h-full gap-4 p-4 grid grid-cols-1 lg:grid-cols-12 md:p-10">
           {/* Left Panel */}
-          <div className="bg-card rounded-2xl flex flex-col justify-between relative overflow-hidden p-6 md:p-10 lg:col-span-5">
-            <div className="text-center">
-              <p className="text-primary font-medium text-xl">Beneficios</p>
+          <div className="bg-[#F5FAF3] rounded-2xl flex flex-col justify-between relative overflow-hidden p-6 md:p-10 lg:col-span-5">
+            <div className="text-center ">
+              <p className="text-primary font-medium text-xl">
+                {" "}
+                {t("benefitsSection.title")}
+              </p>
             </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center py-6">
+            <div className="flex-1 flex flex-col items-center justify-center  py-6">
               <div className="space-y-3 text-center">
                 {visibleItems.map((item) => (
                   <div

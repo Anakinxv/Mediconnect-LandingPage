@@ -130,5 +130,50 @@
         "description": "Consulta con médicos desde cualquier lugar y en cualquier momento, sin esperas ni traslados."
       }
     ]
+  },
+  "benefitsSection": {
+    "title": "Beneficios",
+    "items": [
+      {
+        "id": "acceso",
+        "name": "Acceso inmediato",
+        "description": "Conecta con médicos y especialistas cuando lo necesites, sin largas esperas ni procesos complicados. MediConnect acerca la atención médica a tu día a día."
+      },
+      {
+        "id": "ahorro",
+        "name": "Ahorro inteligente",
+        "description": "Reduce costos y tiempo al evitar traslados innecesarios, llamadas y gestiones presenciales. Todo el proceso médico se realiza desde un solo lugar."
+      },
+      {
+        "id": "historial",
+        "name": "Historial centralizado",
+        "description": "Toda tu información clínica se guarda de forma organizada y segura, permitiendo un acceso rápido en cualquier momento y desde cualquier dispositivo."
+      },
+      {
+        "id": "atencion",
+        "name": "Atención continua",
+        "description": "Mantén seguimiento médico antes, durante y después de cada consulta, garantizando un cuidado constante y personalizado."
+      },
+      {
+        "id": "comunicacion",
+        "name": "Comunicación segura",
+        "description": "Intercambia mensajes, documentos e indicaciones médicas mediante canales protegidos que respetan la privacidad y confidencialidad del paciente."
+      },
+      {
+        "id": "decisiones",
+        "name": "Decisiones precisas",
+        "description": "El acceso a datos completos y actualizados permite a los profesionales ofrecer diagnósticos y tratamientos más acertados."
+      },
+      {
+        "id": "gestion",
+        "name": "Gestión optimizada",
+        "description": "Médicos y centros de salud pueden administrar citas, expedientes y agendas de forma eficiente, mejorando su productividad."
+      },
+      {
+        "id": "experiencia",
+        "name": "Experiencia confiable",
+        "description": "Una plataforma intuitiva, moderna y estable que genera confianza tanto en pacientes como en profesionales de la salud."
+      }
+    ]
   }
 }

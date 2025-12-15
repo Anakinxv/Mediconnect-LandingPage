@@ -70,7 +70,6 @@ function FuncionalitySection() {
 
   return (
     <section ref={sectionRef} className="w-full bg-white p-[15px]">
-      {/* TITULOS - CENTRADOS */}
       <div className="bg-white py-12 px-6 items-center w-full">
         <div className="flex flex-col items-center text-center gap-2">
           <h4

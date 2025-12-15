@@ -55,9 +55,9 @@ function FuncionalityCards() {
 
   return (
     <div className="w-full flex justify-center px-2 sm:px-4">
-      {/* Móvil: una columna */}
-      <div className="block sm:hidden w-full max-w-sm">
-        <div className="flex flex-col gap-4">
+      {/* Móvil: grid 2 columnas */}
+      <div className="block sm:hidden w-full ">
+        <div className="grid grid-cols-2 gap-4">
           {cards.map((card, index) => (
             <Card key={index} card={card} className="h-[350px]" />
           ))}
