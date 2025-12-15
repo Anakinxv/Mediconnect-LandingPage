@@ -4,6 +4,7 @@ import AboutSection from "@/components/lading/AboutSection";
 import UsersSection from "@/components/lading/UsersSection";
 import HowItWorksSection from "@/components/lading/HowItWorksSection";
 import FuncionalitySection from "@/components/lading/FuncionalitySection";
+import BeneficitsSection from "@/components/lading/BenefictsSection";
 
 function LandingPage() {
   const [isCarouselActive, setIsCarouselActive] = useState(false);
@@ -15,6 +16,8 @@ function LandingPage() {
       <UsersSection />
       <HowItWorksSection onCarouselActiveChange={setIsCarouselActive} />{" "}
       <FuncionalitySection />
+      <BeneficitsSection />
+      <AboutSection />
     </div>
   );
 }
