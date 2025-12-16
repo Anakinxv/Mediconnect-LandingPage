@@ -17,7 +17,6 @@ import flagItaly from "@/assets/flag-italy.png";
 import flagJapan from "@/assets/flag-japan.png";
 import flagPortugal from "@/assets/flag-portugal.png";
 import flagChina from "@/assets/flag-china.png";
-import MediButton from "./MediButton";
 
 const languages = [
   { code: "es", label: "Español", flag: flagSpain },

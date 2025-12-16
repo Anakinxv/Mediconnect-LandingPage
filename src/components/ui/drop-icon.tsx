@@ -108,6 +108,7 @@ const GripIcon = forwardRef<GripIconHandle, GripProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
         >
+          xs
           {CIRCLES.map((circle, index) => (
             <motion.circle
               key={`${circle.cx}-${circle.cy}`}

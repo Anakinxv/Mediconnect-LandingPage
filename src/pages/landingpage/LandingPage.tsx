@@ -12,7 +12,7 @@ function LandingPage() {
   const isCarouselActive = useAppStore((state) => state.isCarouselActive);
 
   return (
-    <div className="bg-white w-full overflow-x-hidden">
+    <div className="bg-white w-full overflow-x-hidden flex flex-col gap-10">
       <HeroSection isCarouselActive={isCarouselActive} />
       <AboutSection />
       <UsersSection />
