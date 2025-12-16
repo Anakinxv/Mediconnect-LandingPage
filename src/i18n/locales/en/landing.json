@@ -174,5 +174,9 @@
         "description": "An intuitive, modern, and stable platform that builds trust for both patients and healthcare professionals."
       }
     ]
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "Join those who care for their health"
   }
 }

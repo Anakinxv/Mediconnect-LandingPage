@@ -137,7 +137,7 @@ function TestimonialsSection() {
             ref={titleRef}
             className="tracking-wide text-lg font-regular text-primary"
           >
-            Testimonios
+            {t("testimonials.title", "Testimonials")}
           </h4>
           <div
             className={`w-full ${
@@ -150,7 +150,10 @@ function TestimonialsSection() {
                 isMobile ? "text-3xl" : "text-6xl"
               } font-medium text-primary mb-4 w-full`}
             >
-              Únete a quienes cuidan su salud
+              {t(
+                "testimonials.subtitle",
+                "Join those who care for their health"
+              )}
             </h1>
           </div>
           <div className="flex w-full justify-center items-center ">

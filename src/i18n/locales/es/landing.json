@@ -175,5 +175,9 @@
         "description": "Una plataforma intuitiva, moderna y estable que genera confianza tanto en pacientes como en profesionales de la salud."
       }
     ]
+  },
+  "testimonials": {
+    "title": "Testimonios",
+    "subtitle": "Únete a quienes cuidan su salud"
   }
 }
