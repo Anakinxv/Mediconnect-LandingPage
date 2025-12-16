@@ -1,4 +1,3 @@
-import { useState } from "react";
 import HeroSection from "../../components/lading/HeroSection";
 import AboutSection from "@/components/lading/AboutSection";
 import UsersSection from "@/components/lading/UsersSection";
@@ -6,6 +5,7 @@ import HowItWorksSection from "@/components/lading/HowItWorksSection";
 import FuncionalitySection from "@/components/lading/FuncionalitySection";
 import BeneficitsSection from "@/components/lading/BenefictsSection";
 import TestimonialsSection from "@/components/lading/TestimonialsSection";
+import FAQSection from "@/components/lading/FAQSection";
 import { useAppStore } from "@/stores/useAppStore";
 function LandingPage() {
   const setisCarouselActive = useAppStore((state) => state.setisCarouselActive);
@@ -20,6 +20,7 @@ function LandingPage() {
       <FuncionalitySection />
       <BeneficitsSection onCarouselActiveChange={setisCarouselActive} />
       <TestimonialsSection />
+      <FAQSection />
     </div>
   );
 }

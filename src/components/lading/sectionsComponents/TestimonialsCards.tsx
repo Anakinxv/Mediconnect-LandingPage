@@ -77,7 +77,7 @@ function TestimonialsCards() {
     infiniteTimeline.current = gsap.timeline({ repeat: -1 });
     infiniteTimeline.current.to(sliderRef.current, {
       x: -originalSetWidth * 2,
-      duration: testimonialsData.length * 4,
+      duration: 45, // <-- más lento (antes era 30)
       ease: "none",
       modifiers: {
         x: (x) => {
@@ -148,7 +148,7 @@ function TestimonialsCards() {
                   <h4 className="font-medium text-primary text-lg transition-colors duration-300 hover:text-primary">
                     {testimonial.name}
                   </h4>
-                  <p className="text-primary/75 text-md">
+                  <p className="text-primary/75 text-md font-normal">
                     {testimonial.service}
                   </p>
                 </div>
