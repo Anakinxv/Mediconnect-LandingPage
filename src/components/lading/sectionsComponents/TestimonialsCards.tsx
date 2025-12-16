@@ -8,119 +8,167 @@ gsap.registerPlugin(ScrollTrigger);
 
 const testimonialsData = [
   {
-    name: "Sarah M.",
-    service: "Diagnósticos Avanzados",
+    name: "Dr. Alejandro Gómez",
+    service: "Consulta Médica Integral",
     testimonial:
-      "Los diagnósticos avanzados de Sanaris me dieron una claridad y una tranquilidad que nunca antes había tenido.",
-    avatar: testimonialImage1, // Usa la imagen local
+      "Scheduling telehealth appointments was incredibly convenient and fit perfectly into my busy lifestyle. The care team was attentive and made the whole experience smooth and stress-free.",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
-    name: "Carlos R.",
+    name: "Laura Fernández",
     service: "Telemedicina",
     testimonial:
-      "La atención médica a distancia me permitió recibir cuidados de calidad sin salir de casa.",
-    avatar: testimonialImage1, // Usa la imagen local
+      "Pude consultar con un especialista de forma rápida y segura. La experiencia fue clara, humana y muy profesional.",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
-    name: "María L.",
+    name: "Miguel Hernández",
+    service: "Gestión de Citas",
+    testimonial:
+      "La organización de citas es sencilla y eficiente. Ahora tengo control total de mis consultas médicas.",
+    avatar: "https://randomuser.me/api/portraits/men/65.jpg",
+  },
+  {
+    name: "Dra. Patricia Ruiz",
+    service: "Diagnósticos Clínicos",
+    testimonial:
+      "Los reportes médicos y diagnósticos son claros, precisos y fáciles de compartir con los pacientes.",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+  },
+  {
+    name: "José Martínez",
+    service: "Seguimiento Médico",
+    testimonial:
+      "El seguimiento continuo me dio confianza y tranquilidad durante todo mi tratamiento.",
+    avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+  },
+  {
+    name: "Andrea López",
     service: "Consulta Especializada",
     testimonial:
-      "El seguimiento personalizado y la atención del equipo médico superó todas mis expectativas.",
-    avatar: testimonialImage1, // Usa la imagen local
+      "La atención fue personalizada y el equipo médico mostró un alto nivel de profesionalismo.",
+    avatar: "https://randomuser.me/api/portraits/women/29.jpg",
   },
 ];
 
 function TestimonialsCards() {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const infiniteTimeline = useRef<gsap.core.Timeline | null>(null);
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        cardsRef.current,
-        {
-          opacity: 0,
-          y: 50,
-          scale: 0.95,
+  // Triple testimonials for seamless infinite loop
+  const tripleTestimonials = [
+    ...testimonialsData,
+    ...testimonialsData,
+    ...testimonialsData,
+  ];
+
+  useGSAP(() => {
+    if (!sliderRef.current) return;
+
+    const cardWidth = isMobile ? 320 : 520;
+    const originalSetWidth = cardWidth * testimonialsData.length;
+
+    // Set initial position to show the middle set
+    gsap.set(sliderRef.current, { x: -originalSetWidth });
+
+    // Create seamless infinite loop
+    infiniteTimeline.current = gsap.timeline({ repeat: -1 });
+    infiniteTimeline.current.to(sliderRef.current, {
+      x: -originalSetWidth * 2,
+      duration: testimonialsData.length * 4,
+      ease: "none",
+      modifiers: {
+        x: (x) => {
+          const currentX = parseFloat(x);
+          // When we reach the end of the second set, jump back to the beginning of the second set
+          if (currentX <= -originalSetWidth * 2) {
+            gsap.set(sliderRef.current, { x: -originalSetWidth });
+            return (-originalSetWidth).toString() + "px";
+          }
+          return x;
         },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+      },
+    });
 
-      cardsRef.current.forEach((card) => {
-        if (card) {
-          card.addEventListener("mouseenter", () => {
-            gsap.to(card, {
-              scale: 1.02,
-              y: -5,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          });
-
-          card.addEventListener("mouseleave", () => {
-            gsap.to(card, {
-              scale: 1,
-              y: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          });
-        }
-      });
-    },
-    { scope: containerRef }
-  );
+    // Initial entrance animation
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, [isMobile]);
 
   return (
-    <div
-      ref={containerRef}
-      className={`w-full ${
-        isMobile
-          ? "flex flex-col gap-4"
-          : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      }`}
-    >
-      {testimonialsData.map((testimonial, index) => (
+    <div ref={containerRef} className="w-full relative py-4 overflow-hidden">
+      {/* Infinite Slider */}
+      <div className="relative">
         <div
-          key={index}
-          ref={(el) => {
-            cardsRef.current[index] = el;
+          ref={sliderRef}
+          className="flex gap-4"
+          style={{
+            width: `${tripleTestimonials.length * (isMobile ? 320 : 520)}px`,
           }}
-          className="bg-[#F5FAF3] p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer"
         >
-          <div className="flex items-start gap-4 mb-4">
-            <img
-              src={testimonial.avatar}
-              alt={testimonial.name}
-              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
-            />
-            <div className="flex-1">
-              <h4 className="font-semibold text-gray-900 text-lg">
-                {testimonial.name}
-              </h4>
-              <p className="text-primary font-medium text-sm">
-                {testimonial.service}
-              </p>
+          {tripleTestimonials.map((testimonial, index) => (
+            <div
+              key={`${testimonial.name}-${index}`}
+              className={`bg-[#ecf6e8dc]/80 p-6 rounded-3xl transition-all duration-500 ease-out cursor-pointer bg-[#ecf6e8] hover:shadow-lg ${
+                isMobile ? " w-[70vw] h-[260px] mx-auto" : "w-[500px] h-[225px]"
+              }`}
+              style={isMobile ? { minWidth: "70vw" } : {}}
+              onMouseEnter={() => {
+                if (infiniteTimeline.current) {
+                  infiniteTimeline.current.timeScale(0.2);
+                }
+              }}
+              onMouseLeave={() => {
+                if (infiniteTimeline.current) {
+                  infiniteTimeline.current.timeScale(1);
+                }
+              }}
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <img
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  className="w-16 h-16 rounded-2xl object-cover flex-shrink-0 transition-transform duration-300"
+                />
+                <div className="flex-1">
+                  <h4 className="font-medium text-primary text-lg transition-colors duration-300 hover:text-primary">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-primary/75 text-md">
+                    {testimonial.service}
+                  </p>
+                </div>
+              </div>
+              <blockquote
+                className="text-primary font-medium text-md text-justify"
+                style={{
+                  display: "-webkit-box",
+                  WebkitLineClamp: 4,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                "{testimonial.testimonial}"
+              </blockquote>
             </div>
-          </div>
-          <blockquote className="text-gray-700 leading-relaxed italic">
-            "{testimonial.testimonial}"
-          </blockquote>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

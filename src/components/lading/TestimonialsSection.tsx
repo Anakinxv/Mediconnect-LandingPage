@@ -127,12 +127,12 @@ function TestimonialsSection() {
   );
 
   return (
-    <main className="p-[15px] flex justify-center">
+    <main className="p-[15px] flex w-full justify-center ">
       <main
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"
       >
-        <div className="flex flex-col gap-6 w-full h-full">
+        <div className="flex flex-col gap-6 w-full h-full ">
           <h4
             ref={titleRef}
             className="tracking-wide text-lg font-regular text-primary"
@@ -153,7 +153,7 @@ function TestimonialsSection() {
               Únete a quienes cuidan su salud
             </h1>
           </div>
-          <div className="flex">
+          <div className="flex w-full justify-center items-center ">
             <TestimonialsCards />
           </div>
         </div>
