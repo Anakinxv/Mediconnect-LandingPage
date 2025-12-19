@@ -1,18 +1,11 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Funcionality01 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality02 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality03 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality04 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import { useTranslation } from "react-i18next";
 
-gsap.registerPlugin(ScrollTrigger);
-
 function FuncionalityCards() {
   const { t } = useTranslation("landing");
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const cardImages = [
     Funcionality01,
@@ -27,47 +20,12 @@ function FuncionalityCards() {
     desc: t(`functionality.cards.${index}.description`),
   }));
 
-  useGSAP(
-    () => {
-      // Animación escalonada para cada tarjeta
-      const cardElements =
-        gsap.utils.toArray<HTMLElement>(".funcionality-card");
-
-      cardElements.forEach((card, index) => {
-        gsap.fromTo(
-          card,
-          {
-            opacity: 0,
-            scale: 0.9,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    },
-    { scope: containerRef }
-  );
-
   const Card = ({
     card,
     className = "",
-    index,
   }: {
     card: (typeof cards)[0];
     className?: string;
-    index: number;
   }) => (
     <div
       className={`funcionality-card bg-white rounded-3xl bg-gradient-to-b 
@@ -75,7 +33,7 @@ function FuncionalityCards() {
         via-[#F5FAF3] via-[71%]
         to-[#D7E3C9]/25 to-[100%] overflow-hidden 
         flex flex-col gap-2 sm:gap-3 md:gap-4 items-center justify-center 
-        p-3 sm:p-4 md:p-6 lg:p-8 ${className} border border-accent/40`}
+        p-3 sm:p-4 md:p-6 lg:p-8 ${className} border border-accent/40  `}
     >
       <div className="overflow-hidden inline-block rounded-2xl sm:rounded-3xl w-full flex-1">
         <img
@@ -96,12 +54,12 @@ function FuncionalityCards() {
   );
 
   return (
-    <div ref={containerRef} className="w-full flex justify-center px-2 sm:px-4">
+    <div className="w-full flex justify-center px-2 sm:px-4">
       {/* Móvil: grid 2 columnas */}
-      <div className="block sm:hidden w-full">
+      <div className="block sm:hidden w-full ">
         <div className="grid grid-cols-2 gap-4">
           {cards.map((card, index) => (
-            <Card key={index} card={card} className="h-[350px]" index={index} />
+            <Card key={index} card={card} className="h-[350px]" />
           ))}
         </div>
       </div>
@@ -109,12 +67,11 @@ function FuncionalityCards() {
       {/* Tablet: grid 2x2 */}
       <div className="hidden sm:block md:hidden w-full max-w-2xl">
         <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[700px]">
-          <Card card={cards[0]} index={0} />
-          <Card card={cards[1]} index={1} />
-          <Card card={cards[2]} index={2} />
+          <Card card={cards[0]} />
+          <Card card={cards[1]} />
+          <Card card={cards[2]} />
           <Card
             card={cards[3]}
-            index={3}
             className="bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
           />
         </div>
@@ -123,12 +80,11 @@ function FuncionalityCards() {
       {/* Desktop pequeño: grid 2x2 más grande */}
       <div className="hidden md:block lg:hidden w-full max-w-4xl">
         <div className="grid grid-cols-2 grid-rows-2 gap-6 h-[800px]">
-          <Card card={cards[0]} index={0} />
-          <Card card={cards[1]} index={1} />
-          <Card card={cards[2]} index={2} />
+          <Card card={cards[0]} />
+          <Card card={cards[1]} />
+          <Card card={cards[2]} />
           <Card
             card={cards[3]}
-            index={3}
             className="bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
           />
         </div>
@@ -139,17 +95,16 @@ function FuncionalityCards() {
         <div className="grid grid-rows-2 gap-4">
           {/* Primera fila: 55% - 45% */}
           <div className="grid grid-cols-[55%_45%] gap-4">
-            <Card card={cards[0]} className="h-[500px]" index={0} />
-            <Card card={cards[1]} className="h-[500px]" index={1} />
+            <Card card={cards[0]} className="h-[500px]" />
+            <Card card={cards[1]} className="h-[500px]" />
           </div>
 
           {/* Segunda fila: 45% - 55% */}
           <div className="grid grid-cols-[45%_55%] gap-4">
-            <Card card={cards[2]} className="h-[500px]" index={2} />
+            <Card card={cards[2]} className="h-[500px]" />
             <Card
               card={cards[3]}
               className="h-[500px] bg-gradient-to-b from-white from-[0%] via-[#F5FAF3] via-[90%] to-[#D7E3C9]/60 to-[100%]"
-              index={3}
             />
           </div>
         </div>

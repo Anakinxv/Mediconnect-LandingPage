@@ -27,6 +27,8 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
   const textRef = useRef<HTMLParagraphElement>(null);
   const panelsContainerRef = useRef<HTMLDivElement>(null);
   const panelsWrapperRef = useRef<HTMLDivElement>(null);
+  const titlesContainerRef = useRef<HTMLDivElement>(null);
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   const steps = [
     { image: step1, number: "01" },
@@ -37,6 +39,41 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
 
   useGSAP(
     () => {
+      // Fade up para títulos
+      gsap.fromTo(
+        titlesContainerRef.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titlesContainerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Fade up para carrusel, con delay para suavidad
+      gsap.fromTo(
+        carouselContainerRef.current,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: carouselContainerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
       // Animación del título
       gsap.fromTo(
         titleRef.current,
@@ -151,6 +188,34 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         }
       });
 
+      // Animación de entrada para cada panel (como las imágenes en AboutSection)
+      panels.forEach((panel, i) => {
+        gsap.fromTo(
+          panel,
+          {
+            opacity: 0,
+            scale: 0.95,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1,
+            delay: i * 0.1, // pequeño delay escalonado
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: tween,
+              start: "left center",
+              end: "center center",
+              toggleActions: "play none none none",
+              scrub: 1,
+            },
+          }
+        );
+      });
+
       const handleResize = () => {
         ScrollTrigger.refresh();
       };
@@ -173,7 +238,10 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
           className="bg-white py-12 px-6 items-center w-full"
         >
           {/* TÍTULOS - CENTRADOS */}
-          <div className="flex flex-col items-center text-center gap-4">
+          <div
+            ref={titlesContainerRef}
+            className="flex flex-col items-center text-center gap-4"
+          >
             <h4
               ref={titleRef}
               className="tracking-wide text-lg font-regular text-primary"
@@ -201,22 +269,27 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
 
         {/* CARRUSEL HORIZONTAL */}
         <div
-          ref={panelsContainerRef}
+          ref={carouselContainerRef}
           className="relative overflow-hidden bg-white"
         >
           <div
-            ref={panelsWrapperRef}
-            className="flex gap-4 pl-4 pr-4"
-            style={{ width: `${4 * 95}vw` }}
+            ref={panelsContainerRef}
+            className="relative overflow-hidden bg-white"
           >
-            {steps.map((step, index) => (
-              <div
-                key={index}
-                className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
-              >
-                <HowItWorksPanels stepIndex={index} />
-              </div>
-            ))}
+            <div
+              ref={panelsWrapperRef}
+              className="flex gap-4 pl-4 pr-4"
+              style={{ width: `${4 * 95}vw` }}
+            >
+              {steps.map((step, index) => (
+                <div
+                  key={index}
+                  className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
+                >
+                  <HowItWorksPanels stepIndex={index} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -58,9 +58,10 @@ function TestimonialsSection() {
         }
       );
 
-      // Animación de las tarjetas de testimonios
+      // Animación escalonada para cada tarjeta
+      const cards = gsap.utils.toArray<HTMLElement>(".testimonial-card");
       gsap.fromTo(
-        cardsRef.current,
+        cards,
         {
           opacity: 0,
           scale: 0.95,
@@ -71,7 +72,7 @@ function TestimonialsSection() {
           scale: 1,
           y: 0,
           duration: 1,
-          delay: 0.2,
+          stagger: 0.15,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,

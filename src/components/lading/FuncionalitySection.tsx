@@ -81,9 +81,10 @@ function FuncionalitySection() {
         }
       );
 
-      // Animación de las tarjetas
+      // Animación escalonada para cada tarjeta de funcionalidad
+      const cards = gsap.utils.toArray<HTMLElement>(".funcionality-card");
       gsap.fromTo(
-        cardsRef.current,
+        cards,
         {
           opacity: 0,
           scale: 0.95,
@@ -93,8 +94,8 @@ function FuncionalitySection() {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 1,
-          delay: 0.2,
+          duration: 0.6,
+          stagger: 0.05,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,

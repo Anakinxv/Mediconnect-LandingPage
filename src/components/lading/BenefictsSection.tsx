@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react"; // <-- Agregar esto
 import {
   Zap,
   PiggyBank,
@@ -13,7 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { useTranslation } from "react-i18next"; // <-- Agrega esto
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,11 +78,16 @@ export const IndustryCarousel = ({
     icon: benefitIcons[item.id],
     image: benefitImages[item.id],
   }));
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false); // <-- Agregar esto
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const photosContainerRef = useRef<HTMLDivElement>(null);
   const infoCardRef = useRef<HTMLDivElement>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null); // <-- Agregar esto
+  const rightPanelRef = useRef<HTMLDivElement>(null); // <-- Agregar esto
+  const titleRef = useRef<HTMLDivElement>(null); // <-- Agregar esto
   const isMobile = useIsMobile();
 
   const getVisibleItems = () => {
@@ -303,6 +309,104 @@ export const IndustryCarousel = ({
     });
   };
 
+  useEffect(() => {
+    if (!infoCardRef.current) return;
+
+    // Animación de entrada para la tarjeta de información
+    gsap.fromTo(
+      infoCardRef.current,
+      {
+        opacity: 0,
+        y: 30,
+        scale: 0.97,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      }
+    );
+  }, [activeIndex]);
+
+  useEffect(() => {
+    // Animación de entrada para la imagen activa
+    const activePhoto =
+      document.querySelectorAll(".carousel-photo")[activeIndex];
+    if (activePhoto) {
+      gsap.fromTo(
+        activePhoto,
+        {
+          opacity: 0,
+          scale: 0.97,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        }
+      );
+    }
+  }, [activeIndex]);
+
+  // Animaciones de entrada similares a AboutSection
+  useGSAP(
+    () => {
+      if (!sectionRef.current || hasAnimated) return;
+
+      // Configurar estado inicial
+      gsap.set([leftPanelRef.current, rightPanelRef.current], {
+        opacity: 0,
+        y: 60,
+      });
+
+      gsap.set(titleRef.current, {
+        opacity: 0,
+        y: 30,
+      });
+
+      // Timeline de entrada
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          onEnter: () => setHasAnimated(true),
+        },
+      });
+
+      tl.to(leftPanelRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+        .to(
+          rightPanelRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        )
+        .to(
+          titleRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
+    },
+    { scope: containerRef, dependencies: [hasAnimated] }
+  );
+
   if (isMobile) {
     return (
       <div ref={containerRef} className="relative bg-primary">
@@ -310,9 +414,12 @@ export const IndustryCarousel = ({
           ref={sectionRef}
           className="h-screen flex items-center justify-center bg-primary"
         >
-          <div className="relative w-full h-full max-w-lg ">
+          <div className="relative w-full h-full max-w-lg">
             {/* Título arriba al centro */}
-            <div className="absolute top-8 left-0 right-0 z-50 flex flex-col items-center text-3xl font-semibold text-white gap-2">
+            <div
+              ref={titleRef}
+              className="absolute top-8 left-0 right-0 z-50 flex flex-col items-center text-3xl font-semibold text-white gap-2"
+            >
               {t("benefitsSection.title")}
               <h2 className="text-white text-xl font-medium text-center">
                 {current.name}
@@ -376,17 +483,19 @@ export const IndustryCarousel = ({
   }
 
   return (
-    <div ref={containerRef} className="relative bg-primary ">
+    <div ref={containerRef} className="relative bg-primary">
       <div
         ref={sectionRef}
         className="h-screen md:p-8 flex items-center justify-center bg-primary"
       >
         <div className="w-full h-full gap-4 p-4 grid grid-cols-1 lg:grid-cols-12 md:p-10">
           {/* Left Panel */}
-          <div className="bg-[#F5FAF3] rounded-2xl flex flex-col justify-between relative overflow-hidden p-6 md:p-10 lg:col-span-5">
-            <div className="text-center ">
-              <p className="text-primary font-medium text-xl">
-                {" "}
+          <div
+            ref={leftPanelRef}
+            className="bg-[#F5FAF3] rounded-2xl flex flex-col justify-between relative overflow-hidden p-6 md:p-10 lg:col-span-5"
+          >
+            <div className="text-center">
+              <p ref={titleRef} className="text-primary font-medium text-xl">
                 {t("benefitsSection.title")}
               </p>
             </div>
@@ -449,7 +558,10 @@ export const IndustryCarousel = ({
           </div>
 
           {/* Right Panel */}
-          <div className="relative rounded-2xl overflow-hidden lg:col-span-7 min-h-[400px]">
+          <div
+            ref={rightPanelRef}
+            className="relative rounded-2xl overflow-hidden lg:col-span-7 min-h-[400px]"
+          >
             <div ref={photosContainerRef} className="absolute inset-0">
               {benefits.map((benefit, index) => (
                 <img

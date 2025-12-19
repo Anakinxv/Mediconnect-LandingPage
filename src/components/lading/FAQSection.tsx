@@ -95,7 +95,7 @@ function FAQSection() {
         }
       );
 
-      // Animación de la imagen
+      // Animación de la imagen FAQ (idéntica a AboutSection)
       gsap.fromTo(
         imageRef.current,
         {
@@ -117,7 +117,7 @@ function FAQSection() {
         }
       );
 
-      // Animación del acordeón
+      // Animación del acordeón FAQ (idéntica a AboutSection)
       gsap.fromTo(
         accordionRef.current,
         {
@@ -130,7 +130,6 @@ function FAQSection() {
           scale: 1,
           y: 0,
           duration: 1,
-          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: accordionRef.current,

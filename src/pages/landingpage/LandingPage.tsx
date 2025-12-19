@@ -16,7 +16,7 @@ function LandingPage() {
       <HeroSection isCarouselActive={isCarouselActive} />
       <AboutSection />
       <UsersSection />
-      <HowItWorksSection onCarouselActiveChange={setisCarouselActive} />{" "}
+      {/* <HowItWorksSection onCarouselActiveChange={setisCarouselActive} />{" "} */}
       <FuncionalitySection />
       <BeneficitsSection onCarouselActiveChange={setisCarouselActive} />
       <TestimonialsSection />
