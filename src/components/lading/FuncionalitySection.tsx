@@ -94,8 +94,8 @@ function FuncionalitySection() {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.05,
+          duration: 1,
+          stagger: 1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,
@@ -104,8 +104,11 @@ function FuncionalitySection() {
           },
         }
       );
+
+      // Refresca ScrollTrigger para asegurar que detecta los nuevos elementos
+      ScrollTrigger.refresh();
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isMobile] }
   );
 
   return (

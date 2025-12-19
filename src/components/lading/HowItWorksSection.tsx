@@ -238,10 +238,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
           className="bg-white py-12 px-6 items-center w-full"
         >
           {/* TÍTULOS - CENTRADOS */}
-          <div
-            ref={titlesContainerRef}
-            className="flex flex-col items-center text-center gap-4"
-          >
+          <div className="flex flex-col items-center text-center gap-4">
             <h4
               ref={titleRef}
               className="tracking-wide text-lg font-regular text-primary"
@@ -269,27 +266,22 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
 
         {/* CARRUSEL HORIZONTAL */}
         <div
-          ref={carouselContainerRef}
+          ref={panelsContainerRef}
           className="relative overflow-hidden bg-white"
         >
           <div
-            ref={panelsContainerRef}
-            className="relative overflow-hidden bg-white"
+            ref={panelsWrapperRef}
+            className="flex gap-4 pl-4 pr-4"
+            style={{ width: `${4 * 95}vw` }}
           >
-            <div
-              ref={panelsWrapperRef}
-              className="flex gap-4 pl-4 pr-4"
-              style={{ width: `${4 * 95}vw` }}
-            >
-              {steps.map((step, index) => (
-                <div
-                  key={index}
-                  className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
-                >
-                  <HowItWorksPanels stepIndex={index} />
-                </div>
-              ))}
-            </div>
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
+              >
+                <HowItWorksPanels stepIndex={index} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

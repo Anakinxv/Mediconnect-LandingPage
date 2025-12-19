@@ -77,7 +77,7 @@ function TestimonialsCards() {
     infiniteTimeline.current = gsap.timeline({ repeat: -1 });
     infiniteTimeline.current.to(sliderRef.current, {
       x: -originalSetWidth * 2,
-      duration: 45, // <-- más lento (antes era 30)
+      duration: 60,
       ease: "none",
       modifiers: {
         x: (x) => {
@@ -123,7 +123,7 @@ function TestimonialsCards() {
           {tripleTestimonials.map((testimonial, index) => (
             <div
               key={`${testimonial.name}-${index}`}
-              className={`bg-[#ecf6e8dc]/80 p-6 rounded-3xl transition-all duration-500 ease-out cursor-pointer bg-[#ecf6e8] hover:shadow-lg ${
+              className={`bg-[#F5FAF3] p-6 rounded-3xl transition-all duration-500 ease-out cursor-pointer hover:bg-[#ecf6e8] ${
                 isMobile ? " w-[70vw] h-[260px] mx-auto" : "w-[500px] h-[225px]"
               }`}
               style={isMobile ? { minWidth: "70vw" } : {}}

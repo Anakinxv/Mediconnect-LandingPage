@@ -354,7 +354,15 @@ export const IndustryCarousel = ({
   // Animaciones de entrada similares a AboutSection
   useGSAP(
     () => {
-      if (!sectionRef.current || hasAnimated) return;
+      // Solo ejecuta si los refs existen (escritorio)
+      if (
+        !sectionRef.current ||
+        !leftPanelRef.current ||
+        !rightPanelRef.current ||
+        !titleRef.current ||
+        hasAnimated
+      )
+        return;
 
       // Configurar estado inicial
       gsap.set([leftPanelRef.current, rightPanelRef.current], {
@@ -404,7 +412,7 @@ export const IndustryCarousel = ({
           "-=0.6"
         );
     },
-    { scope: containerRef, dependencies: [hasAnimated] }
+    { scope: containerRef, dependencies: [hasAnimated, isMobile] }
   );
 
   if (isMobile) {

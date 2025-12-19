@@ -217,5 +217,13 @@
         "answer": "MediConnect is available as a web platform and may also be accessible through a mobile app, allowing you to manage your healthcare anytime, anywhere."
       }
     ]
+  },
+  "services": {
+    "telehealth": "Telehealth Services",
+    "rehabilitation": "Rehabilitation",
+    "solutions": "Healthcare Solutions",
+    "device": "Medical Device",
+    "diagnostics": "Diagnostics",
+    "care": "Patient Care"
   }
 }
