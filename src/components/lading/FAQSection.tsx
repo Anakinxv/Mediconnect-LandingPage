@@ -122,13 +122,15 @@ function FAQSection() {
         accordionRef.current,
         {
           opacity: 0,
-          x: 50,
+          scale: 0.95,
+          y: 40,
         },
         {
           opacity: 1,
-          x: 0,
+          scale: 1,
+          y: 0,
           duration: 1,
-          delay: 0.3,
+          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: accordionRef.current,
@@ -142,15 +144,24 @@ function FAQSection() {
   );
 
   return (
-    <div className="p-[15px] flex justify-center w-full">
+    <main className="p-[15px] flex justify-center w-full">
       <section
         ref={containerRef}
-        className="gap-4 w-full grid grid-cols-[45%_55%] justify-center py-12 px-6"
+        className="bg-white py-12 px-6 items-center w-full"
       >
-        <main>
+        <div
+          className={`flex ${
+            isMobile ? "flex-col gap-6" : "grid grid-cols-[45%_55%] gap-4"
+          } w-full h-full`}
+        >
+          {/* CONTENIDO IZQUIERDO */}
           <div className="flex flex-col gap-2 w-full h-full justify-between">
-            {/* TITULOS - CENTRADOS */}
-            <div className="flex flex-col items-start text-start gap-2">
+            {/* TÍTULOS */}
+            <div
+              className={`flex flex-col ${
+                isMobile ? "items-center text-center" : "items-start text-start"
+              } gap-2`}
+            >
               <h4
                 ref={titleRef}
                 className="tracking-wide text-lg font-regular text-primary"
@@ -161,20 +172,22 @@ function FAQSection() {
                 ref={subtitleRef}
                 className={`${
                   isMobile ? "text-3xl" : "text-6xl"
-                } font-medium text-primary mb-4 `}
+                } font-medium text-primary mb-4`}
               >
                 {t("faq.heading")}
               </h1>
               <p
                 ref={textRef}
-                className="font-normal text-lg text-primary mb-4  "
+                className="font-normal text-lg text-primary mb-4"
               >
                 {t("faq.description")}
               </p>
             </div>
+
+            {/* IMAGEN */}
             <div
               ref={imageRef}
-              className="overflow-hidden inline-block rounded-4xl w-full "
+              className="overflow-hidden inline-block rounded-4xl w-full"
             >
               <img
                 src={FAQImage}
@@ -183,32 +196,34 @@ function FAQSection() {
               />
             </div>
           </div>
-        </main>
-        <aside className="flex items-start justify-center w-full h-full">
-          <Accordion
-            ref={accordionRef}
-            type="single"
-            collapsible
-            className="w-full  rounded-2xl  flex flex-col gap-2 h-full justify-between"
-          >
-            {faqItems.map((item, idx) => (
-              <AccordionItem
-                value={`item-${idx}`}
-                key={idx}
-                className="bg-[#ecf6e8dc]/80  p-4 rounded-lg shadow-none border-0"
-              >
-                <AccordionTrigger className="text-primary text-md font-medium w-fit ">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-primary text-md">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </aside>
+
+          {/* CONTENIDO DERECHO - ACCORDION */}
+          <div className="flex items-start justify-center w-full h-full">
+            <Accordion
+              ref={accordionRef}
+              type="single"
+              collapsible
+              className="w-full rounded-2xl flex flex-col gap-2 h-full justify-between"
+            >
+              {faqItems.map((item, idx) => (
+                <AccordionItem
+                  value={`item-${idx}`}
+                  key={idx}
+                  className="bg-[#ecf6e8dc]/80 p-4 rounded-lg shadow-none border-0"
+                >
+                  <AccordionTrigger className="text-primary text-md font-medium w-fit">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-primary text-md">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
       </section>
-    </div>
+    </main>
   );
 }
 

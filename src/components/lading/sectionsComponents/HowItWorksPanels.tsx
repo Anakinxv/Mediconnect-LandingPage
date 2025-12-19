@@ -1,10 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import step1 from "../../../assets/step-01.png";
 import step2 from "../../../assets/step-02.png";
 import step3 from "../../../assets/step-03.png";
 import step4 from "../../../assets/step-04.png";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface HowItWorksPanelsProps {
   stepIndex: number;
@@ -15,6 +20,11 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
   ({ stepIndex, imgRef }, ref) => {
     const { t } = useTranslation("landing");
     const isMobile = useIsMobile();
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const stepBadgeRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const descriptionRef = useRef<HTMLDivElement>(null);
 
     const steps = [
       {
@@ -49,8 +59,80 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
 
     const step = steps[stepIndex];
 
+    useGSAP(
+      () => {
+        const tl = gsap.timeline({ paused: true });
+
+        // Animación del step badge
+        tl.fromTo(
+          stepBadgeRef.current,
+          {
+            opacity: 0,
+            y: -30,
+            scale: 0.8,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          }
+        );
+
+        // Animación del título
+        tl.fromTo(
+          titleRef.current,
+          {
+            opacity: 0,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.3"
+        );
+
+        // Animación de la descripción
+        tl.fromTo(
+          descriptionRef.current,
+          {
+            opacity: 0,
+            x: 50,
+            scale: 0.9,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        );
+
+        // Trigger para activar cuando el panel esté en vista
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "left 70%",
+          end: "right 30%",
+          onEnter: () => tl.play(),
+          onEnterBack: () => tl.play(),
+          // onLeave: () => tl.reverse(),
+          // onLeaveBack: () => tl.reverse(),
+        });
+      },
+      { scope: containerRef, dependencies: [stepIndex] }
+    );
+
     return (
-      <div className="w-full h-full rounded-4xl overflow-hidden bg-white relative">
+      <div
+        ref={containerRef}
+        className="w-full h-full rounded-4xl overflow-hidden bg-white relative"
+      >
         <img
           ref={imgRef}
           src={step.image}
@@ -65,6 +147,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
           }`}
         >
           <div
+            ref={stepBadgeRef}
             className={`flex flex-col justify-center items-center relative rounded-full border border-white/60 bg-black/20 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
               isMobile ? "px-4 py-2" : "px-5 py-2"
             }`}
@@ -92,6 +175,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             } justify-between items-end`}
           >
             <h2
+              ref={titleRef}
               className={`text-white ${
                 isMobile ? "text-xl" : "text-2xl md:text-5xl"
               } font-medium mb-2 max-w-lg drop-shadow-lg`}
@@ -100,6 +184,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             </h2>
 
             <div
+              ref={descriptionRef}
               className={`${
                 isMobile ? "max-w-full" : "max-w-sm"
               } flex flex-col justify-center items-start relative rounded-3xl border border-white/60 bg-black/20 backdrop-blur-xl shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)] z-20 ${
@@ -125,5 +210,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
     );
   }
 );
+
+HowItWorksPanels.displayName = "HowItWorksPanels";
 
 export default HowItWorksPanels;

@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
@@ -11,93 +12,144 @@ function FuncionalitySection() {
   const { t } = useTranslation("landing");
   const isMobile = useIsMobile();
 
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Animación del título
-    gsap.fromTo(
-      titleRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
+  useGSAP(
+    () => {
+      // Animación del título
+      gsap.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 30,
         },
-      }
-    );
-    // Animación del subtítulo
-    gsap.fromTo(
-      subtitleRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: subtitleRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación del subtítulo
+      gsap.fromTo(
+        subtitleRef.current,
+        {
+          opacity: 0,
+          y: 50,
         },
-      }
-    );
-    // Animación del texto
-    gsap.fromTo(
-      textRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: subtitleRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación de la descripción
+      gsap.fromTo(
+        textRef.current,
+        {
+          opacity: 0,
+          y: 30,
         },
-      }
-    );
-  }, [isMobile]);
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación de las tarjetas
+      gsap.fromTo(
+        cardsRef.current,
+        {
+          opacity: 0,
+          scale: 0.95,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section ref={sectionRef} className="w-full bg-white p-[15px]">
-      <div className="bg-white py-12 px-6 items-center w-full">
-        <div className="flex flex-col items-center text-center gap-2">
-          <h4
-            ref={titleRef}
-            className="tracking-wide text-lg font-regular text-primary"
+    <main className="p-[15px] flex w-full justify-center">
+      <section
+        ref={containerRef}
+        className="bg-white py-12 px-6 gap-2 items-center w-full"
+      >
+        <div className="flex flex-col gap-6 w-full h-full">
+          {/* TÍTULOS - CENTRADOS */}
+          <div className="flex flex-col items-center text-center gap-4">
+            <h4
+              ref={titleRef}
+              className="tracking-wide text-lg font-regular text-primary"
+            >
+              {t("functionality.title")}
+            </h4>
+
+            <h1
+              ref={subtitleRef}
+              className={`${
+                isMobile ? "text-3xl" : "text-6xl"
+              } font-medium text-primary mb-4`}
+            >
+              {t("functionality.subtitle")}
+            </h1>
+
+            <p
+              ref={textRef}
+              className="font-normal text-lg text-primary mb-4 w-full max-w-2xl"
+            >
+              {t("functionality.description")}
+            </p>
+          </div>
+
+          {/* FUNCTIONALITY CARDS */}
+          <div
+            ref={cardsRef}
+            className="flex w-full justify-center items-center"
           >
-            {t("functionality.title")}
-          </h4>
-          <h1
-            ref={subtitleRef}
-            className={`${
-              isMobile ? "text-3xl" : "text-6xl"
-            } font-medium text-primary mb-4`}
-          >
-            {t("functionality.subtitle")}
-          </h1>
-          <p
-            ref={textRef}
-            className="font-normal text-lg text-primary w-full max-w-2xl"
-          >
-            {t("functionality.description")}
-          </p>
+            <FuncionalityCards />
+          </div>
         </div>
-      </div>
-      <div className="w-full">
-        <FuncionalityCards />
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

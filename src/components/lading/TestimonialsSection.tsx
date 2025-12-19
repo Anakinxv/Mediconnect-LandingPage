@@ -11,15 +11,14 @@ gsap.registerPlugin(ScrollTrigger);
 function TestimonialsSection() {
   const isMobile = useIsMobile();
   const { t } = useTranslation("landing");
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const textRef = useRef(null);
-  const mainImageRef = useRef(null);
-  const asideImageRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
+      // Animación del título
       gsap.fromTo(
         titleRef.current,
         {
@@ -39,6 +38,7 @@ function TestimonialsSection() {
         }
       );
 
+      // Animación del subtítulo
       gsap.fromTo(
         subtitleRef.current,
         {
@@ -58,28 +58,9 @@ function TestimonialsSection() {
         }
       );
 
+      // Animación de las tarjetas de testimonios
       gsap.fromTo(
-        textRef.current,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: textRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      gsap.fromTo(
-        mainImageRef.current,
+        cardsRef.current,
         {
           opacity: 0,
           scale: 0.95,
@@ -90,65 +71,40 @@ function TestimonialsSection() {
           scale: 1,
           y: 0,
           duration: 1,
+          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: mainImageRef.current,
+            trigger: cardsRef.current,
             start: "top 90%",
             toggleActions: "play none none none",
           },
         }
       );
-
-      if (!isMobile && asideImageRef.current) {
-        gsap.fromTo(
-          asideImageRef.current,
-          {
-            opacity: 0,
-            scale: 0.95,
-            y: 60,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: asideImageRef.current,
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
     },
     { scope: containerRef }
   );
 
   return (
     <main className="p-[15px] flex w-full justify-center ">
-      <main
+      <section
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"
       >
         <div className="flex flex-col gap-6 w-full h-full ">
-          <h4
-            ref={titleRef}
-            className="tracking-wide text-lg font-regular text-primary"
-          >
-            {t("testimonials.title", "Testimonials")}
-          </h4>
-          <div
-            className={`w-full ${
-              isMobile ? "flex flex-col" : "grid grid-cols-[65%_35%]"
-            } items-start gap-4`}
-          >
+          {/* TÍTULOS - CENTRADOS */}
+          <div className="flex flex-col items-start text-center gap-4">
+            <h4
+              ref={titleRef}
+              className="tracking-wide text-lg font-regular text-primary"
+            >
+              {t("testimonials.title", "Testimonials")}
+            </h4>
+
             <h1
               ref={subtitleRef}
               className={`${
                 isMobile ? "text-3xl" : "text-6xl"
-              } font-medium text-primary mb-4 w-full`}
+              } font-medium text-primary mb-4`}
             >
               {t(
                 "testimonials.subtitle",
@@ -156,11 +112,16 @@ function TestimonialsSection() {
               )}
             </h1>
           </div>
-          <div className="flex w-full justify-center items-center ">
+
+          {/* TESTIMONIALS CARDS */}
+          <div
+            ref={cardsRef}
+            className="flex w-full justify-center items-center"
+          >
             <TestimonialsCards />
           </div>
         </div>
-      </main>
+      </section>
     </main>
   );
 }
