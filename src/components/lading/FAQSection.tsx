@@ -1,9 +1,10 @@
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import FAQImage from "@/assets/faq.png";
-import FAQImage2 from "@/assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import {
   Accordion,
   AccordionItem,
@@ -11,80 +12,181 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 
-const faqItems = [
-  {
-    question: "What types of organizations do you work with?",
-    answer:
-      "We work with universities, pharmaceutical companies, biotech startups, and government research institutions. Our services are tailored to meet the unique needs of each organization.",
-  },
-  {
-    question: "Can your lab help with regulatory compliance?",
-    answer:
-      "Yes, we provide comprehensive regulatory compliance support including GLP, GMP, and FDA guidelines. Our team ensures all research meets the highest industry standards.",
-  },
-  {
-    question: "How do we get started with a project?",
-    answer:
-      "Simply contact us through our website or email. We'll schedule an initial consultation to discuss your research goals, timeline, and budget requirements.",
-  },
-  {
-    question: "Do you offer custom research outside of your listed services?",
-    answer:
-      "Absolutely. We specialize in developing custom research protocols and can adapt our services to meet your specific scientific objectives.",
-  },
-  {
-    question: "What's the average turnaround time for lab testing?",
-    answer:
-      "Turnaround times vary by project complexity. Standard tests typically take 5-10 business days, while comprehensive studies may require 4-8 weeks.",
-  },
-  {
-    question: "Where is your lab located, and do you serve clients remotely?",
-    answer:
-      "Our main facility is located in San Francisco, CA. We serve clients globally and offer remote consultation, sample shipping, and digital reporting services.",
-  },
-
-  {
-    question: "Where is your lab located, and do you serve clients remotely?",
-    answer:
-      "Our main facility is located in San Francisco, CA. We serve clients globally and offer remote consultation, sample shipping, and digital reporting services.",
-  },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 function FAQSection() {
+  const { t } = useTranslation("landing");
   const isMobile = useIsMobile();
+
+  // Refs para las animaciones
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const accordionRef = useRef<HTMLDivElement>(null);
+
+  // Obtener los items de FAQ traducidos
+  const faqItems = t("faq.items", { returnObjects: true }) as Array<{
+    question: string;
+    answer: string;
+  }>;
+
+  useGSAP(
+    () => {
+      // Animación del título
+      gsap.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación del subtítulo
+      gsap.fromTo(
+        subtitleRef.current,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: subtitleRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación de la descripción
+      gsap.fromTo(
+        textRef.current,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación de la imagen
+      gsap.fromTo(
+        imageRef.current,
+        {
+          opacity: 0,
+          scale: 0.95,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animación del acordeón
+      gsap.fromTo(
+        accordionRef.current,
+        {
+          opacity: 0,
+          x: 50,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          delay: 0.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: accordionRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
     <div className="p-[15px] flex justify-center w-full">
-      <section className="gap-4 w-full grid grid-cols-[40%_60%] justify-center py-12 px-6">
+      <section
+        ref={containerRef}
+        className="gap-4 w-full grid grid-cols-[45%_55%] justify-center py-12 px-6"
+      >
         <main>
           <div className="flex flex-col gap-2 w-full h-full justify-between">
             {/* TITULOS - CENTRADOS */}
             <div className="flex flex-col items-start text-start gap-2">
-              <h4 className="tracking-wide text-lg font-regular text-primary">
-                FAQ
+              <h4
+                ref={titleRef}
+                className="tracking-wide text-lg font-regular text-primary"
+              >
+                {t("faq.title")}
               </h4>
               <h1
+                ref={subtitleRef}
                 className={`${
                   isMobile ? "text-3xl" : "text-6xl"
                 } font-medium text-primary mb-4 `}
               >
-                Preguntas frecuentes esenciales
+                {t("faq.heading")}
               </h1>
-              <p className="font-normal text-lg text-primary mb-4 w-full ">
-                Descubre cómo MediConnect facilita la atención médica para
-                pacientes, doctores y centros de salud.
+              <p
+                ref={textRef}
+                className="font-normal text-lg text-primary mb-4  "
+              >
+                {t("faq.description")}
               </p>
             </div>
-            <div>
+            <div
+              ref={imageRef}
+              className="overflow-hidden inline-block rounded-4xl w-full "
+            >
               <img
-                src={FAQImage2}
+                src={FAQImage}
                 alt="FAQ"
-                className="w-full h-[300px] object-cover rounded-2xl"
+                className="rounded-4xl w-full h-[300px] object-cover shadow-lg hover:scale-115 transition-transform duration-500"
               />
             </div>
           </div>
         </main>
         <aside className="flex items-start justify-center w-full h-full">
           <Accordion
+            ref={accordionRef}
             type="single"
             collapsible
             className="w-full  rounded-2xl  flex flex-col gap-2 h-full justify-between"

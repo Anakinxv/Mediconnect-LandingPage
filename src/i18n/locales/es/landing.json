@@ -179,5 +179,44 @@
   "testimonials": {
     "title": "Testimonios",
     "subtitle": "Únete a quienes cuidan su salud"
+  },
+  "faq": {
+    "title": "FAQ",
+    "heading": "Preguntas frecuentes esenciales",
+    "description": "Descubre cómo MediConnect facilita la atención médica para pacientes, doctores y centros de salud.",
+    "items": [
+      {
+        "question": "¿Qué es MediConnect y cómo funciona?",
+        "answer": "MediConnect es una plataforma digital de salud que conecta pacientes, doctores y centros médicos en un solo lugar. Puedes encontrar servicios médicos, agendar citas, acceder a teleconsultas y gestionar tu salud de forma fácil y segura."
+      },
+      {
+        "question": "¿MediConnect es gratis para los pacientes?",
+        "answer": "Sí. Los pacientes pueden registrarse, buscar doctores o centros médicos y agendar citas sin costo. Algunos servicios, como consultas o telemedicina, dependen de las tarifas del proveedor."
+      },
+      {
+        "question": "¿Cómo agendo una cita médica?",
+        "answer": "Después de crear una cuenta, puedes buscar doctores, especialidades o centros médicos por ubicación. Selecciona el servicio que necesitas, elige una fecha y hora disponible, y confirma tu cita directamente desde la app."
+      },
+      {
+        "question": "¿Puedo asistir a citas en línea?",
+        "answer": "Sí. MediConnect ofrece teleconsultas, permitiéndote conectar con tu doctor de forma segura desde la app sin necesidad de acudir presencialmente al centro médico."
+      },
+      {
+        "question": "¿Mi información médica está segura en MediConnect?",
+        "answer": "Por supuesto. MediConnect prioriza la privacidad y seguridad de los datos. Tu información médica está protegida con sistemas seguros y solo es accesible para profesionales autorizados."
+      },
+      {
+        "question": "¿Qué pueden hacer los doctores en MediConnect?",
+        "answer": "Los doctores pueden gestionar su perfil profesional, aparecer en el directorio médico, recibir solicitudes de citas, realizar teleconsultas y construir relaciones de confianza con los pacientes a través de la plataforma."
+      },
+      {
+        "question": "¿Cuál es el rol de los centros médicos en MediConnect?",
+        "answer": "Los centros médicos usan MediConnect para aumentar su visibilidad, conectar con doctores y ser descubiertos por pacientes. Pueden mostrar sus servicios y fortalecer la colaboración dentro del ecosistema de salud."
+      },
+      {
+        "question": "¿Necesito descargar una app para usar MediConnect?",
+        "answer": "MediConnect está disponible como plataforma web y también puede estar accesible mediante una app móvil, permitiéndote gestionar tu salud en cualquier momento y lugar."
+      }
+    ]
   }
 }
