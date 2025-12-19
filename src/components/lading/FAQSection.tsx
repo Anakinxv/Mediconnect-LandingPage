@@ -149,8 +149,8 @@ function FAQSection() {
         className="bg-white py-12 px-6 items-center w-full"
       >
         <div
-          className={`flex ${
-            isMobile ? "flex-col gap-6" : "grid grid-cols-[45%_55%] gap-4"
+          className={`flex  ${
+            isMobile ? "flex-col gap-6" : "grid grid-cols-2 gap-4"
           } w-full h-full`}
         >
           {/* CONTENIDO IZQUIERDO */}

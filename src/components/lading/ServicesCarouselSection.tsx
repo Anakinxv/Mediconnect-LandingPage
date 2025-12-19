@@ -89,7 +89,7 @@ function ServicesCarouselSection() {
   }, []);
 
   return (
-    <main className="p-[15px] flex w-full justify-center">
+    <main className="flex w-full justify-center">
       <section
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"
