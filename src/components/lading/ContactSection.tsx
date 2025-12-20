@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/useIsMobile";
-
+import MCInput from "@/components/common/forms/MCInput";
 gsap.registerPlugin(ScrollTrigger);
 
 function ContactSection() {
@@ -24,7 +24,6 @@ function ContactSection() {
 
     if (!container || !image || !contact) return;
 
-    // Store references to this component's ScrollTriggers
     const scrollTriggers: ScrollTrigger[] = [];
 
     if (hasAnimated) {
@@ -137,7 +136,6 @@ function ContactSection() {
           <div
             className={`relative w-full h-full overflow-hidden min-h-[600px]`}
           >
-            {/* Imagen de fondo */}
             <img
               ref={imageRef}
               src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=800&fit=crop"

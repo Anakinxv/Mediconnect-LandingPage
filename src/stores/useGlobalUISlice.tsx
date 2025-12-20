@@ -16,6 +16,10 @@ export type GlobalUISlice = {
     type: "success" | "error" | "info";
     open: boolean;
   };
+
+  PasswordVisibility: boolean;
+  SetPasswordVisibility: (visibility: boolean) => void;
+
   setToast: (toast: {
     message: string;
     type: "success" | "error" | "info";
@@ -41,6 +45,11 @@ export const createGlobalUISlice: StateCreator<
 
     isloading: false,
     setIsLoading: (loading: boolean) => set({ isloading: loading }),
+
+    PasswordVisibility: false,
+    SetPasswordVisibility: (visibility: boolean) =>
+      set({ PasswordVisibility: visibility }),
+
     toast: {
       message: "",
       type: "info",
@@ -52,6 +61,7 @@ export const createGlobalUISlice: StateCreator<
       open: boolean;
     }) => set({ toast }),
   }),
+
   {
     name: "global-ui-slice",
   }
