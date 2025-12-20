@@ -24,6 +24,9 @@ function ContactSection() {
 
     if (!container || !image || !contact) return;
 
+    // Store references to this component's ScrollTriggers
+    const scrollTriggers: ScrollTrigger[] = [];
+
     if (hasAnimated) {
       gsap.set(image, {
         scale: 1,
@@ -63,6 +66,11 @@ function ContactSection() {
       },
     });
 
+    // Store the ScrollTrigger instance
+    if (tl.scrollTrigger) {
+      scrollTriggers.push(tl.scrollTrigger);
+    }
+
     tl.to(image, {
       scale: 1,
       borderRadius: isMobile ? "0rem" : "35px",
@@ -98,7 +106,9 @@ function ContactSection() {
     );
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      // Only kill ScrollTriggers created by this component
+      scrollTriggers.forEach((trigger) => trigger.kill());
+      tl.kill();
     };
   }, [isMobile, hasAnimated]);
 

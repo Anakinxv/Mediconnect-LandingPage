@@ -25,7 +25,6 @@ function LandingPage() {
       <FAQSection />
       <ServicesCarouselSection />
       <ContactSection />
-      <UsersSection />
     </div>
   );
 }
