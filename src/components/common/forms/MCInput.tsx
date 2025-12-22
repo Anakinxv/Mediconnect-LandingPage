@@ -132,7 +132,7 @@ function MCInput({
             };
           })()}
           className={cn(
-            "w-full   rounded-4xl border  focus:ring-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-primary",
+            "w-full   rounded-4xl border  focus:ring-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-primary placeholder:text-md",
             getSizeClasses(),
             handleStatusColor(),
             className
