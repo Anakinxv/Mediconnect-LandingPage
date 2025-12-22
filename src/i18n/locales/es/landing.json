@@ -226,5 +226,16 @@
     "device": "Dispositivo Médico",
     "diagnostics": "Diagnósticos",
     "care": "Atención al Paciente"
+  },
+  "contacts": {
+    "title": "Contáctanos si tienes alguna duda!",
+    "nameLabel": "Nombre Completo",
+    "namePlaceholder": "Nombre Completo",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "Correo electrónico",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "Escriba su mensaje aquí...",
+    "submit": "Enviar Ahora",
+    "success": "¡Mensaje enviado correctamente!"
   }
 }

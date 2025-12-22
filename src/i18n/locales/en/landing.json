@@ -225,5 +225,16 @@
     "device": "Medical Device",
     "diagnostics": "Diagnostics",
     "care": "Patient Care"
+  },
+  "contacts": {
+    "title": "Contact us if you have any questions!",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Full Name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Write your message here...",
+    "submit": "Send Now",
+    "success": "Message sent successfully!"
   }
 }

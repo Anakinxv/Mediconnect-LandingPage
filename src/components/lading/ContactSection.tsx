@@ -9,6 +9,7 @@ import MCFormWrapper from "@/components/common/forms/MCFormWrapper";
 import { contactSchema } from "@/schema/landingSchema";
 import ContactImage from "@/assets/contact.png";
 import { useAppStore } from "@/stores/useAppStore";
+import { useTranslation } from "react-i18next";
 gsap.registerPlugin(ScrollTrigger);
 
 function ContactSection() {
@@ -18,7 +19,7 @@ function ContactSection() {
   const contactRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [hasAnimated, setHasAnimated] = useState(false);
-
+  const { t } = useTranslation("landing");
   useEffect(() => {
     const container = containerRef.current;
     const image = imageRef.current;
@@ -131,7 +132,7 @@ function ContactSection() {
     <section id="contact" className="w-full">
       <div
         ref={containerRef}
-        className="h-screen w-full flex items-center justify-center bg-rd py-8 px-4 sm:px-6 lg:px-8"
+        className="h-screen w-full flex items-center justify-center bg-rd py-8 px-4 sm:px-6 lg:px-8 "
       >
         <div className="relative w-full mx-auto h-full flex items-center">
           <div
@@ -157,8 +158,8 @@ function ContactSection() {
               className="absolute z-20 left-16 top-1/2 -translate-y-1/2 w-3xl max-w-full"
             >
               <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-12 flex flex-col gap-4">
-                <h2 className="animate-item  font-medium text-gray-800 mb-1 text-4xl lg:text-5xl">
-                  Contáctanos si tienes alguna duda!
+                <h2 className="animate-item font-medium text-gray-800 mb-1 text-4xl lg:text-5xl">
+                  {t("contacts.title")}
                 </h2>
                 <MCFormWrapper
                   schema={contactSchema}
@@ -173,8 +174,8 @@ function ContactSection() {
                     <div className="animate-item">
                       <MCInput
                         name="name"
-                        label="Nombre Completo"
-                        placeholder="Nombre Completo"
+                        label={t("contacts.nameLabel")}
+                        placeholder={t("contacts.namePlaceholder")}
                         value={contactForm.name}
                         onChange={(e) =>
                           setcontactForm({
@@ -188,8 +189,8 @@ function ContactSection() {
                     <div className="animate-item">
                       <MCInput
                         name="email"
-                        label="Correo electrónico"
-                        placeholder="Correo electrónico"
+                        label={t("contacts.emailLabel")}
+                        placeholder={t("contacts.emailPlaceholder")}
                         type="email"
                         value={contactForm.email}
                         onChange={(e) =>
@@ -205,8 +206,8 @@ function ContactSection() {
                   <div className="animate-item">
                     <MCTextArea
                       name="message"
-                      label="Mensaje"
-                      placeholder="Escriba su mensaje aquí..."
+                      label={t("contacts.messageLabel")}
+                      placeholder={t("contacts.messagePlaceholder")}
                       className="h-[150px]"
                       value={contactForm.message}
                       onChange={(e) =>
@@ -228,7 +229,7 @@ function ContactSection() {
                         contactForm.message === ""
                       }
                     >
-                      Enviar Ahora
+                      {t("contacts.submit")}
                     </MediButton>
                   </div>
                 </MCFormWrapper>
