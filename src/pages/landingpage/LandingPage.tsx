@@ -8,8 +8,9 @@ import TestimonialsSection from "@/components/lading/TestimonialsSection";
 import FAQSection from "@/components/lading/FAQSection";
 import { useAppStore } from "@/stores/useAppStore";
 import ServicesCarouselSection from "@/components/lading/ServicesCarouselSection";
-import ContactSection from "@/components/lading/ContactSection";
+
 import Footer from "@/components/lading/Footer";
+import ContactSectionWrapper from "@/components/lading/ContactSectionWrapper";
 function LandingPage() {
   const setisCarouselActive = useAppStore((state) => state.setisCarouselActive);
   const isCarouselActive = useAppStore((state) => state.isCarouselActive);
@@ -24,7 +25,7 @@ function LandingPage() {
       <BeneficitsSection onCarouselActiveChange={setisCarouselActive} />
       <TestimonialsSection />
       <FAQSection />
-      <ContactSection />
+      <ContactSectionWrapper />
       <ServicesCarouselSection />
       <Footer />
     </div>

@@ -20,6 +20,7 @@ function ContactSection() {
   const isMobile = useIsMobile();
   const [hasAnimated, setHasAnimated] = useState(false);
   const { t } = useTranslation("landing");
+
   useEffect(() => {
     const container = containerRef.current;
     const image = imageRef.current;
@@ -30,14 +31,38 @@ function ContactSection() {
 
     const scrollTriggers: ScrollTrigger[] = [];
 
-    if (hasAnimated) {
+    // En mobile, no aplicar animaciones complejas
+    if (isMobile) {
       gsap.set(image, {
         scale: 1,
-        borderRadius: isMobile ? "0rem" : "35px",
+        borderRadius: "1rem",
       });
       gsap.set(overlay, {
         scale: 1,
-        borderRadius: isMobile ? "0rem" : "35px",
+        borderRadius: "1rem",
+      });
+      gsap.set(contact, {
+        x: 0,
+        opacity: 1,
+        scale: 1,
+      });
+      const formElements = contact.querySelectorAll(".animate-item");
+      gsap.set(formElements, {
+        y: 0,
+        opacity: 1,
+      });
+      return;
+    }
+
+    // Código desktop original
+    if (hasAnimated) {
+      gsap.set(image, {
+        scale: 1,
+        borderRadius: "35px",
+      });
+      gsap.set(overlay, {
+        scale: 1,
+        borderRadius: "35px",
       });
       gsap.set(contact, {
         x: 0,
@@ -83,7 +108,7 @@ function ContactSection() {
 
     tl.to([image, overlay], {
       scale: 1,
-      borderRadius: isMobile ? "0rem" : "35px",
+      borderRadius: "35px",
       duration: 1,
       ease: "power2.out",
     });
@@ -132,33 +157,53 @@ function ContactSection() {
     <section id="contact" className="w-full">
       <div
         ref={containerRef}
-        className="h-screen w-full flex items-center justify-center bg-rd py-8 px-4 sm:px-6 lg:px-8 "
+        className={`w-full flex items-center justify-center bg-rd px-4 sm:px-6 lg:px-8 ${
+          isMobile ? "min-h-screen py-8" : "h-screen py-8"
+        }`}
       >
         <div className="relative w-full mx-auto h-full flex items-center">
           <div
-            className={`relative w-full h-full overflow-hidden min-h-[600px]`}
+            className={`relative w-full h-full overflow-hidden min-h-[600px] ${
+              isMobile ? "flex items-center" : ""
+            }`}
           >
             <img
               ref={imageRef}
               src={ContactImage}
               alt="Imagen de contacto"
-              className="absolute inset-0 w-full h-full object-cover will-change-transform rounded-[35px] z-0"
+              className={`absolute inset-0 w-full h-full object-cover will-change-transform z-0 ${
+                isMobile ? "rounded-2xl" : "rounded-[35px]"
+              }`}
               style={{ transformOrigin: "center center" }}
             />
 
             <div
               ref={overlayRef}
-              className="absolute inset-0 bg-primary/25 rounded-[35px] z-10 will-change-transform"
+              className={`absolute inset-0 bg-primary/25 z-10 will-change-transform ${
+                isMobile ? "rounded-2xl" : "rounded-[35px]"
+              }`}
               style={{ transformOrigin: "center center" }}
             ></div>
 
             {/* Formulario de contacto */}
             <div
               ref={contactRef}
-              className="absolute z-20 left-16 top-1/2 -translate-y-1/2 w-3xl max-w-full"
+              className={`absolute z-20 ${
+                isMobile
+                  ? "left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[90%] max-w-md"
+                  : "left-16 top-1/2 -translate-y-1/2 w-3xl max-w-full"
+              }`}
             >
-              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-12 flex flex-col gap-4">
-                <h2 className="animate-item font-medium text-gray-800 mb-1 text-4xl lg:text-5xl">
+              <div
+                className={`bg-white shadow-2xl border border-gray-100 flex flex-col ${
+                  isMobile ? "rounded-xl p-6 gap-3" : "rounded-3xl p-12 gap-4"
+                }`}
+              >
+                <h2
+                  className={`animate-item font-medium text-gray-800 ${
+                    isMobile ? "text-2xl mb-0" : "text-4xl lg:text-5xl mb-1"
+                  }`}
+                >
                   {t("contacts.title")}
                 </h2>
                 <MCFormWrapper
@@ -208,7 +253,7 @@ function ContactSection() {
                       name="message"
                       label={t("contacts.messageLabel")}
                       placeholder={t("contacts.messagePlaceholder")}
-                      className="h-[150px]"
+                      className={isMobile ? "h-[100px]" : "h-[150px]"}
                       value={contactForm.message}
                       onChange={(e) =>
                         setcontactForm({
@@ -222,7 +267,7 @@ function ContactSection() {
                   <div className="animate-item pt-2">
                     <MediButton
                       type="submit"
-                      className="w-full "
+                      className="w-full"
                       disabled={
                         contactForm.name === "" ||
                         contactForm.email === "" ||
