@@ -92,7 +92,7 @@ function ServicesCarouselSection() {
     <main className="flex w-full justify-center">
       <section
         ref={containerRef}
-        className="bg-white py-12 px-6 gap-2 items-center w-full"
+        className="bg-white py-12 px-8  items-center w-full"
       >
         <div className="relative overflow-hidden ">
           <div
@@ -121,11 +121,11 @@ function ServicesCarouselSection() {
                 }}
               >
                 {/* Service Image */}
-                <div className="w-[350px] h-[100px] overflow-hidden rounded-full flex-shrink-0 transition-transform duration-300 hover:scale-105 flex items-center justify-center">
+                <div className="overflow-hidden inline-block rounded-full w-[350px] h-[100px]">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover"
+                    className="rounded-4xl w-full h-full object-cover shadow-lg hover:scale-110 transition-transform duration-500"
                   />
                 </div>
                 {/* Circular Title Pill */}

@@ -91,9 +91,13 @@ function TestimonialsSection() {
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"
       >
-        <div className="flex flex-col gap-6 w-full h-full ">
+        <div className="flex flex-col gap-6 w-full h-full">
           {/* TÍTULOS - CENTRADOS */}
-          <div className="flex flex-col items-start text-center gap-4">
+          <div
+            className={`${
+              isMobile ? "text-center" : "text-start"
+            } flex flex-col  gap-4 w-full`}
+          >
             <h4
               ref={titleRef}
               className="tracking-wide text-lg font-regular text-primary"
@@ -104,8 +108,8 @@ function TestimonialsSection() {
             <h1
               ref={subtitleRef}
               className={`${
-                isMobile ? "text-3xl" : "text-6xl"
-              } font-medium text-primary mb-4`}
+                isMobile ? "text-3xl " : "text-6xl"
+              } font-medium text-primary mb-4 `}
             >
               {t(
                 "testimonials.subtitle",

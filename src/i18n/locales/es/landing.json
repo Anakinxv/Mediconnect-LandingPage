@@ -237,5 +237,24 @@
     "messagePlaceholder": "Escriba su mensaje aquí...",
     "submit": "Enviar Ahora",
     "success": "¡Mensaje enviado correctamente!"
+  },
+  "footer": {
+    "quickLinks": [
+      { "href": "#inicio", "label": "Inicio" },
+      { "href": "#about", "label": "Nosotros" },
+      { "href": "#how", "label": "Cómo Funciona" },
+      { "href": "#faq", "label": "FAQ" },
+      { "href": "#contact", "label": "Contacto" }
+    ],
+    "quickLinksTitle": "Enlaces Rápidos",
+    "newsletterTitle": "Boletín Informativo",
+    "newsletterDesc": "Suscríbete para recibir novedades y consejos de salud.",
+    "newsletterBtn": "Suscribirse",
+    "brandDesc": "Plataforma digital para conectar pacientes y médicos de forma segura y eficiente. Salud al alcance de todos.",
+    "copyright": "© 2025 MediConnect. Todos los derechos reservados.",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad",
+    "contact": "Contáctanos",
+    "InputPlaceholder": "Introduce tu correo electrónico"
   }
 }
