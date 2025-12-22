@@ -152,7 +152,7 @@ const Footer = () => {
             </div>
 
             {/* Quick Links Column */}
-            <div
+            {/* <div
               ref={quickLinksRef}
               className="flex flex-col gap-y-3 sm:gap-y-4 text-left lg:text-center w-full lg:w-auto mt-6 lg:mt-0 items-center justify-center"
             >
@@ -181,7 +181,7 @@ const Footer = () => {
                   ))}
                 </ul>
               </nav>
-            </div>
+            </div> */}
 
             {/* Newsletter Column */}
             <div
@@ -213,7 +213,7 @@ const Footer = () => {
                         setnewsletterForm({ email: e.target.value })
                       }
                       required
-                      className="bg-white text-primary h-12 sm:h-[52px] text-sm sm:text-base flex-1 min-w-0 transition-all duration-300 hover:shadow-lg focus:shadow-lg focus:scale-[1.02]"
+                      className="bg-white text-primary h-12 sm:h-[52px] md:w-[300px] text-sm sm:text-base flex-1 min-w-0 transition-all duration-300 hover:shadow-lg focus:shadow-lg focus:scale-[1.02]"
                     />
                     <MediButton
                       type="submit"

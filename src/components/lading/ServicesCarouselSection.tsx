@@ -8,19 +8,20 @@ import service3 from "@/assets/ServicesCarousel/service-3.png";
 import service4 from "@/assets/ServicesCarousel/service-4.png";
 import service5 from "@/assets/ServicesCarousel/service-5.png";
 import service6 from "@/assets/ServicesCarousel/service-6.png";
-
+import { useTranslation } from "react-i18next";
 gsap.registerPlugin(ScrollTrigger);
 
-const servicesData = [
-  { image: service1, title: "Telehealth Services" },
-  { image: service2, title: "Rehabilitation" },
-  { image: service3, title: "Healthcare Solutions" },
-  { image: service4, title: "Medical Device" },
-  { image: service5, title: "Diagnostics" },
-  { image: service6, title: "Patient Care" },
-];
-
 function ServicesCarouselSection() {
+  const { t } = useTranslation("landing");
+
+  const servicesData = [
+    { image: service1, title: t("services.telehealth") },
+    { image: service2, title: t("services.rehabilitation") },
+    { image: service3, title: t("services.solutions") },
+    { image: service4, title: t("services.device") },
+    { image: service5, title: t("services.diagnostics") },
+    { image: service6, title: t("services.care") },
+  ];
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
