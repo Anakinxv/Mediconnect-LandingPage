@@ -1,14 +1,13 @@
 import { type StateCreator } from "zustand";
+import { type ContactFormData } from "@/types/landingTypes";
 
 export interface LandingSlice {
   isCarouselActive: boolean;
   setisCarouselActive: (active: boolean) => void;
 
-  conctactForm: {
-    name: string;
-    email: string;
-    message: string;
-  };
+  conctactForm: ContactFormData;
+
+  setcontactForm: (form: ContactFormData) => void;
 }
 
 export const createLandingSlice: StateCreator<LandingSlice> = (set) => ({
@@ -22,4 +21,9 @@ export const createLandingSlice: StateCreator<LandingSlice> = (set) => ({
     email: "",
     message: "",
   },
+
+  setcontactForm: (form: ContactFormData) =>
+    set(() => ({
+      conctactForm: form,
+    })),
 });

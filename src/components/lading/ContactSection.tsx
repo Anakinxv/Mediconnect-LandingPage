@@ -1,33 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import MCInput from "@/components/common/forms/MCInput";
+import MediButton from "@/components/common/MediButton";
+import MCTextArea from "@/components/common/forms/MCTextArea";
+import MCFormWrapper from "@/components/common/forms/MCFormWrapper";
+import { contactSchema } from "@/schema/landingSchema";
+import ContactImage from "@/assets/contact.png";
+import { useAppStore } from "@/stores/useAppStore";
 gsap.registerPlugin(ScrollTrigger);
 
 function ContactSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
 
   useEffect(() => {
     const container = containerRef.current;
     const image = imageRef.current;
+    const overlay = overlayRef.current;
     const contact = contactRef.current;
 
-    if (!container || !image || !contact) return;
+    if (!container || !image || !overlay || !contact) return;
 
     const scrollTriggers: ScrollTrigger[] = [];
 
     if (hasAnimated) {
       gsap.set(image, {
+        scale: 1,
+        borderRadius: isMobile ? "0rem" : "35px",
+      });
+      gsap.set(overlay, {
         scale: 1,
         borderRadius: isMobile ? "0rem" : "35px",
       });
@@ -48,6 +55,10 @@ function ContactSection() {
       scale: 0.2,
       borderRadius: "3rem",
     });
+    gsap.set(overlay, {
+      scale: 0.2,
+      borderRadius: "3rem",
+    });
     gsap.set(contact, {
       x: -100,
       opacity: 0,
@@ -65,12 +76,11 @@ function ContactSection() {
       },
     });
 
-    // Store the ScrollTrigger instance
     if (tl.scrollTrigger) {
       scrollTriggers.push(tl.scrollTrigger);
     }
 
-    tl.to(image, {
+    tl.to([image, overlay], {
       scale: 1,
       borderRadius: isMobile ? "0rem" : "35px",
       duration: 1,
@@ -105,103 +115,123 @@ function ContactSection() {
     );
 
     return () => {
-      // Only kill ScrollTriggers created by this component
       scrollTriggers.forEach((trigger) => trigger.kill());
       tl.kill();
     };
   }, [isMobile, hasAnimated]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (data: any) => {
     alert("¡Mensaje enviado correctamente!");
-    setFormData({ name: "", email: "", message: "" });
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const contactForm = useAppStore((state) => state.conctactForm);
+  const setcontactForm = useAppStore((state) => state.setcontactForm);
 
   return (
     <section id="contact" className="w-full">
       <div
         ref={containerRef}
-        className="h-screen w-full flex items-center justify-center bg-white py-8 px-4 sm:px-6 lg:px-8"
+        className="h-screen w-full flex items-center justify-center bg-rd py-8 px-4 sm:px-6 lg:px-8"
       >
-        <div className="relative w-[100%] mx-auto h-full flex items-center">
+        <div className="relative w-full mx-auto h-full flex items-center">
           <div
             className={`relative w-full h-full overflow-hidden min-h-[600px]`}
           >
             <img
               ref={imageRef}
-              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=800&fit=crop"
+              src={ContactImage}
               alt="Imagen de contacto"
-              className={`absolute inset-0 w-full h-full object-cover will-change-transform rounded-[35px]`}
+              className="absolute inset-0 w-full h-full object-cover will-change-transform rounded-[35px] z-0"
               style={{ transformOrigin: "center center" }}
             />
+
+            <div
+              ref={overlayRef}
+              className="absolute inset-0 bg-primary/25 rounded-[35px] z-10 will-change-transform"
+              style={{ transformOrigin: "center center" }}
+            ></div>
 
             {/* Formulario de contacto */}
             <div
               ref={contactRef}
-              className="absolute z-20 left-16 top-1/2 -translate-y-1/2 w-[600px] max-w-full"
+              className="absolute z-20 left-16 top-1/2 -translate-y-1/2 w-3xl max-w-full"
             >
-              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-12">
-                <h2 className="animate-item font-bold text-gray-800 mb-1 text-4xl lg:text-5xl">
-                  <span className="text-emerald-600">Contáctanos</span> si
-                  tienes
+              <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-12 flex flex-col gap-4">
+                <h2 className="animate-item  font-medium text-gray-800 mb-1 text-4xl lg:text-5xl">
+                  Contáctanos si tienes alguna duda!
                 </h2>
-                <h2 className="animate-item font-bold text-gray-800 mb-6 text-4xl lg:text-5xl">
-                  alguna <span className="text-emerald-600">duda!</span>
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <MCFormWrapper
+                  schema={contactSchema}
+                  defaultValues={{
+                    name: contactForm.name,
+                    email: contactForm.email,
+                    message: contactForm.message,
+                  }}
+                  onSubmit={handleSubmit}
+                >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="animate-item">
-                      <input
-                        type="text"
+                      <MCInput
                         name="name"
+                        label="Nombre Completo"
                         placeholder="Nombre Completo"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all duration-300 text-base"
+                        value={contactForm.name}
+                        onChange={(e) =>
+                          setcontactForm({
+                            ...contactForm,
+                            name: e.target.value,
+                          })
+                        }
                         required
                       />
                     </div>
                     <div className="animate-item">
-                      <input
-                        type="email"
+                      <MCInput
                         name="email"
+                        label="Correo electrónico"
                         placeholder="Correo electrónico"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all duration-300 text-base"
+                        type="email"
+                        value={contactForm.email}
+                        onChange={(e) =>
+                          setcontactForm({
+                            ...contactForm,
+                            email: e.target.value,
+                          })
+                        }
                         required
                       />
                     </div>
                   </div>
                   <div className="animate-item">
-                    <textarea
+                    <MCTextArea
                       name="message"
+                      label="Mensaje"
                       placeholder="Escriba su mensaje aquí..."
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all duration-300 resize-none text-base"
+                      className="h-[150px]"
+                      value={contactForm.message}
+                      onChange={(e) =>
+                        setcontactForm({
+                          ...contactForm,
+                          message: e.target.value,
+                        })
+                      }
                       required
                     />
                   </div>
                   <div className="animate-item pt-2">
-                    <button
+                    <MediButton
                       type="submit"
-                      className="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl text-base"
+                      className="w-full "
+                      disabled={
+                        contactForm.name === "" ||
+                        contactForm.email === "" ||
+                        contactForm.message === ""
+                      }
                     >
                       Enviar Ahora
-                    </button>
+                    </MediButton>
                   </div>
-                </form>
+                </MCFormWrapper>
               </div>
             </div>
           </div>

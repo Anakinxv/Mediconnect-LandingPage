@@ -58,7 +58,7 @@ function MCInput({
       case "loading":
         return "border-blue-500 focus:border-blue-500";
       default:
-        return "border-[var(--theme-border)] focus:border-[var(--theme-primary)]";
+        return "border-primary/50 focus:border-primary";
     }
   };
 
@@ -84,7 +84,7 @@ function MCInput({
         <div className="flex flex-row justify-between items-center mb-1 gap-2">
           <label
             htmlFor={name}
-            className="text-left text-base sm:text-lg text-[var(--theme-text)]"
+            className="text-left text-base sm:text-lg text-primary"
           >
             {label}
             {required && <span className="text-red-500 ml-1">*</span>}
@@ -93,7 +93,7 @@ function MCInput({
             <Button
               type="button"
               variant="ghost"
-              className="hover:bg-[var(--theme-secondary)]/10 rounded-2xl text-[var(--theme-textSecondary)] px-2 py-1"
+              className=" rounded-2xl text-gray-500 px-2 py-1"
               onClick={handlePasswordToggle}
             >
               {PasswordVisibility ? (
@@ -132,7 +132,7 @@ function MCInput({
             };
           })()}
           className={cn(
-            "w-full bg-[var(--theme-surface)] placeholder:text-[var(--theme-textSecondary)] text-[var(--theme-text)] focus:ring-0 rounded-2xl sm:rounded-4xl",
+            "w-full   rounded-4xl border  focus:ring-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-primary",
             getSizeClasses(),
             handleStatusColor(),
             className
@@ -153,14 +153,13 @@ function MCInput({
               ? "text-yellow-500"
               : status === "loading"
               ? "text-blue-500"
-              : "text-[var(--theme-textSecondary)]"
+              : "text-gray-500"
           )}
         >
           {statusMessage}
         </span>
       )}
 
-      {/* Form Validation Error */}
       {errors[name] && (
         <span className="text-red-500 text-sm mt-1">
           {String(errors[name]?.message)}
