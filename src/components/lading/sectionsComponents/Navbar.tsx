@@ -12,8 +12,16 @@ type NavbarProps = {
 function Navbar({ id, isFixed = false }: NavbarProps) {
   const { t } = useTranslation("landing");
 
+  const handleMenuClick = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const menuItems = [
-    { href: "#inicio", label: t("navbar.home") },
+    { href: "#hero-container", label: t("navbar.home") },
     { href: "#about", label: t("navbar.about") },
     { href: "#how", label: t("navbar.how") },
     { href: "#faq", label: t("navbar.faq") },
@@ -54,6 +62,7 @@ function Navbar({ id, isFixed = false }: NavbarProps) {
             <li key={item.href}>
               <a
                 href={item.href}
+                onClick={handleMenuClick(item.href)}
                 className={`block px-3 py-2 rounded-full transition-colors duration-300 ${
                   isFixed ? "hover:bg-primary/10" : "hover:bg-white/10"
                 }`}

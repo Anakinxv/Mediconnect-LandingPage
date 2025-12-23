@@ -128,7 +128,7 @@ function AboutSection() {
   );
 
   return (
-    <main className="p-[15px] flex justify-center">
+    <main className="p-[15px] flex justify-center" id="about">
       <main
         ref={containerRef}
         className="bg-white py-12 px-6 gap-2 items-center w-full"

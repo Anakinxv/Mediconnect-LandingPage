@@ -41,12 +41,23 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   }, [isOpen]);
 
   const menuItems = [
-    { label: t("navbar.home") },
-    { label: t("navbar.about") },
-    { label: t("navbar.how") },
-    { label: t("navbar.faq") },
-    { label: t("navbar.contact") },
+    { href: "#hero-container", label: t("navbar.home") },
+    { href: "#about", label: t("navbar.about") },
+    { href: "#how", label: t("navbar.how") },
+    { href: "#faq", label: t("navbar.faq") },
+    { href: "#contact", label: t("navbar.contact") },
   ];
+
+  const handleMenuItemClick = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen(false);
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 300); // Espera a que cierre el menú antes de hacer scroll
+  };
 
   useGSAP(() => {
     if (isOpen) {
@@ -120,10 +131,6 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   }, [isOpen]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  const handleMenuItemClick = () => {
-    setIsOpen(false);
-  };
 
   // Estilo para el círculo de hover en botones
   const hoverCircleButton =
@@ -200,12 +207,13 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
           <ul ref={menuItemsRef} className="space-y-2">
             {menuItems.map((item, index) => (
               <li key={index}>
-                <button
-                  onClick={handleMenuItemClick}
+                <a
+                  href={item.href}
+                  onClick={handleMenuItemClick(item.href)}
                   className="block w-full px-8 py-4 text-3xl font-medium text-primary transition-all duration-300 rounded-xl active:bg-primary/10 active:scale-95 text-left"
                 >
                   {item.label}
-                </button>
+                </a>
               </li>
             ))}
           </ul>

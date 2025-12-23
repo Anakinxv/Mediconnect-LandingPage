@@ -126,7 +126,7 @@ function FAQSection() {
   );
 
   return (
-    <main className="p-[15px] flex justify-center w-full">
+    <main className="p-[15px] flex justify-center w-full" id="faq">
       <section
         ref={containerRef}
         className="bg-white py-12 px-6 items-center w-full"
