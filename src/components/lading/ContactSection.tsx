@@ -10,6 +10,7 @@ import { contactSchema } from "@/schema/landingSchema";
 import ContactImage from "@/assets/contact.png";
 import { useAppStore } from "@/stores/useAppStore";
 import { useTranslation } from "react-i18next";
+
 gsap.registerPlugin(ScrollTrigger);
 
 function ContactSection() {
@@ -29,120 +30,81 @@ function ContactSection() {
 
     if (!container || !image || !overlay || !contact) return;
 
-    const scrollTriggers: ScrollTrigger[] = [];
-
     // En mobile, no aplicar animaciones complejas
     if (isMobile) {
-      gsap.set(image, {
-        scale: 1,
-        borderRadius: "1rem",
-      });
-      gsap.set(overlay, {
-        scale: 1,
-        borderRadius: "1rem",
-      });
-      gsap.set(contact, {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-      });
+      gsap.set(image, { scale: 1, borderRadius: "1rem" });
+      gsap.set(overlay, { scale: 1, borderRadius: "1rem" });
+      gsap.set(contact, { x: 0, opacity: 1, scale: 1 });
       const formElements = contact.querySelectorAll(".animate-item");
-      gsap.set(formElements, {
-        y: 0,
-        opacity: 1,
-      });
+      gsap.set(formElements, { y: 0, opacity: 1 });
       return;
     }
 
-    // Código desktop original
+    // Si ya se animó, establecer estado final
     if (hasAnimated) {
-      gsap.set(image, {
-        scale: 1,
-        borderRadius: "35px",
-      });
-      gsap.set(overlay, {
-        scale: 1,
-        borderRadius: "35px",
-      });
-      gsap.set(contact, {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-      });
+      gsap.set(image, { scale: 1, borderRadius: "35px" });
+      gsap.set(overlay, { scale: 1, borderRadius: "35px" });
+      gsap.set(contact, { x: 0, opacity: 1, scale: 1 });
       const formElements = contact.querySelectorAll(".animate-item");
-      gsap.set(formElements, {
-        y: 0,
-        opacity: 1,
-      });
+      gsap.set(formElements, { y: 0, opacity: 1 });
       return;
     }
 
-    gsap.set(image, {
-      scale: 0.2,
-      borderRadius: "3rem",
-    });
-    gsap.set(overlay, {
-      scale: 0.2,
-      borderRadius: "3rem",
-    });
-    gsap.set(contact, {
-      x: -100,
-      opacity: 0,
-      scale: 0.9,
-    });
+    // 🔥 USAR GSAP CONTEXT
+    const ctx = gsap.context(() => {
+      // Estado inicial
+      gsap.set(image, { scale: 0.2, borderRadius: "3rem" });
+      gsap.set(overlay, { scale: 0.2, borderRadius: "3rem" });
+      gsap.set(contact, { x: -100, opacity: 0, scale: 0.9 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        scrub: 1,
-        onLeave: () => setHasAnimated(true),
-      },
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "+=100%",
 
-    if (tl.scrollTrigger) {
-      scrollTriggers.push(tl.scrollTrigger);
-    }
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          onLeave: () => setHasAnimated(true),
+        },
+      });
 
-    tl.to([image, overlay], {
-      scale: 1,
-      borderRadius: "35px",
-      duration: 1,
-      ease: "power2.out",
-    });
-    tl.to(
-      contact,
-      {
-        x: 0,
-        opacity: 1,
+      tl.to([image, overlay], {
         scale: 1,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "-=0.5"
-    );
-    const formElements = contact.querySelectorAll(".animate-item");
-    tl.fromTo(
-      formElements,
-      {
-        y: 30,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        duration: 0.4,
+        borderRadius: "35px",
+        duration: 1,
         ease: "power2.out",
-      },
-      "-=0.4"
-    );
+      });
+
+      tl.to(
+        contact,
+        {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.5"
+      );
+
+      const formElements = contact.querySelectorAll(".animate-item");
+      tl.fromTo(
+        formElements,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      );
+    }, container); // 🔥 Scope al container
 
     return () => {
-      scrollTriggers.forEach((trigger) => trigger.kill());
-      tl.kill();
+      ctx.revert(); // 🔥 LIMPIA SOLO los triggers de esta sección
     };
   }, [isMobile, hasAnimated]);
 

@@ -8,13 +8,15 @@ import TestimonialsSection from "@/components/lading/TestimonialsSection";
 import FAQSection from "@/components/lading/FAQSection";
 import { useAppStore } from "@/stores/useAppStore";
 import ServicesCarouselSection from "@/components/lading/ServicesCarouselSection";
-
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 import Footer from "@/components/lading/Footer";
 import ContactSectionWrapper from "@/components/lading/ContactSectionWrapper";
+
 function LandingPage() {
   const setisCarouselActive = useAppStore((state) => state.setisCarouselActive);
   const isCarouselActive = useAppStore((state) => state.isCarouselActive);
 
+  useLenisGsap();
   return (
     <div className="bg-white w-full overflow-x-hidden flex flex-col gap-10">
       <HeroSection isCarouselActive={isCarouselActive} />

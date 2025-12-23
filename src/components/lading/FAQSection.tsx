@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -34,13 +34,10 @@ function FAQSection() {
 
   useGSAP(
     () => {
-      // Animación del título
+      // Título
       gsap.fromTo(
         titleRef.current,
-        {
-          opacity: 0,
-          y: 30,
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -54,13 +51,10 @@ function FAQSection() {
         }
       );
 
-      // Animación del subtítulo
+      // Subtítulo
       gsap.fromTo(
         subtitleRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
@@ -74,13 +68,10 @@ function FAQSection() {
         }
       );
 
-      // Animación de la descripción
+      // Texto
       gsap.fromTo(
         textRef.current,
-        {
-          opacity: 0,
-          y: 30,
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -95,14 +86,10 @@ function FAQSection() {
         }
       );
 
-      // Animación de la imagen FAQ (idéntica a AboutSection)
+      // Imagen
       gsap.fromTo(
         imageRef.current,
-        {
-          opacity: 0,
-          scale: 0.95,
-          y: 40,
-        },
+        { opacity: 0, scale: 0.95, y: 40 },
         {
           opacity: 1,
           scale: 1,
@@ -117,19 +104,15 @@ function FAQSection() {
         }
       );
 
-      // Animación del acordeón FAQ (idéntica a AboutSection)
+      // Accordion
       gsap.fromTo(
         accordionRef.current,
-        {
-          opacity: 0,
-          scale: 0.95,
-          y: 40,
-        },
+        { opacity: 0, y: 60 },
         {
           opacity: 1,
-          scale: 1,
           y: 0,
           duration: 1,
+          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: accordionRef.current,

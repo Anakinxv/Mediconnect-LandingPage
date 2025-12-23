@@ -1,3 +1,4 @@
+// useLenisGsap.ts
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
@@ -7,10 +8,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function useLenisGsap() {
   useEffect(() => {
+    if (window.innerWidth < 1024) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
-      smoothTouch: false,
     });
 
     const raf = (time: number) => {
@@ -19,11 +21,15 @@ export function useLenisGsap() {
     };
     requestAnimationFrame(raf);
 
+    // 🔑 CRÍTICO
     lenis.on("scroll", ScrollTrigger.update);
 
+    // 🔑 CRÍTICO
     ScrollTrigger.scrollerProxy(document.body, {
       scrollTop(value) {
-        return arguments.length ? lenis.scrollTo(value!) : lenis.scroll;
+        return arguments.length
+          ? lenis.scrollTo(value!, { immediate: true })
+          : lenis.scroll;
       },
       getBoundingClientRect() {
         return {

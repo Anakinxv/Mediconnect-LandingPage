@@ -12,21 +12,19 @@ function FuncionalitySection() {
   const { t } = useTranslation("landing");
   const isMobile = useIsMobile();
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
+  // Refs para animaciones
+  const containerRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const textRef = useRef(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // Animación del título
+      // Título
       gsap.fromTo(
         titleRef.current,
-        {
-          opacity: 0,
-          y: 30,
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -40,13 +38,10 @@ function FuncionalitySection() {
         }
       );
 
-      // Animación del subtítulo
+      // Subtítulo
       gsap.fromTo(
         subtitleRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
@@ -60,13 +55,10 @@ function FuncionalitySection() {
         }
       );
 
-      // Animación de la descripción
+      // Texto
       gsap.fromTo(
         textRef.current,
-        {
-          opacity: 0,
-          y: 30,
-        },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
@@ -81,34 +73,9 @@ function FuncionalitySection() {
         }
       );
 
-      // Animación escalonada para cada tarjeta de funcionalidad
-      const cards = gsap.utils.toArray<HTMLElement>(".funcionality-card");
-      gsap.fromTo(
-        cards,
-        {
-          opacity: 0,
-          scale: 0.95,
-          y: 40,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 1,
-          stagger: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Refresca ScrollTrigger para asegurar que detecta los nuevos elementos
-      ScrollTrigger.refresh();
+      // Cards (animación grupal usando el contenedor como trigger)
     },
-    { scope: containerRef, dependencies: [isMobile] }
+    { scope: containerRef }
   );
 
   return (
@@ -145,10 +112,7 @@ function FuncionalitySection() {
           </div>
 
           {/* FUNCTIONALITY CARDS */}
-          <div
-            ref={cardsRef}
-            className="flex w-full justify-center items-center"
-          >
+          <div className="flex w-full justify-center items-center">
             <FuncionalityCards />
           </div>
         </div>
