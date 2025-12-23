@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useTranslation } from "react-i18next";
-
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 gsap.registerPlugin(ScrollTrigger);
 
 interface Benefit {
@@ -78,6 +78,8 @@ export const IndustryCarousel = ({
     icon: benefitIcons[item.id],
     image: benefitImages[item.id],
   }));
+
+  useLenisGsap();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false); // <-- Agregar esto

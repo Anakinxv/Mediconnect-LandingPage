@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import FuncionalityCards from "./sectionsComponents/FuncionalityCards";
-
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 gsap.registerPlugin(ScrollTrigger);
 
 function FuncionalitySection() {
@@ -17,8 +17,7 @@ function FuncionalitySection() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const textRef = useRef(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-
+  useLenisGsap();
   useGSAP(
     () => {
       // Título

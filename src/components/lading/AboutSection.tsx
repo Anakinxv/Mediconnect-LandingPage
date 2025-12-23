@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
-
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 gsap.registerPlugin(ScrollTrigger);
 
 function AboutSection() {
@@ -18,7 +18,7 @@ function AboutSection() {
   const textRef = useRef(null);
   const mainImageRef = useRef(null);
   const asideImageRef = useRef(null);
-
+  useLenisGsap();
   useGSAP(
     () => {
       gsap.fromTo(

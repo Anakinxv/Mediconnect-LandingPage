@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import MediButton from "../common/MediButton";
 import InfoContainers from "./sectionsComponents/UsersComponents/InfoContainers";
 import PhotoContainers from "./sectionsComponents/UsersComponents/PhotoContainers";
-
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 gsap.registerPlugin(ScrollTrigger);
 
 function UsersSection() {
@@ -26,7 +26,7 @@ function UsersSection() {
   const patientRef = useRef<HTMLDivElement>(null);
   const doctorRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
-
+  useLenisGsap();
   useGSAP(
     () => {
       // Animación del título
