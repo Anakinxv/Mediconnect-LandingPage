@@ -4,10 +4,31 @@ import gsap from "gsap";
 import MediConnectLogo from "../../../assets/MediConnectLanding.png";
 import MediConnectGreenLogo from "../../../assets/MediConnectLanding-green.png";
 import MediButton from "@/components/common/MediButton";
-import LanguageDropDown from "@/components/common/LanguageDropDown";
+import MobileLanguageSelector from "@/components/common/MobileLanguageSelector";
 import { GripIcon } from "@/components/ui/drop-icon";
 import { XIcon } from "@/components/ui/x-icon";
+import { ChevronDownIcon } from "@/components/ui/chevron-down";
 import { useTranslation } from "react-i18next";
+import { useAppStore } from "@/stores/useAppStore";
+import flagSpain from "@/assets/flag-spain.png";
+import flagUSA from "@/assets/flag-usa.png";
+import flagFrance from "@/assets/flag-france.png";
+import flagHaiti from "@/assets/flag-haiti.png";
+import flagItaly from "@/assets/flag-italy.png";
+import flagJapan from "@/assets/flag-japan.png";
+import flagPortugal from "@/assets/flag-portugal.png";
+import flagChina from "@/assets/flag-china.png";
+
+const languages = [
+  { code: "es", label: "Español", flag: flagSpain },
+  { code: "en", label: "English", flag: flagUSA },
+  { code: "fr", label: "Français", flag: flagFrance },
+  { code: "ht", label: "Kreyòl", flag: flagHaiti },
+  { code: "it", label: "Italiano", flag: flagItaly },
+  { code: "ja", label: "日本語", flag: flagJapan },
+  { code: "pt", label: "Português", flag: flagPortugal },
+  { code: "zh", label: "中文", flag: flagChina },
+];
 
 type MobileNavbarProps = {
   id?: string;
@@ -16,29 +37,34 @@ type MobileNavbarProps = {
 
 function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
   const { t } = useTranslation("landing");
+  const language = useAppStore((state) => state.language);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLanguageSelectorOpen, setIsLanguageSelectorOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<HTMLUListElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
 
-  // Cerrar overlay si se hace scroll con el menú abierto
+  // Comentamos o eliminamos el useEffect que cierra el menú al hacer scroll
+  /*
   useEffect(() => {
     if (!isOpen) return;
     const handleScroll = () => setIsOpen(false);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
+  */
 
   // Manejar el overflow del body al abrir/cerrar el menú
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen || isLanguageSelectorOpen) {
+      document.body.style.overflow = "hidden"; // Prevenir scroll del body cuando el menú está abierto
     } else {
       document.body.style.overflow = "";
     }
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, isLanguageSelectorOpen]);
 
   const menuItems = [
     { href: "#hero-container", label: t("navbar.home") },
@@ -58,6 +84,16 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
       }
     }, 300); // Espera a que cierre el menú antes de hacer scroll
   };
+
+  const handleLanguageButtonClick = () => {
+    setIsLanguageSelectorOpen(true);
+  };
+
+  const handleLanguageSelectorClose = () => {
+    setIsLanguageSelectorOpen(false);
+  };
+
+  const selectedLang = languages.find((l) => l.code === language);
 
   useGSAP(() => {
     if (isOpen) {
@@ -219,16 +255,21 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
           </ul>
         </div>
 
-        {/* Bottom Section - Language Dropdown and Buttons */}
+        {/* Bottom Section - Mobile Language Selector and Buttons */}
         <div className="space-y-6 mt-8">
-          {/* Language Dropdown FUERA del ref de animación */}
-          <LanguageDropDown
-            buttonBg="bg-white"
-            buttonText="text-primary"
-            borderColor="border-primary"
-            showLabel={true}
-            className="w-full h-14 px-6 text-xl font-medium rounded-full border transition-all duration-150"
-          />
+          {/* Mobile Language Button */}
+          <button
+            onClick={handleLanguageButtonClick}
+            className="w-full h-14 px-6 flex items-center justify-center gap-3 text-xl font-medium rounded-full border border-primary bg-white text-primary transition-all duration-150 active:bg-primary/10 active:scale-95"
+          >
+            <img
+              src={selectedLang?.flag}
+              alt={selectedLang?.label}
+              className="w-6 h-6 rounded-full"
+            />
+            <span className="flex-1 text-left">{selectedLang?.label}</span>
+            <ChevronDownIcon size={20} />
+          </button>
 
           {/* Botones CON animación */}
           <div ref={buttonsRef} className="space-y-4">
@@ -247,6 +288,12 @@ function MobileNavbar({ id, isFixed = false }: MobileNavbarProps) {
           </div>
         </div>
       </div>
+
+      {/* Mobile Language Selector Modal */}
+      <MobileLanguageSelector
+        isOpen={isLanguageSelectorOpen}
+        onClose={handleLanguageSelectorClose}
+      />
     </>
   );
 }

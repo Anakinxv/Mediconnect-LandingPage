@@ -1,8 +1,15 @@
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
+import { useLenisGsap } from "@/hooks/useLenisGsap";
 import Funcionality01 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality02 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality03 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
 import Funcionality04 from "../../../assets/Heren_HERE_[YOUR_SCENE_CONCEPT_HERE]__COLOR_PALETTE___-_Primary_calm_greens__5157a5a4-2da5-4b37-a912-3cf351cc5e90.png";
-import { useTranslation } from "react-i18next";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FuncionalityCardsProps {
   cardClassName?: string;
@@ -10,6 +17,15 @@ interface FuncionalityCardsProps {
 
 function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
   const { t } = useTranslation("landing");
+
+  // Refs para las animaciones
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mobileGridRef = useRef<HTMLDivElement>(null);
+  const tabletGridRef = useRef<HTMLDivElement>(null);
+  const desktopSmallGridRef = useRef<HTMLDivElement>(null);
+  const desktopLargeGridRef = useRef<HTMLDivElement>(null);
+
+  useLenisGsap();
 
   const cardImages = [
     Funcionality01,
@@ -27,17 +43,20 @@ function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
   const Card = ({
     card,
     className = "",
+    cardRef,
   }: {
     card: (typeof cards)[0];
     className?: string;
+    cardRef?: React.RefObject<HTMLDivElement>;
   }) => (
     <div
+      ref={cardRef}
       className={`bg-white rounded-3xl bg-gradient-to-b 
         from-white from-[0%]
         via-[#F5FAF3] via-[71%]
         to-[#D7E3C9]/25 to-[100%] overflow-hidden 
         flex flex-col gap-2 sm:gap-3 md:gap-4 items-center justify-center 
-        p-3 sm:p-4 md:p-6 lg:p-8 ${className} border border-accent/40  `}
+        p-3 sm:p-4 md:p-6 lg:p-8 ${className} border border-accent/40 functionality-card`}
     >
       <div className="overflow-hidden inline-block rounded-2xl sm:rounded-3xl w-full flex-1">
         <img
@@ -57,14 +76,68 @@ function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
     </div>
   );
 
-  return (
-    <div className="w-full flex justify-center px-2 sm:px-4">
-      {/*
-        En cada grid, agrega cardClassName a cada Card
-      */}
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
 
+      // Animación para las tarjetas con escalonamiento
+      const cards = gsap.utils.toArray<HTMLElement>(".functionality-card");
+
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            scale: 0.95,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1,
+            delay: index * 0.15, // Escalonar las animaciones
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+
+      // Animación adicional para el hover effect
+      cards.forEach((card) => {
+        const img = card.querySelector("img");
+        if (img) {
+          card.addEventListener("mouseenter", () => {
+            gsap.to(card, {
+              y: -8,
+              scale: 1.02,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+
+          card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+              y: 0,
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+        }
+      });
+    },
+    { scope: containerRef }
+  );
+
+  return (
+    <div ref={containerRef} className="w-full flex justify-center px-2 sm:px-4">
       {/* Móvil: grid 2 columnas */}
-      <div className="block sm:hidden w-full ">
+      <div ref={mobileGridRef} className="block sm:hidden w-full">
         <div className="grid grid-cols-2 gap-4">
           {cards.map((card, index) => (
             <Card
@@ -77,7 +150,10 @@ function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
       </div>
 
       {/* Tablet: grid 2x2 */}
-      <div className="hidden sm:block md:hidden w-full max-w-2xl">
+      <div
+        ref={tabletGridRef}
+        className="hidden sm:block md:hidden w-full max-w-2xl"
+      >
         <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[700px]">
           <Card card={cards[0]} className={cardClassName} />
           <Card card={cards[1]} className={cardClassName} />
@@ -92,7 +168,10 @@ function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
       </div>
 
       {/* Desktop pequeño: grid 2x2 más grande */}
-      <div className="hidden md:block lg:hidden w-full max-w-4xl">
+      <div
+        ref={desktopSmallGridRef}
+        className="hidden md:block lg:hidden w-full max-w-4xl"
+      >
         <div className="grid grid-cols-2 grid-rows-2 gap-6 h-[800px]">
           <Card card={cards[0]} className={cardClassName} />
           <Card card={cards[1]} className={cardClassName} />
@@ -107,7 +186,10 @@ function FuncionalityCards({ cardClassName }: FuncionalityCardsProps) {
       </div>
 
       {/* Desktop grande: grid asimétrico original */}
-      <div className="hidden lg:block w-full max-w-7xl">
+      <div
+        ref={desktopLargeGridRef}
+        className="hidden lg:block w-full max-w-7xl"
+      >
         <div className="grid grid-rows-2 gap-4">
           {/* Primera fila: 55% - 45% */}
           <div className="grid grid-cols-[55%_45%] gap-4">

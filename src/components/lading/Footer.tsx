@@ -130,11 +130,11 @@ const Footer = () => {
         className="bg-primary rounded-[20px] sm:rounded-[25px] lg:rounded-[35px]"
       >
         <div className="rounded-[20px] sm:rounded-[25px] lg:rounded-[35px] border border-primary/20 bg-primary py-8 sm:py-10 lg:py-14 px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row justify-between gap-6 sm:gap-8 lg:gap-8  mx-auto items-center lg:items-start">
+          <div className="flex flex-col lg:flex-row justify-between gap-8 sm:gap-10 lg:gap-8 mx-auto items-center lg:items-start">
             {/* Brand Column */}
             <div
               ref={brandRef}
-              className="flex flex-col gap-y-3 sm:gap-y-4 text-center lg:text-left w-full lg:w-auto"
+              className="flex flex-col gap-y-4 sm:gap-y-4 text-center lg:text-left w-full lg:w-auto"
             >
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white flex items-center justify-center lg:justify-start gap-3 mb-1">
                 <img
@@ -151,77 +151,49 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Quick Links Column */}
-            {/* <div
-              ref={quickLinksRef}
-              className="flex flex-col gap-y-3 sm:gap-y-4 text-left lg:text-center w-full lg:w-auto mt-6 lg:mt-0 items-center justify-center"
-            >
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">
-                {t("footer.quickLinksTitle")}
-              </h3>
-              <nav>
-                <ul className="flex flex-col gap-2 w-full">
-                  {quickLinks.map((link) => (
-                    <li key={link.href} className="w-full">
-                      <a
-                        href={link.href}
-                        className="group flex items-center gap-3 text-lg text-white transition-colors duration-300 hover:text-accent py-2 w-full"
-                      >
-                        <span className="flex items-center transition-transform duration-300 group-hover:translate-x-2">
-                          <ChevronRight
-                            size={28}
-                            className="text-white transition-colors duration-300 group-hover:text-accent"
-                          />
-                        </span>
-                        <span className="font-medium transition-colors duration-300 group-hover:text-accent group-hover:translate-x-1">
-                          {link.label}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div> */}
-
             {/* Newsletter Column */}
             <div
               ref={newsletterRef}
-              className="flex flex-col gap-y-3 sm:gap-y-4 text-center lg:text-left w-full lg:w-auto mt-6 lg:mt-0 px-0"
+              className="flex flex-col gap-y-4 sm:gap-y-4 text-center lg:text-left w-full lg:w-auto"
             >
-              <h3 className="text-base sm:text-lg font-semibold text-white">
+              <h3 className="text-lg sm:text-xl font-semibold text-white">
                 {t("footer.newsletterTitle")}
               </h3>
-              <p className="text-md sm:text-md text-white max-w-md mx-auto lg:mx-0">
+              <p className="text-sm sm:text-base text-white max-w-md mx-auto lg:mx-0 mb-2">
                 {t("footer.newsletterDesc")}
               </p>
 
               {/* Newsletter Form */}
-              <div className="w-full flex justify-center">
+              <div className="w-full">
                 <MCFormWrapper
                   onSubmit={handleSubmit}
                   schema={newsletterSchema}
                   defaultValues={{ email: newsletterForm!.email }}
                   className="w-full"
                 >
-                  <div className="flex flex-col sm:flex-row gap-2 w-full">
-                    <MCInput
-                      name="email"
-                      type="email"
-                      placeholder={t("footer.InputPlaceholder")}
-                      value={newsletterForm!.email}
-                      onChange={(e) =>
-                        setnewsletterForm({ email: e.target.value })
-                      }
-                      required
-                      className="bg-white text-primary h-12 sm:h-[52px] md:w-[300px] text-sm sm:text-base flex-1 min-w-0 transition-all duration-300 hover:shadow-lg focus:shadow-lg focus:scale-[1.02]"
-                    />
-                    <MediButton
-                      type="submit"
-                      className="bg-accent text-primary h-12 sm:h-[52px] text-sm sm:text-base flex items-center justify-center shadow transition-all duration-300 w-full sm:w-auto sm:min-w-[140px] hover:scale-105 hover:shadow-lg hover:bg-accent/90"
-                      aria-label="Enviar"
-                    >
-                      {t("footer.newsletterBtn")}
-                    </MediButton>
+                  <div className="flex flex-col gap-3 w-full max-w-md mx-auto lg:mx-0 sm:flex-row sm:gap-2">
+                    <div className="flex-1">
+                      <MCInput
+                        name="email"
+                        type="email"
+                        placeholder={t("footer.InputPlaceholder")}
+                        value={newsletterForm!.email}
+                        onChange={(e) =>
+                          setnewsletterForm({ email: e.target.value })
+                        }
+                        required
+                        className="bg-white text-primary h-12 sm:h-[52px] w-full text-sm sm:text-base transition-all duration-300 hover:shadow-lg focus:shadow-lg focus:scale-[1.02] rounded-full rounded-full px-4 sm:px-6"
+                      />
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <MediButton
+                        type="submit"
+                        className="bg-accent text-primary h-12 sm:h-[52px] text-sm sm:text-base flex items-center justify-center shadow transition-all duration-300 w-full sm:w-auto sm:min-w-[140px] hover:scale-105 hover:shadow-lg hover:bg-accent/90 rounded-full "
+                        aria-label="Enviar"
+                      >
+                        {t("footer.newsletterBtn")}
+                      </MediButton>
+                    </div>
                   </div>
                 </MCFormWrapper>
               </div>
@@ -234,7 +206,7 @@ const Footer = () => {
           ref={bottomBarRef}
           className="border-t border-white/20 py-3 sm:py-4"
         >
-          <div className="mx-auto flex flex-col items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 md:flex-row">
+          <div className="mx-auto flex flex-col items-center justify-between gap-4 sm:gap-4 px-4 sm:px-6 lg:px-8 py-4 sm:py-4 lg:py-6 md:flex-row">
             <p className="text-xs sm:text-sm text-white text-center md:text-left hover:text-accent transition-colors duration-300">
               {t("footer.copyright")}
             </p>

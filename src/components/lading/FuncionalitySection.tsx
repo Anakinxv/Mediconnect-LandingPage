@@ -17,13 +17,19 @@ function FuncionalitySection() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const textRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+
   useLenisGsap();
+
   useGSAP(
     () => {
       // Título
       gsap.fromTo(
         titleRef.current,
-        { opacity: 0, y: 30 },
+        {
+          opacity: 0,
+          y: 30,
+        },
         {
           opacity: 1,
           y: 0,
@@ -40,7 +46,10 @@ function FuncionalitySection() {
       // Subtítulo
       gsap.fromTo(
         subtitleRef.current,
-        { opacity: 0, y: 50 },
+        {
+          opacity: 0,
+          y: 50,
+        },
         {
           opacity: 1,
           y: 0,
@@ -57,7 +66,10 @@ function FuncionalitySection() {
       // Texto
       gsap.fromTo(
         textRef.current,
-        { opacity: 0, y: 30 },
+        {
+          opacity: 0,
+          y: 30,
+        },
         {
           opacity: 1,
           y: 0,
@@ -72,7 +84,27 @@ function FuncionalitySection() {
         }
       );
 
-      // Cards (animación grupal usando el contenedor como trigger)
+      // Animación para el contenedor de las cards
+      gsap.fromTo(
+        cardsContainerRef.current,
+        {
+          opacity: 0,
+          scale: 0.95,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsContainerRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     },
     { scope: containerRef }
   );
@@ -111,7 +143,10 @@ function FuncionalitySection() {
           </div>
 
           {/* FUNCTIONALITY CARDS */}
-          <div className="flex w-full justify-center items-center">
+          <div
+            ref={cardsContainerRef}
+            className="flex w-full justify-center items-center"
+          >
             <FuncionalityCards />
           </div>
         </div>
