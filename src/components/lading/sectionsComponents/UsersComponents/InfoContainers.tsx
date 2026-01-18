@@ -1,5 +1,5 @@
 import MediButton from "@/components/common/MediButton";
-import { useIsMobile } from "@/hooks/useIsMobile";
+
 import { useEffect, useState, useRef } from "react";
 
 import { useGSAP } from "@gsap/react";
@@ -15,7 +15,7 @@ interface InfoContainersProps {
 
 function InfoContainers({ userType = "patient" }: InfoContainersProps) {
   const { t } = useTranslation("landing");
-  const isMobile = useIsMobile();
+
   const [currentType, setCurrentType] = useState(userType);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
         filter: "blur(0px)",
         duration: 1.5,
         ease: "power3.out",
-      }
+      },
     )
       .fromTo(
         [subtitleRef.current, titleRef.current, descriptionRef.current],
@@ -97,7 +97,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
           stagger: 0.15,
           ease: "power3.out",
         },
-        "-=1.2"
+        "-=1.2",
       )
       .fromTo(
         listRef.current ? Array.from(listRef.current.children) : [],
@@ -114,7 +114,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
           stagger: 0.12,
           ease: "power3.out",
         },
-        "-=0.8"
+        "-=0.8",
       )
       .fromTo(
         buttonsRef.current,
@@ -130,7 +130,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
           duration: 0.8,
           ease: "elastic.out(1, 0.5)",
         },
-        "-=0.6"
+        "-=0.6",
       )
       .fromTo(
         indicatorsRef.current?.children ?? [],
@@ -147,7 +147,7 @@ function InfoContainers({ userType = "patient" }: InfoContainersProps) {
           stagger: 0.1,
           ease: "back.out(2)",
         },
-        "-=0.4"
+        "-=0.4",
       );
   });
 

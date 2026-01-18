@@ -1,4 +1,3 @@
-import { use } from "i18next";
 import HeroImageSection from "./sectionsComponents/HeroImage";
 import { useLenisGsap } from "@/hooks/useLenisGsap";
 

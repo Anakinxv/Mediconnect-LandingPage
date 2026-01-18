@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap, { ScrollTrigger } from "gsap/all";
-import { useIsMobile } from "../../hooks/useIsMobile";
+
 import service1 from "@/assets/ServicesCarousel/service-1.png";
 import service2 from "@/assets/ServicesCarousel/service-2.png";
 import service3 from "@/assets/ServicesCarousel/service-3.png";
@@ -22,7 +22,7 @@ function ServicesCarouselSection() {
     { image: service5, title: t("services.diagnostics") },
     { image: service6, title: t("services.care") },
   ];
-  const isMobile = useIsMobile();
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const infiniteTimeline = useRef<gsap.core.Timeline | null>(null);
@@ -66,7 +66,7 @@ function ServicesCarouselSection() {
         opacity: 1,
         y: 0,
         duration: 0.8,
-      }
+      },
     );
 
     // Animación alternada para los servicios (solo el set central)
@@ -85,7 +85,7 @@ function ServicesCarouselSection() {
           start: "top 85%",
           toggleActions: "play none none none",
         },
-      }
+      },
     );
   }, []);
 

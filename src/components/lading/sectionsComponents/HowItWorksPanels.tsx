@@ -17,7 +17,7 @@ interface HowItWorksPanelsProps {
 }
 
 const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
-  ({ stepIndex, imgRef }, ref) => {
+  ({ stepIndex, imgRef }) => {
     const { t } = useTranslation("landing");
     const isMobile = useIsMobile();
 
@@ -77,7 +77,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             scale: 1,
             duration: 0.6,
             ease: "back.out(1.7)",
-          }
+          },
         );
 
         // Animación del título
@@ -93,7 +93,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.3"
+          "-=0.3",
         );
 
         // Animación de la descripción
@@ -111,7 +111,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.4",
         );
 
         // Trigger para activar cuando el panel esté en vista
@@ -125,7 +125,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
           // onLeaveBack: () => tl.reverse(),
         });
       },
-      { scope: containerRef, dependencies: [stepIndex] }
+      { scope: containerRef, dependencies: [stepIndex] },
     );
 
     return (
@@ -208,7 +208,7 @@ const HowItWorksPanels = forwardRef<HTMLImageElement, HowItWorksPanelsProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 HowItWorksPanels.displayName = "HowItWorksPanels";

@@ -1,4 +1,3 @@
-import React from "react";
 import MCInput from "@/components/common/forms/MCInput";
 import MediButton from "@/components/common/MediButton";
 import MCTextArea from "@/components/common/forms/MCTextArea";
@@ -13,8 +12,8 @@ function MobileContactSection() {
   const contactForm = useAppStore((state) => state.conctactForm);
   const setcontactForm = useAppStore((state) => state.setcontactForm);
 
-  const handleSubmit = (data: any) => {
-    alert("¡Mensaje enviado correctamente!");
+  const handleSubmit = () => {
+    alert("¡Mensaje enviado correctamente! ");
   };
 
   return (

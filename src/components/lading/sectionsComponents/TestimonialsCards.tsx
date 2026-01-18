@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "../../../hooks/useIsMobile";
-import testimonialImage1 from "@/assets/Funcionality-01.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonialsData = [
@@ -105,7 +105,7 @@ function TestimonialsCards() {
           start: "top 85%",
           toggleActions: "play none none none",
         },
-      }
+      },
     );
   }, [isMobile]);
 

@@ -6,7 +6,7 @@ import MCFormWrapper from "../common/forms/MCFormWrapper";
 import { newsletterSchema } from "@/schema/landingSchema";
 import { useAppStore } from "@/stores/useAppStore";
 import MCLOGO from "@/assets/MediConnectLanding.png";
-import { ChevronRight } from "lucide-react";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,10 +15,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
   const { t } = useTranslation("landing");
-  const quickLinks = t("footer.quickLinks", { returnObjects: true }) as {
-    href: string;
-    label: string;
-  }[];
 
   const newsletterForm = useAppStore((state) => state.newletterForm);
   const setnewsletterForm = useAppStore((state) => state.setnewsletterForm);
@@ -49,7 +45,7 @@ const Footer = () => {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Quick links animation
@@ -70,7 +66,7 @@ const Footer = () => {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Newsletter section animation
@@ -91,7 +87,7 @@ const Footer = () => {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Bottom bar animation
@@ -112,13 +108,13 @@ const Footer = () => {
             start: "top 90%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
-  const handleSubmit = (data: { email: string }) => {
+  const handleSubmit = () => {
     setnewsletterForm({ email: "" });
   };
 

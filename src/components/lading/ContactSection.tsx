@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react"; // <-- Agregar esto
@@ -107,7 +107,7 @@ function ContactSection() {
           duration: 2.5,
           ease: "sine.inOut",
         },
-        0
+        0,
       );
 
       tl.to(
@@ -119,7 +119,7 @@ function ContactSection() {
           duration: 1.5,
           ease: "sine.inOut",
         },
-        0.8
+        0.8,
       );
 
       tl.to(
@@ -131,7 +131,7 @@ function ContactSection() {
           duration: 1,
           ease: "sine.out",
         },
-        1.5
+        1.5,
       );
 
       // Trigger adicional para el área post-pin (transición suave)
@@ -155,10 +155,10 @@ function ContactSection() {
         postPinTrigger.kill();
       };
     },
-    { scope: containerRef, dependencies: [isMobile, hasAnimated] }
+    { scope: containerRef, dependencies: [isMobile, hasAnimated] },
   );
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = () => {
     alert("¡Mensaje enviado correctamente!");
   };
 

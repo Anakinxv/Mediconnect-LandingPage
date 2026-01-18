@@ -53,7 +53,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Fade up para carrusel, con delay para suavidad
@@ -71,7 +71,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación del título
@@ -91,7 +91,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación del subtítulo
@@ -111,7 +111,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación de la descripción
@@ -132,7 +132,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación del carrusel horizontal
@@ -183,7 +183,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
                 end: "center center",
                 scrub: 1,
               },
-            }
+            },
           );
         }
       });
@@ -212,7 +212,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
               toggleActions: "play none none none",
               scrub: 1,
             },
-          }
+          },
         );
       });
 
@@ -227,7 +227,7 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
-    { scope: containerRef, dependencies: [isMobile, onCarouselActiveChange] }
+    { scope: containerRef, dependencies: [isMobile, onCarouselActiveChange] },
   );
 
   return (
@@ -274,9 +274,9 @@ function HowItWorksSection({ onCarouselActiveChange }: HowItWorksSectionProps) {
             className="flex gap-4 pl-4 pr-4"
             style={{ width: `${4 * 95}vw` }}
           >
-            {steps.map((step, index) => (
+            {steps.map((_step, index) => (
               <div
-                key={index}
+                key={index} // This is correct
                 className="horizontal-panel w-[100vw] h-[100vh] bg-white flex items-center justify-center py-4"
               >
                 <HowItWorksPanels stepIndex={index} />

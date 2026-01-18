@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -35,7 +35,7 @@ function TestimonialsSection() {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación del subtítulo
@@ -55,7 +55,7 @@ function TestimonialsSection() {
             start: "top 85%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animación escalonada para cada tarjeta
@@ -79,10 +79,10 @@ function TestimonialsSection() {
             start: "top 90%",
             toggleActions: "play none none none",
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -113,7 +113,7 @@ function TestimonialsSection() {
             >
               {t(
                 "testimonials.subtitle",
-                "Join those who care for their health"
+                "Join those who care for their health",
               )}
             </h1>
           </div>
