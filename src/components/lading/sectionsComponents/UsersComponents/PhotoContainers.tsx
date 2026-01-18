@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import UserPatient from "@/assets/User-Patient.jpg";
+import UserPatient from "@/assets/user-patient.jpg";
 import UserDoctor from "@/assets/user-doctor.jpg";
 import UserMedico from "@/assets/user-center.png";
 
@@ -63,7 +63,7 @@ function PhotoContainers({ userType }: PhotoContainersProps) {
           toggleActions: "play none none none",
           once: true,
         },
-      }
+      },
     );
   });
 
